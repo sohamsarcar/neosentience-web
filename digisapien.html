@@ -533,6 +533,16 @@ footer .fmeta a:hover{color:#fff}
 .case-visual figcaption{font-family:'Albert Sans',sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);
   opacity:.7;padding:14px 20px;border-top:1px solid color-mix(in srgb,var(--ink) 8%,transparent)}
 @media(max-width:820px){.case-head{grid-template-columns:1fr;align-items:start}.case-client{white-space:normal;flex-wrap:wrap}}
+/* industries: colour-coded, iconed */
+.sector{position:relative}
+.sector::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--c,var(--acc));opacity:.55}
+.sector-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sector-ico{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--c,var(--acc));
+  background:color-mix(in srgb,var(--c,var(--acc)) 14%,transparent);border:1px solid color-mix(in srgb,var(--c,var(--acc)) 30%,transparent)}
+.sector-ico svg{width:18px;height:18px}
+.sector-head .sector-idx{margin:0;color:var(--c,var(--acc))!important;opacity:1}
+.sector::after{background:var(--c,var(--acc))}
+.sector:hover{background:color-mix(in srgb,var(--c,var(--acc)) 6%,transparent)}
 /* top bar */
 .topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
 .topbar .brand{display:flex;align-items:center;gap:22px}
@@ -880,58 +890,58 @@ footer .fmeta a:hover{color:#fff}
     </div>
 
     <div class="sectors reveal">
-      <div class="sector">
-        <div class="sector-idx">01 · Real Estate</div>
+      <div class="sector" style="--c:#f59e0b">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><div class="sector-idx">01 · Real Estate</div></div>
         <h4>Always-on sales concierge</h4>
         <p>Walks buyers through floor plans, pricing and inventory at the sales gallery, on the site, or on the app — every language, every hour.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">02 · Airports</div>
+      <div class="sector" style="--c:#38bdf8">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 13.5L4 11l1.5-1.5 6 1 5-5a1.8 1.8 0 012.5 2.5l-5 5 1 6L13.5 20l-2.5-6.5"/><path d="M4 20l3-3"/></svg></span><div class="sector-idx">02 · Airports</div></div>
         <h4>Multilingual wayfinder</h4>
         <p>Terminal directions, gate updates, immigration and customs guidance for millions of passengers — every arrival in their own language.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">03 · Sales & Marketing</div>
+      <div class="sector" style="--c:#f472b6">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2a2 2 0 002 2h2l6 4V5L7 9H5a2 2 0 00-2 2z"/><path d="M17 9a4 4 0 010 6"/><path d="M7 15v4"/></svg></span><div class="sector-idx">03 · Sales & Marketing</div></div>
         <h4>Always-on brand host</h4>
         <p>Personalised, engaging experiences that lift interaction and conversion — with recall of every past visit.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">04 · Retail</div>
+      <div class="sector" style="--c:#a78bfa">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg></span><div class="sector-idx">04 · Retail</div></div>
         <h4>Personal shopper, at scale</h4>
         <p>Reads mood, remembers preference, tailors recommendation — every aisle, every store, every hour.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">05 · Healthcare</div>
+      <div class="sector" style="--c:#34d399">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l2-5 3 10 2-6 1.5 1H21"/></svg></span><div class="sector-idx">05 · Healthcare</div></div>
         <h4>Front-desk that listens</h4>
         <p>Patient intake, information, remote monitoring — with the patience for the tenth question of the day.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">06 · Customer Service</div>
+      <div class="sector" style="--c:#22d3ee">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 13a8 8 0 0116 0"/><path d="M4 13v3a2 2 0 002 2h1v-6H6a2 2 0 00-2 1z"/><path d="M20 13v3a2 2 0 01-2 2h-1v-6h1a2 2 0 012 1z"/><path d="M15 20h-3"/></svg></span><div class="sector-idx">06 · Customer Service</div></div>
         <h4>24/7 first response</h4>
         <p>Instant, human-like resolution for the 80% of queries that don't need a human — freeing agents for the ones that do.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">07 · Entertainment</div>
+      <div class="sector" style="--c:#fb7185">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1.1 5.9L12 16.9l-5.3 2.8 1.1-5.9-4.3-4.1 5.9-.8z"/></svg></span><div class="sector-idx">07 · Entertainment</div></div>
         <h4>Digital twins of celebs</h4>
         <p>Licensed AI twins of stars and influencers — fan interaction, brand endorsements, virtual events, on demand.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">08 · Education</div>
+      <div class="sector" style="--c:#fbbf24">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 9L12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11.3V16c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3v-4.7"/><path d="M21.5 9v5"/></svg></span><div class="sector-idx">08 · Education</div></div>
         <h4>Personal tutor for every learner</h4>
         <p>Adaptive tutoring, interactive simulations, patient repetition — in the learner's language, at their pace.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">09 · Travel & Hospitality</div>
+      <div class="sector" style="--c:#2dd4bf">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18V9a1 1 0 011-1h3a2 2 0 012 2v2h9a3 3 0 013 3v3"/><path d="M3 15h18"/><path d="M3 18v1M21 18v1"/></svg></span><div class="sector-idx">09 · Travel & Hospitality</div></div>
         <h4>Multilingual concierge</h4>
         <p>Tourist guides, museum experts, hotel greeters — every guest served in their own language, on arrival.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">10 · Enterprise</div>
+      <div class="sector" style="--c:#818cf8">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V5a1 1 0 011-1h9a1 1 0 011 1v15"/><path d="M15 9h4a1 1 0 011 1v10"/><path d="M8 8h3M8 12h3M8 16h3M18 13h0M18 17h0"/><path d="M2 20h20"/></svg></span><div class="sector-idx">10 · Enterprise</div></div>
         <h4>Virtual receptionist & onboarding</h4>
         <p>Employee onboarding, knowledge management, meeting hosts, internal helpdesk — a colleague that never leaves.</p>
       </div>
-      <div class="sector">
-        <div class="sector-idx">11 · Banking & Finance</div>
+      <div class="sector" style="--c:#4ade80">
+        <div class="sector-head"><span class="sector-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5"/><path d="M4 9h16"/><path d="M6 9v8M10 9v8M14 9v8M18 9v8"/><path d="M3 17h18M3 20h18"/></svg></span><div class="sector-idx">11 · Banking & Finance</div></div>
         <h4>Personal advisor, on tap</h4>
         <p>Personalised financial advice, product explainers, streamlined onboarding — in Hindi, Tamil, Arabic, English.</p>
       </div>
