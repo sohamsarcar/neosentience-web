@@ -543,6 +543,23 @@ footer .fmeta a:hover{color:#fff}
 .sector-head .sector-idx{margin:0;color:var(--c,var(--acc))!important;opacity:1}
 .sector::after{background:var(--c,var(--acc))}
 .sector:hover{background:color-mix(in srgb,var(--c,var(--acc)) 6%,transparent)}
+/* deployment: prominent, iconed, colour-coded */
+.deploy-head{margin-top:var(--sp-block);max-width:720px}
+.deploy-head .section-eyebrow{margin-bottom:14px}
+.deploy-title{font-family:'Albert Sans',sans-serif;font-weight:700;font-size:clamp(24px,2.4vw,32px);letter-spacing:-.02em;line-height:1.1;color:var(--ink);margin:0 0 12px}
+.deploy-title em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--acc)}
+.deploy-sub{font-size:clamp(14px,1.2vw,16px);line-height:1.6;color:var(--ink-dim);font-weight:300;margin:0}
+.deploy{margin-top:32px!important;gap:20px!important}
+.deploy-card{text-align:left!important;padding:32px 28px 30px!important;position:relative;overflow:hidden;
+  border-color:color-mix(in srgb,var(--c,var(--acc)) 28%,transparent)!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c,var(--acc)) 9%,transparent),transparent 60%),linear-gradient(180deg,rgba(11,13,18,.9),rgba(15,18,25,.6))!important}
+.deploy-card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--c,var(--acc));opacity:.85}
+.deploy-card:hover{border-color:color-mix(in srgb,var(--c,var(--acc)) 55%,transparent)!important;transform:translateY(-3px)}
+.deploy-icon{width:64px!important;height:64px!important;margin:0 0 22px!important;border-radius:18px!important;color:var(--c,var(--acc))!important;
+  background:color-mix(in srgb,var(--c,var(--acc)) 14%,transparent)!important;border:1px solid color-mix(in srgb,var(--c,var(--acc)) 35%,transparent)!important}
+.deploy-icon svg{width:30px;height:30px}
+.deploy-card h5{font-size:18px!important;text-transform:none!important;letter-spacing:-.01em!important;margin-bottom:10px!important}
+.deploy-card p{font-size:14px!important;line-height:1.6!important}
 /* top bar */
 .topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
 .topbar .brand{display:flex;align-items:center;gap:22px}
@@ -948,19 +965,24 @@ footer .fmeta a:hover{color:#fff}
     </div>
 
     <!-- DEPLOYMENT -->
+    <div class="deploy-head reveal">
+      <div class="section-eyebrow"><span class="section-eyebrow-num">Deployment</span></div>
+      <h3 class="deploy-title">One being. <em>Three ways to ship.</em></h3>
+      <p class="deploy-sub">Pick the surface that fits the room — the same DigiSapien, the same memory, the same face.</p>
+    </div>
     <div class="deploy reveal">
-      <div class="deploy-card">
-        <div class="deploy-icon">▮</div>
+      <div class="deploy-card" style="--c:#38bdf8">
+        <div class="deploy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="12" rx="2"/><path d="M12 15v6"/><path d="M8 21h8"/><circle cx="12" cy="6.2" r="1"/></svg></div>
         <h5>Hardware Kiosk</h5>
-        <p>Ultra-HD screen kiosk with integrated camera + audio — drop-in for showrooms, branches, lobbies.</p>
+        <p>Ultra-HD screen kiosk with integrated camera and audio — drop-in for showrooms, branches, lobbies.</p>
       </div>
-      <div class="deploy-card">
-        <div class="deploy-icon">◱</div>
-        <h5>Web · App · Metaverse</h5>
-        <p>Same being, delivered through the browser, native app or immersive worlds — no additional hardware needed.</p>
+      <div class="deploy-card" style="--c:#a78bfa">
+        <div class="deploy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="13" height="11" rx="2"/><path d="M3 8h13"/><rect x="14" y="10" width="7" height="11" rx="1.6"/><path d="M17.5 18.6h0"/></svg></div>
+        <h5>Web · App</h5>
+        <p>Same being, delivered through the browser or a native app — no additional hardware needed.</p>
       </div>
-      <div class="deploy-card">
-        <div class="deploy-icon">⌘</div>
+      <div class="deploy-card" style="--c:#34d399">
+        <div class="deploy-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5"/><path d="M12 12v9"/></svg></div>
         <h5>Augmented Reality</h5>
         <p>Bring the being into the customer's room, tabletop or headset — spatially aware, gaze-locked, life-scale.</p>
       </div>
