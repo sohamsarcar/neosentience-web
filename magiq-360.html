@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Magiq 360 freezes the decisive moment in live sport and flies a camera around it — bullet time built for broadcast, live through IPL 2026.">
+<title>Magiq 360 — Neosentience Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050608;
+  --bg-2:#0b0d12;
+  --bg-3:#0f1219;
+  --ink:#f2f4f7;
+  --ink-dim:#8a92a3;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --accent:#00d4ff;
+  --accent-2:#4aa8ff;
+  --accent-3:#9d8bff;
+  --accent-4:#7de3ff;
+  --grad: linear-gradient(120deg,#00d4ff 0%,#4aa8ff 55%,#9d8bff 100%);
+  /* ── structural rhythm (shared across every Neosentience page) ── */
+  --wrap:1240px;
+  --sp-section:64px;   /* symmetric: 128px between sections, no inline collapses */
+  --sp-block:48px;     /* heading → first grid/panel inside a section */
+  --nav-h:57px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--ink);font-family:'Albert Sans',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,video{max-width:100%;display:block}
+
+.bg-grid{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(1200px 800px at 15% -10%, rgba(0,212,255,.10), transparent 60%),
+    radial-gradient(1000px 700px at 90% 25%, rgba(74,168,255,.08), transparent 60%),
+    radial-gradient(1400px 900px at 50% 110%, rgba(157,139,255,.06), transparent 55%);
+}
+.bg-grid::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.wrap{position:relative;z-index:1;max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg,rgba(5,6,8,.95),rgba(5,6,8,.4));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{height:20px;width:auto;opacity:.92;display:block}
+.nav-links{display:flex;gap:36px;font-size:14px;color:var(--ink-dim)}
+.nav-links a:hover{color:var(--ink);transition:.2s}
+/* right-hand nav slot matches the product pages' mono meta label — a pill
+   button here made the bar 73px against 57px everywhere else */
+.nav-cta{white-space:nowrap;font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;font-weight:600;color:var(--accent);transition:opacity .2s}
+.nav-cta:hover{opacity:.75}
+
+/* HERO */
+.hero{padding:150px 0 80px;position:relative;overflow:hidden}
+.hero-layout{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:stretch;
+  margin-bottom:80px;
+}
+.hero-visual{
+  position:relative;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 40px 100px -30px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.04);
+  min-height:100%;align-self:stretch;background:#000;
+}
+.hero-visual video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:contrast(1.04) saturate(1.08);
+  min-height:560px;
+}
+.hero-visual::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(5,6,8,.1) 0%,rgba(5,6,8,0) 40%,rgba(5,6,8,.85) 100%),
+    linear-gradient(90deg,rgba(5,6,8,.4) 0%,transparent 30%);
+}
+.hero-visual-overlay{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;color:var(--ink)}
+.hv-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 10px;border-radius:999px;
+  background:rgba(0,212,255,.18);border:1px solid rgba(0,212,255,.4);
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;backdrop-filter:blur(8px);
+;font-weight:600}
+.hv-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
+.hv-title{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:24px;line-height:1.2;letter-spacing:-.015em;
+  text-shadow:0 4px 20px rgba(0,0,0,.7);
+}
+.hv-meta{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-dim);margin-top:10px;
+}
+/* orbit readout, top-left of the loop */
+.hv-ticker{
+  position:absolute;top:20px;left:20px;z-index:2;
+  padding:10px 14px;border-radius:8px;
+  background:rgba(5,6,8,.75);backdrop-filter:blur(10px);border:1px solid var(--line-2);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  color:var(--accent);line-height:1.7;
+}
+.hv-ticker .lbl{color:var(--ink-dim);margin-right:6px}
+.hv-ticker .val{color:var(--ink)}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.25);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  font-weight:500;margin-bottom:40px;
+}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.logo-block{margin-bottom:56px;display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+.magiq-logo{max-width:290px;width:100%;filter:drop-shadow(0 6px 22px rgba(0,212,255,.28))}
+
+.hero h1{
+  /* house display face: Inter 800, with the serif reserved for the italic
+     accent clause only — matches the product pages and the homepage */
+  font-family:'Albert Sans',sans-serif;
+  /* the hero grid column is ~640px, not the 960px max-width — and Inter 800
+     sets much wider than Instrument Serif did at the same size, so the scale
+     comes down to keep the italic clause on one line */
+  font-size:clamp(38px,4.7vw,68px);
+  font-weight:800;line-height:1.04;letter-spacing:-.034em;
+  margin-bottom:32px;max-width:960px;
+  padding-bottom:.1em;
+}
+.hero h1 em{
+  font-family:'Instrument Serif',serif;font-weight:400;
+  font-style:italic;letter-spacing:-.005em;
+  /* house rule: the italic clause opens its own line instead of breaking
+     mid-phrase at whichever word happens to hit the measure */
+  display:block;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  position:relative;
+  padding-bottom:.06em;
+}
+
+.hero-lede{
+  font-size:clamp(15px,1.26vw,18px);line-height:1.6;
+  color:var(--ink-dim);max-width:680px;margin-bottom:44px;font-weight:400;
+}
+.hero-lede strong{color:var(--ink);font-weight:500}
+
+.partners{
+  display:flex;flex-wrap:wrap;gap:0;margin-top:24px;
+  border:1px solid var(--line);border-radius:24px;
+  background:linear-gradient(135deg,rgba(0,212,255,.03),rgba(157,139,255,.03));
+  overflow:hidden;max-width:900px;
+}
+.partner{flex:1;min-width:260px;padding:24px 28px;border-right:1px solid var(--line)}
+.partner:last-child{border-right:none}
+.partner-lbl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);font-weight:500;margin-bottom:8px}
+.partner-name{font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-.005em;margin-bottom:4px}
+.partner-role{font-size:13px;color:var(--ink-dim);line-height:1.5}
+
+.hero-stats{
+  margin-top:100px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  position:relative;
+}
+.stat{padding:34px 24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat-num{
+  font-family:'Instrument Serif',serif;
+  font-size:52px;line-height:1;letter-spacing:-.02em;margin-bottom:10px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat-lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);font-weight:500}
+
+/* SECTIONS */
+.section{padding:var(--sp-section) 0;position:relative}
+.section-eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  font-weight:600;margin-bottom:24px;
+}
+.section h2{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:clamp(30px,3.9vw,52px);line-height:1.1;letter-spacing:-.026em;
+  margin-bottom:32px;max-width:900px;padding-bottom:.06em;
+}
+/* the em must now declare the serif itself — it no longer inherits one */
+.section h2 em{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  display:block;padding:0 .12em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section-sub{font-size:18px;line-height:1.55;color:var(--ink-dim);max-width:700px;margin-bottom:56px}
+.section-sub strong{color:var(--ink);font-weight:500}
+
+/* REEL */
+.reel-sec{border-top:1px solid var(--line)}
+.reel{
+  position:relative;border-radius:20px;overflow:hidden;background:#000;
+  border:1px solid var(--line);
+  box-shadow:0 50px 120px -40px rgba(0,0,0,.9), inset 0 0 0 1px rgba(255,255,255,.04);
+}
+.reel video{width:100%;height:auto;display:block;aspect-ratio:16/9;background:#000}
+.reel-meta{
+  display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  margin-top:18px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-dim);
+}
+.reel-meta .on{color:var(--accent);font-weight:500}
+
+/* MOVES */
+.moves{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:8px}
+.move{
+  padding:36px 34px;border-radius:26px;border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(11,13,18,.9),rgba(15,18,25,.5));
+  transition:border-color .3s, transform .3s;
+}
+.move:hover{border-color:rgba(0,212,255,.32);transform:translateY(-3px)}
+.arc{margin-bottom:24px;height:78px}
+.arc svg{height:100%;width:auto;overflow:visible}
+.move-t{
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:16px;
+}
+.move h3{font-family:'Albert Sans',sans-serif;font-weight:700;font-size:23px;line-height:1.2;letter-spacing:-.022em;margin-bottom:12px}
+.move p{font-size:14.5px;color:var(--ink-dim);line-height:1.62}
+.move p b{color:var(--ink);font-weight:500}
+
+.sweep{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.deg{padding:30px 24px;border-right:1px solid var(--line)}
+.deg:last-child{border-right:none}
+.deg-n{font-family:'Instrument Serif',serif;font-size:42px;line-height:1;margin-bottom:10px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.deg-h{font-size:13px;color:var(--ink-dim);line-height:1.5}
+
+/* SPORTS */
+.sports-sec{border-top:1px solid var(--line)}
+.sports{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.sport{
+  padding:12px 20px;border-radius:999px;font-size:14px;
+  border:1px solid rgba(0,212,255,.3);background:rgba(0,212,255,.06);color:var(--ink);
+  transition:.25s;
+}
+.sport:hover{border-color:var(--accent);background:rgba(0,212,255,.14)}
+.sport span{color:var(--accent);margin-right:9px;font-family:'JetBrains Mono',monospace;font-size:11.5px}
+.agnostic{
+  margin-top:46px;padding:32px 34px;border-radius:26px;
+  border:1px solid var(--line);background:rgba(255,255,255,.02);max-width:860px;
+}
+.agnostic-h{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px}
+.agnostic p{font-size:15px;line-height:1.65;color:var(--ink-dim)}
+.agnostic p b{color:var(--ink);font-weight:500}
+
+/* CLOSE */
+.close{border-top:1px solid var(--line);text-align:center;
+  background:radial-gradient(ellipse 800px 400px at 50% 40%,rgba(0,212,255,.08),transparent 70%)}
+.close h2{margin-left:auto;margin-right:auto}
+.close p{font-size:16px;color:var(--ink-dim);max-width:620px;margin:0 auto 40px;line-height:1.6}
+.close p b{color:var(--ink);font-weight:500}
+.btn{
+  display:inline-flex;align-items:center;gap:11px;padding:16px 32px;border-radius:999px;
+  background:var(--accent);color:#00212e;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;
+  transition:transform .3s, box-shadow .3s;box-shadow:0 8px 30px rgba(0,212,255,.3);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 42px rgba(0,212,255,.45)}
+
+footer{padding:44px 0 56px;border-top:1px solid var(--line)}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.flogo{height:22px;width:auto;opacity:.85}
+.fmark{height:20px;width:auto;opacity:.75}
+.fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.fmeta a{transition:color .2s}
+.fmeta a:hover{color:var(--ink)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease-out, transform .8s ease-out}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .hero-layout{grid-template-columns:1fr;gap:40px}
+  .hero-visual{aspect-ratio:5/6;min-height:0}
+  .hero-visual video{min-height:0}
+  .moves{grid-template-columns:1fr}
+  .sweep{grid-template-columns:repeat(2,1fr)}
+  .deg:nth-child(2){border-right:none}
+  .nav-links{display:none}
+  .section{padding:var(--sp-section) 0}
+  .hero-stats{margin-top:60px}
+}
+@media (max-width:560px){
+  :root{--sp-section:44px;--sp-block:36px}
+  .wrap{padding:0 20px}
+  nav{padding:14px 20px}
+  .nav-meta,.nav-cta{letter-spacing:.12em}
+  .hero{padding-top:115px}
+  .nav-inner{padding:14px 20px}
+  .stat{padding:26px 18px}
+  .stat-num{font-size:40px}
+}
+
+/* ── MOTION PREFERENCE ──────────────────────────────────────────────────────
+   Every page here animates on scroll. Under prefers-reduced-motion the whole
+   page must still arrive in its final readable state, so reveals are forced
+   visible rather than left at opacity:0 waiting on an animation that will
+   never run. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+}
+
+/* ── FOCUS ──────────────────────────────────────────────────────────────────
+   Keyboard focus needs a visible indicator on every operable control. */
+:focus-visible{
+  outline:2px solid var(--accent);
+  /* deliberately no border-radius here — the outline already follows the
+     element's own radius, and setting one flattens pill buttons to 4px */
+  outline-offset:3px;
+}
+
+/* ═════════ HOUSE LAYER — shared with the homepage: type, nav, buttons, labels ═════════ */
+:root{--acc:var(--accent);--acc-ink:#00212e;--c-digisapien:#3ee089;--c-nyaya:#4a6cff;--c-chatdj:#ff3d81;--c-vaani:#a855f7;--c-qrator:#ffb84a;--c-magiq:#00d4ff;--h-ease:cubic-bezier(.16,1,.3,1)}
+html,body{font-family:'Albert Sans',system-ui,sans-serif;font-weight:300}
+h1,h2,h3,h4{font-family:'Albert Sans',system-ui,sans-serif}
+h1 em,h2 em,.hero h1 em,.hero-title em,h2.section-title em,.tech-name em,.section h2 em,.cta h2 em,.stat-num,.deg-n,.a-n,.market-headline strong,.market-quote-body strong{
+  background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;-webkit-text-fill-color:initial;color:var(--acc)!important}
+.hero h1 em::after{display:none}
+/* section headings share the homepage scale; only the hero h1 is larger */
+h2,.section h2,.head h2,.cta h2{font-size:clamp(30px,3.4vw,46px)!important;line-height:1.05!important;letter-spacing:-.025em!important}
+/* house footer, identical on every page */
+footer{padding:46px 0 60px!important;border-top:0!important;background:none!important}
+footer .frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+footer .flogo{height:20px;width:auto;opacity:.85}
+footer .fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+footer .fmeta a:hover{color:#fff}
+/* section rhythm: hero→reel and sports→close ran to ~180px */
+.hero{padding-bottom:40px!important}
+.close{padding-top:44px!important}
+/* top bar */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
+.topbar .brand{display:flex;align-items:center;gap:22px}
+.topbar .brand img{height:32px;width:auto;opacity:.95;display:block}
+/* the page's own nav{} element rule (fixed, full-width) must not reach the pill */
+.pillnav{position:static;top:auto;left:auto;right:auto;z-index:auto;justify-content:flex-start;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none;
+  display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pillnav a{padding:10px 20px;border-radius:999px;font-weight:500;font-size:14px;color:rgba(255,255,255,.72);transition:color .3s var(--h-ease),background .3s var(--h-ease)}
+.pillnav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.menu{position:relative}
+.menu-btn{display:flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;color:inherit;font:inherit}
+.menu-btn span{padding:14px 22px;font-weight:500;font-size:14px;color:rgba(255,255,255,.75)}
+.menu-btn span+span{border-left:1px solid rgba(255,255,255,.12);padding:14px 16px;letter-spacing:.2em;color:#fff}
+.menu-list{position:absolute;right:0;top:calc(100% + 10px);min-width:260px;padding:10px;border-radius:20px;background:rgba(6,8,10,.94);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(16px);display:none;flex-direction:column;gap:2px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+.menu.open .menu-list{display:flex}
+.menu-list a{--c:var(--acc);display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:rgba(255,255,255,.75)}
+.menu-list a:hover,.menu-list a[aria-current]{background:rgba(255,255,255,.06);color:#fff}
+.menu-list a i{width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.menu-list .sep{height:1px;background:rgba(255,255,255,.1);margin:6px 8px}
+/* hero kicker: the homepage tag style, in the page accent */
+.hero-tag{font-family:'Syncopate',sans-serif!important;font-weight:700!important;font-size:12px!important;letter-spacing:.3em!important;text-transform:uppercase!important;
+  color:var(--acc)!important;background:none!important;border:0!important;padding:0!important;border-radius:0!important;backdrop-filter:none!important}
+.hero-tag .dot,.hero-tag .hero-dot,.hero-tag .hero-tag-dot,.hero-tag span.dot{display:none!important}
+.hero-tag::before,.hero-tag::after,.hero-tag > span:empty,.hero-tag > i{display:none!important}
+/* primary buttons: the homepage pill, in the page accent */
+.btn,.cta-btn,.gate-btn.open{display:inline-flex;align-items:center;gap:14px;height:58px;padding:0 28px;border-radius:999px;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:16px;font-weight:600;letter-spacing:0;text-transform:none;
+  background:var(--acc);border:1px solid var(--acc);color:var(--acc-ink);box-shadow:none;transition:transform .35s var(--h-ease),box-shadow .35s var(--h-ease),filter .35s var(--h-ease)}
+.btn:hover,.cta-btn:hover,.gate-btn.open:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(0,0,0,.7);filter:brightness(1.08)}
+/* footer meta */
+.fmeta,.footer-inner,.foot-copy,.footer-contact{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:680px){
+  .topbar{padding:18px 18px}
+  .pillnav a:not(:first-child){display:none}
+  .menu-btn span:first-child{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<header class="topbar">
+  <div class="brand"><a href="neosentience.html" aria-label="Neosentience"><img src="qrator-assets/neosentience-logo.png" alt="Neosentience"></a>
+    <nav class="pillnav" aria-label="Primary">
+      <a href="neosentience.html">Home</a><a href="neosentience.html#products">Products</a><a href="neosentience.html#consulting">Consulting</a><a href="neosentience.html#contact">Contact</a>
+    </nav></div>
+  <div class="menu" id="menu">
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" id="menu-toggle"><span>Menu</span><span aria-hidden="true">••</span></button>
+    <div class="menu-list" id="menu-list" role="menu">
+        <a role="menuitem" style="--c:var(--c-digisapien)" href="digisapien.html"><i></i>DigiSapien</a>
+        <a role="menuitem" style="--c:var(--c-nyaya)" href="nyaya-sahayak.html"><i></i>Nyaya Sahayak</a>
+        <a role="menuitem" style="--c:var(--c-chatdj)" href="chat-dj.html"><i></i>Chat DJ</a>
+        <a role="menuitem" style="--c:var(--c-vaani)" href="vaani-studio.html"><i></i>VAANI Studio</a>
+        <div class="sep"></div>
+        <a role="menuitem" style="--c:var(--c-qrator)" href="qrator.html"><i></i>QRATOR</a>
+        <a role="menuitem" style="--c:var(--c-magiq)" href="magiq-360.html" aria-current="page"><i></i>Magiq 360</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-tag"><span class="hero-tag-dot"></span>Case Study &middot; Immersive sports broadcast</div>
+
+    <div class="logo-block">
+      <svg class="magiq-logo" viewBox="0 0 460 96" role="img" aria-label="Magiq 360">
+        <defs>
+          <linearGradient id="mq" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="460" y2="0">
+            <stop offset="0" stop-color="#00d4ff"/>
+            <stop offset="0.6" stop-color="#4aa8ff"/>
+            <stop offset="1" stop-color="#9d8bff"/>
+          </linearGradient>
+        </defs>
+        <text x="0" y="72" font-family="Albert Sans,sans-serif" font-weight="700" font-size="76"
+              letter-spacing="-3" fill="#f2f4f7">MAGIQ</text>
+        <text x="272" y="72" font-family="Albert Sans,sans-serif" font-weight="300" font-size="76"
+              letter-spacing="-1" fill="url(#mq)">360</text>
+        <circle cx="424" cy="30" r="9" fill="none" stroke="url(#mq)" stroke-width="2.5" opacity=".9"/>
+        <ellipse cx="424" cy="30" rx="17" ry="7" fill="none" stroke="url(#mq)" stroke-width="1.6"
+                 opacity=".55" transform="rotate(-24 424 30)"/>
+      </svg>
+    </div>
+
+    <div class="hero-layout">
+      <div>
+        <h1>The moment stops. <em>The camera doesn&rsquo;t.</em></h1>
+
+        <p class="hero-lede">
+          <strong>Magiq 360</strong> freezes the decisive moment in a live sports broadcast and
+          flies a camera around it &mdash; a bullet-time orbit anywhere from
+          <strong style="color:var(--accent)">90&deg; to a full 360&deg;</strong>, or a clean move
+          between two real cameras. The play stands still; the point of view keeps travelling.
+          It ran live through the entire <strong>IPL 2026</strong> season.
+        </p>
+
+        <div class="partners">
+          <div class="partner">
+            <div class="partner-lbl">Built for</div>
+            <div class="partner-name">Quidich Innovation Labs</div>
+            <div class="partner-role">Sports broadcast tech &middot; Live match operations</div>
+          </div>
+          <div class="partner">
+            <div class="partner-lbl">AI consulting &amp; production</div>
+            <div class="partner-name">Neosentience Technologies</div>
+            <div class="partner-role">System design &middot; Pipeline &middot; Live delivery</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual: the orbit, looping -->
+      <div class="hero-visual reveal">
+        <video src="magiq360-assets/orbit.mp4" poster="magiq360-assets/orbit-poster.jpg"
+               autoplay muted loop playsinline preload="metadata"></video>
+        <div class="hv-ticker">
+          <div><span class="lbl">MOMENT</span><span class="val">FROZEN</span></div>
+          <div><span class="lbl">ORBIT</span><span class="val">360&deg;</span></div>
+        </div>
+        <div class="hero-visual-overlay">
+          <span class="hv-tag"><span class="hv-tag-dot"></span>On Air</span>
+          <div class="hv-title">A crease decision, held still and read from every side.</div>
+          <div class="hv-meta">IPL 2026 &middot; 74 MATCHES</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stats reveal">
+      <div class="stat"><div class="stat-num">74</div><div class="stat-lbl">IPL 2026 matches</div></div>
+      <div class="stat"><div class="stat-num">3&ndash;4</div><div class="stat-lbl">Moments aired per match</div></div>
+      <div class="stat"><div class="stat-num">90&ndash;360&deg;</div><div class="stat-lbl">Orbit, set per moment</div></div>
+      <div class="stat"><div class="stat-num">Any</div><div class="stat-lbl">Sport it can be pointed at</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE REEL -->
+<section class="section reel-sec" id="reel">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">The reel</div>
+    <h2 class="reveal">A season of moments, <em>held still.</em></h2>
+    <p class="section-sub reveal">
+      Catches at the rope, run-outs judged on a stride, boundary saves that turn on a boot
+      landing inside a line. These went to air during <strong>IPL 2026</strong> &mdash; three or
+      four in a typical match, built and delivered inside the live broadcast.
+    </p>
+
+    <div class="reel reveal">
+      <video src="magiq360-assets/reel.mp4" poster="magiq360-assets/reel-poster.jpg"
+             controls playsinline preload="none"></video>
+    </div>
+    <div class="reel-meta">
+      <span class="on">IPL 2026 &middot; Magiq 360 broadcast reel</span>
+      <span>0:54 &middot; Sound on</span>
+    </div>
+  </div>
+</section>
+
+<!-- THE MOVES -->
+<section class="section" id="moves" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">The moves</div>
+    <h2 class="reveal">One rig. <em>Two ways to travel.</em></h2>
+    <p class="section-sub reveal">
+      Both moves start the same way &mdash; the broadcast picks the frame worth holding. What
+      changes is where the camera goes once time has stopped.
+    </p>
+
+    <div class="moves reveal">
+      <div class="move">
+        <div class="arc">
+          <svg viewBox="0 0 150 78" fill="none">
+            <ellipse cx="75" cy="54" rx="58" ry="17" stroke="rgba(0,212,255,.28)" stroke-width="1.4"/>
+            <circle cx="75" cy="54" r="6" fill="#00d4ff" opacity=".9"/>
+            <path d="M17 54 A58 17 0 0 1 133 54" stroke="#00d4ff" stroke-width="2"
+                  stroke-linecap="round" stroke-dasharray="3 6"/>
+            <path d="M126 46 L133 54 L126 60" stroke="#00d4ff" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="8" y="44" width="16" height="11" rx="2" fill="#7de3ff"/>
+            <path d="M24 47 L31 44 L31 55 L24 52 Z" fill="#7de3ff"/>
+          </svg>
+        </div>
+        <div class="move-t">Bullet time</div>
+        <h3>90&deg; to 360&deg;, around a frozen frame</h3>
+        <p>
+          Time stops on the chosen frame and the camera keeps moving through it. A
+          <b>quarter turn</b> changes the read on a line call; the <b>full circle</b> hands the
+          viewer the whole geometry of a moment they only saw once, at speed, from one side.
+        </p>
+      </div>
+
+      <div class="move">
+        <div class="arc">
+          <svg viewBox="0 0 150 78" fill="none">
+            <rect x="6" y="20" width="18" height="13" rx="2" fill="#7de3ff"/>
+            <path d="M24 23 L32 19 L32 34 L24 30 Z" fill="#7de3ff"/>
+            <rect x="126" y="46" width="18" height="13" rx="2" fill="#9d8bff"/>
+            <path d="M126 49 L118 45 L118 60 L126 56 Z" fill="#9d8bff"/>
+            <path d="M34 28 C68 28 82 52 116 52" stroke="#00d4ff" stroke-width="2"
+                  stroke-linecap="round" stroke-dasharray="3 6"/>
+            <circle cx="75" cy="39" r="5.5" fill="#00d4ff" opacity=".9"/>
+          </svg>
+        </div>
+        <div class="move-t">Camera to camera</div>
+        <h3>A smooth move between two real angles</h3>
+        <p>
+          Broadcast cuts jump. Magiq 360 <b>travels</b> instead &mdash; synthesising the path
+          between two physical cameras so the viewer keeps their bearings and never loses the
+          ball, the player or the line across the change of angle.
+        </p>
+      </div>
+    </div>
+
+    <div class="sweep reveal">
+      <div class="deg"><div class="deg-n">90&deg;</div><div class="deg-h">Change the read on a line call</div></div>
+      <div class="deg"><div class="deg-n">180&deg;</div><div class="deg-h">Cross to the reverse angle</div></div>
+      <div class="deg"><div class="deg-n">270&deg;</div><div class="deg-h">Come around behind the play</div></div>
+      <div class="deg"><div class="deg-n">360&deg;</div><div class="deg-h">The whole geometry, one shot</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ANY SPORT -->
+<section class="section sports-sec" id="sports">
+  <div class="wrap">
+    <div class="section-eyebrow reveal">Not just cricket</div>
+    <h2 class="reveal">Any sport with <em>a moment worth holding.</em></h2>
+    <p class="section-sub reveal">
+      Nothing in the rig is cricket-specific. It is a <strong>customisable tool</strong> &mdash;
+      the moment it watches for, the arc it flies and the look of the shot are all configured
+      per sport. Wherever a decision, a celebration or a piece of skill happens too fast to read
+      once, the same freeze-and-orbit applies.
+    </p>
+
+    <div class="sports reveal">
+      <div class="sport"><span>01</span>Cricket</div>
+      <div class="sport"><span>02</span>Football</div>
+      <div class="sport"><span>03</span>Kabaddi</div>
+      <div class="sport"><span>04</span>Hockey</div>
+      <div class="sport"><span>05</span>Tennis</div>
+      <div class="sport"><span>06</span>Badminton</div>
+      <div class="sport"><span>07</span>Athletics</div>
+      <div class="sport"><span>08</span>Basketball</div>
+      <div class="sport"><span>09</span>Wrestling</div>
+      <div class="sport"><span>10</span>Motorsport</div>
+    </div>
+
+    <div class="agnostic reveal">
+      <div class="agnostic-h">What it needs</div>
+      <p>
+        The moment, and the angles around it. Give the rig a frozen frame and the cameras that
+        saw it, and it builds the path between them &mdash; <b>a line call, a goal-mouth
+        scramble, a photo finish, an overtake</b>. The sport changes; the move does not.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="section close">
+  <div class="wrap">
+    <h2 class="reveal">The replay you can <em>walk around.</em></h2>
+    <p class="reveal">
+      Magiq 360 was built with <b>Quidich Innovation Labs</b>, where Neosentience works as AI
+      consultant and technical architect on immersive broadcast &mdash; from system design
+      through to live delivery on air.
+    </p>
+    <a class="btn reveal" href="mailto:soham@neosentience.in">Talk to us &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <img src="qrator-assets/neosentience-logo.png" alt="Neosentience" class="flogo">
+      <span class="fmeta">AI product studio · India</span>
+      <span class="fmeta"><a href="mailto:soham@neosentience.in">soham@neosentience.in</a> · +91 99679 60018</span>
+      <span class="fmeta">© 2026 Neosentience Technologies Pvt Ltd.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* The hero loop only decodes while it is on screen — an off-screen video
+   running for the length of the page is wasted battery. The showreel below is
+   preload="none", so it costs nothing until someone presses play. */
+(function(){
+  const loop = document.querySelector('.hero-visual video');
+  const reel = document.querySelector('.reel video');
+  if(!loop) return;
+  const vio = new IntersectionObserver(es => es.forEach(e => {
+    if(e.isIntersecting) loop.play().catch(()=>{});
+    else loop.pause();
+  }), {threshold:.2});
+  vio.observe(loop);
+
+  /* one soundtrack at a time: the reel takes over when it starts */
+  if(reel){
+    reel.addEventListener('play', () => loop.pause());
+    reel.addEventListener('pause', () => {
+      const r = loop.getBoundingClientRect();
+      if(r.bottom > 0 && r.top < innerHeight) loop.play().catch(()=>{});
+    });
+  }
+})();
+</script>
+<script>(function(){var m=document.getElementById('menu'),t=document.getElementById('menu-toggle');if(!m||!t)return;t.addEventListener('click',function(e){e.stopPropagation();var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});document.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false')});document.addEventListener('keydown',function(e){if(e.key==='Escape'){m.classList.remove('open');t.setAttribute('aria-expanded','false')}})})();</script>
+<script>
+/* House rule: a serif-italic accent either shares one line with the sans, or
+   starts its own line. It never breaks mid-phrase. Measured, not guessed:
+   set inline, see if the heading still fits one line, otherwise block. */
+(function(){
+  function fit(){
+    document.querySelectorAll('h1 em,h2 em,h3 em').forEach(function(em){
+      var h=em.parentElement; em.style.display='inline';
+      var fs=parseFloat(getComputedStyle(h).fontSize);
+      var one=h.getBoundingClientRect().height<=fs*1.45;
+      em.style.display=one?'inline':'block';
+    });
+  }
+  fit(); addEventListener('resize',fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Neosentience builds AI products that enhance and empower human ingenuity — built for India: its languages, its laws, its games, its institutions.">
+<title>Neosentience — AI Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#0b0c0e;
+  --card:#0d1f18;
+  --card-2:#0a1712;
+  --card-3:#071009;
+  --ink:#eef4f0;
+  --ink-2:#a9bcb2;
+  --ink-3:#6f8579;
+  --line:rgba(238,244,240,.12);
+  --line-2:rgba(238,244,240,.22);
+  --green:#3ee089;
+  --green-ink:#06170d;
+
+  --c-digisapien:#3ee089;
+  --c-nyaya:#4a6cff;
+  --c-chatdj:#ff3d81;
+  --c-vaani:#a855f7;
+  --c-qrator:#ffb84a;
+  --c-magiq:#00d4ff;
+
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;color-scheme:dark}
+html,body{background:var(--page);color:var(--ink);
+  font-family:'Albert Sans',system-ui,sans-serif;font-weight:300;font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--green);color:var(--green-ink)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.display{font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase}
+
+/* ═══════════════════ THE CARD ═══════════════════ */
+.frame{padding:22px;display:flex}
+.card{position:relative;flex:1;min-width:0;width:100%;border-radius:34px;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(62% 78% at 68% 18%,rgba(62,224,137,.17),transparent 72%),
+    linear-gradient(160deg,var(--card) 0%,var(--card-2) 55%,var(--card-3) 100%);
+  box-shadow:0 60px 120px -40px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.04) inset;
+  display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto;min-height:calc(min(100vh,1000px) - 44px)}
+/* concentric rings behind the figure */
+.rings{position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55}
+.rings circle{fill:none;stroke:rgba(238,244,240,.09);stroke-width:1}
+.rings circle:nth-child(2){stroke:rgba(62,224,137,.14)}
+/* fine grain */
+.card::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* figure */
+.figure{position:absolute;right:0;top:0;bottom:0;width:70%;z-index:1;pointer-events:none;mix-blend-mode:lighten}
+.figure img,.figure video{position:absolute;right:15%;top:-4%;height:116%;width:auto;max-width:none;object-fit:cover;
+  object-fit:cover;object-position:50% 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 88%,transparent 100%),linear-gradient(180deg,#000 82%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 0,#000 14%,#000 88%,transparent 100%),linear-gradient(180deg,#000 82%,transparent 100%);
+  mask-composite:intersect;
+  filter:saturate(.95) contrast(1.02)}
+/* the being carries the brand light: a green edge on the shadow side */
+.figure::after{content:"";position:absolute;inset:0;
+  background:none}
+
+/* ── top bar ── */
+.top{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:28px 34px}
+.brand{display:flex;align-items:center;gap:22px}
+.brand img{height:32px;width:auto;opacity:.95}
+.pillnav{display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;
+  background:rgba(238,244,240,.06);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.pillnav a{padding:10px 20px;border-radius:999px;font-weight:500;font-size:14px;color:var(--ink-2);transition:color .3s var(--ease),background .3s var(--ease)}
+.pillnav a:hover{color:var(--ink)}
+.pillnav a.on{background:var(--ink);color:var(--card-3);font-weight:600}
+.menu{position:relative}
+.menu-btn{display:flex;align-items:center;border-radius:999px;background:rgba(238,244,240,.06);border:1px solid var(--line);backdrop-filter:blur(10px);overflow:hidden}
+.menu-btn span{padding:14px 22px;font-weight:500;font-size:14px;color:var(--ink-2)}
+.menu-btn span+span{border-left:1px solid var(--line);padding:14px 16px;letter-spacing:.2em;color:var(--ink)}
+.menu-list{position:absolute;right:0;top:calc(100% + 10px);min-width:260px;padding:10px;border-radius:20px;
+  background:rgba(7,16,9,.92);border:1px solid var(--line-2);backdrop-filter:blur(16px);
+  display:none;flex-direction:column;gap:2px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+.menu.open .menu-list{display:flex}
+.menu-list a{--c:var(--green);display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:var(--ink-2)}
+.menu-list a:hover{background:rgba(238,244,240,.06);color:var(--ink)}
+.menu-list a i{width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.menu-list .sep{height:1px;background:var(--line);margin:6px 8px}
+
+/* ── copy block ── */
+.copy{position:relative;z-index:3;align-self:center;padding:0 34px 0 54px;max-width:720px;min-width:0}
+.kicker{animation:rise 1s var(--ease) .1s both;font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.3em;color:var(--green);margin-bottom:22px}
+.wordmark{font-weight:700;font-size:clamp(40px,4.6vw,66px);letter-spacing:-.03em;line-height:1.02;color:var(--ink);
+  margin-bottom:22px}
+.wordmark em{display:block;font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  letter-spacing:-.005em;color:var(--green);font-size:1.12em;line-height:1;padding:0 .1em .06em 0}
+.lede{font-size:clamp(16px,1.3vw,19px);line-height:1.55;color:var(--ink-2);max-width:46ch;margin-bottom:34px}
+.lede strong{color:var(--ink);font-weight:500}
+.ctas{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:22px;padding:0 10px 0 28px;height:58px;border-radius:999px;
+  background:rgba(238,244,240,.07);border:1px solid var(--line-2);font-weight:500;font-size:16px;color:var(--ink);
+  transition:background .35s var(--ease),transform .35s var(--ease)}
+.pill:hover{background:rgba(238,244,240,.12);transform:translateY(-1px)}
+.pill i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;letter-spacing:.14em;font-size:14px;color:var(--ink-2)}
+.pill.primary{background:var(--green);border-color:var(--green);color:var(--green-ink);font-weight:600}
+.pill.primary i{color:var(--green-ink)}
+.pill.primary:hover{background:#5cf0a0}
+.vbar{width:1px;height:34px;background:var(--line-2)}
+.connect{display:inline-flex;align-items:center;gap:16px;font-size:14px;font-weight:500;color:var(--ink-2)}
+.connect i{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:rgba(238,244,240,.07);border:1px solid var(--line-2);transition:background .35s var(--ease)}
+.connect:hover{color:var(--ink)}.connect:hover i{background:rgba(238,244,240,.13)}
+.connect svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── bottom bar ── */
+.bottom{position:relative;z-index:3;display:grid;grid-template-columns:1fr 1fr auto auto;align-items:center;gap:0;
+  padding:22px 34px 26px;background:linear-gradient(180deg,rgba(7,16,9,0),rgba(7,16,9,.55));border-top:1px solid rgba(238,244,240,.06)}
+.stmt{display:flex;align-items:flex-start;gap:18px;padding:6px 32px 6px 0;border-right:1px solid var(--line);min-width:0}
+.stmt+.stmt{padding-left:32px}
+.stmt i{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;
+  font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;color:var(--green);margin-top:2px}
+.stmt h3{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px;letter-spacing:-.01em}
+.stmt p{font-size:14px;line-height:1.5;color:var(--ink-2);max-width:40ch}
+.next{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);margin:0 28px;transition:background .35s var(--ease)}
+.next:hover{background:rgba(238,244,240,.1)}
+.next svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.socials{display:flex;align-items:center;gap:8px;padding-left:28px;border-left:1px solid var(--line)}
+.socials a{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--ink-2);transition:color .3s var(--ease),background .3s var(--ease)}
+.socials a:hover{color:var(--ink);background:rgba(238,244,240,.08)}
+.socials svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* page-load choreography: one orchestrated entrance */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes figure-in{from{opacity:0;transform:translateX(40px) scale(1.02)}to{opacity:1;transform:none}}
+@keyframes rings-in{from{opacity:0;transform:scale(.92)}to{opacity:.55;transform:none}}
+.top{animation:rise .9s var(--ease) both}
+.wordmark{animation:rise 1s var(--ease) .15s both}
+.lede{animation:rise 1s var(--ease) .28s both}
+.ctas{animation:rise 1s var(--ease) .4s both}
+.bottom{animation:rise 1s var(--ease) .55s both}
+.figure{animation:figure-in 1.4s var(--ease) .2s both}
+.rings{animation:rings-in 1.6s var(--ease) .1s both;transform-origin:70% 45%}
+
+/* ═══════════════════ BELOW THE CARD ═══════════════════ */
+.wrap{max-width:1360px;margin:0 auto;padding:0 44px}
+section.block{padding:96px 0 40px}
+.head{display:grid;grid-template-columns:auto 1fr;gap:0 48px;align-items:stretch;margin-bottom:44px}
+/* the note sits beside a full-height rule, centred on the heading */
+.head p{align-self:stretch;display:flex;align-items:center;border-left:1px solid #e0b34a;padding:6px 0 6px 44px}
+.head h2{font-weight:700;font-size:clamp(30px,3.4vw,46px);letter-spacing:-.025em;line-height:1.05}
+.head h2 em,.cta h2 em{display:block;font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;color:var(--green);font-size:1.1em;line-height:1.05;letter-spacing:-.005em;padding-right:.1em}
+.head p{color:var(--ink-2);max-width:54ch;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid.four{grid-template-columns:repeat(4,1fr)}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.pcard{--c:var(--green);position:relative;display:flex;flex-direction:column;min-height:300px;padding:26px 24px 24px;border-radius:26px;
+  /* the product's colour is present at rest: a wash from the top, a tinted edge, a lit top rule */
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c) 11%,transparent),rgba(238,244,240,.02) 62%);
+  border:1px solid color-mix(in srgb,var(--c) 30%,transparent);
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--c) 55%,transparent);
+  transition:transform .45s var(--ease),border-color .45s var(--ease),background .45s var(--ease),box-shadow .45s var(--ease)}
+.pcard:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c) 60%,transparent);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c) 17%,transparent),rgba(238,244,240,.02) 66%);
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--c) 85%,transparent),0 24px 50px -30px color-mix(in srgb,var(--c) 45%,transparent)}
+.pcard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.pcard-cat{font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c)}
+.pcard-status{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--c) 75%,var(--ink));padding:5px 10px;border-radius:999px;border:1px solid color-mix(in srgb,var(--c) 40%,transparent);background:color-mix(in srgb,var(--c) 8%,transparent)}
+.pcard-logo{align-self:flex-start;height:34px;width:auto;max-width:190px;object-fit:contain;margin-bottom:18px;opacity:.95}
+.pcard-logo.mark{height:42px}.pcard-logo.lg{height:44px}
+.pcard-name{font-family:'Syncopate',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;letter-spacing:.06em;margin-bottom:18px}
+.tagline{font-weight:500;font-size:17px;color:var(--ink);margin-bottom:10px}
+.pcard p{color:var(--ink-2);font-size:14px;line-height:1.55;flex:1}
+.pcard-foot{display:flex;justify-content:space-between;align-items:center;margin-top:22px;padding-top:16px;border-top:1px solid color-mix(in srgb,var(--c) 28%,transparent);font-size:12.5px;color:var(--ink-3)}
+.pcard-foot b{color:var(--ink-2);font-weight:500}
+.pcard-link{color:var(--c);font-weight:600}
+
+.approach{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.appr{padding:30px 28px;border-radius:26px;border:1px solid var(--line);background:rgba(238,244,240,.025)}
+.appr h3{font-weight:600;font-size:19px;margin-bottom:10px;color:var(--ink)}
+.appr p{color:var(--ink-2);font-size:14.5px}
+
+.cta{margin:96px 0 0;padding:64px 54px;border-radius:34px;position:relative;overflow:hidden;
+  background:radial-gradient(90% 120% at 90% 10%,rgba(62,224,137,.14),transparent 55%),linear-gradient(160deg,var(--card),var(--card-3));
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;border:1px solid rgba(255,255,255,.04)}
+.cta h2{font-weight:700;font-size:clamp(30px,3.2vw,44px);letter-spacing:-.025em;line-height:1.05;margin-bottom:14px}
+.cta p{color:var(--ink-2);max-width:56ch}
+footer{padding:46px 0 60px}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--line)}
+.frow img{height:20px;opacity:.85}
+.fmeta{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.fmeta a:hover{color:var(--ink)}
+
+
+/* scroll reveal below the card */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media (max-width:1180px){
+  .bottom{grid-template-columns:1fr 1fr auto}
+  .socials{display:none}
+}
+@media (max-width:960px){
+  .figure{width:70%;opacity:.55}
+  .figure img{height:100%}
+  .copy{padding:0 34px}
+  .grid,.grid.four,.grid.two,.approach{grid-template-columns:1fr 1fr}
+  .head{grid-template-columns:1fr;gap:20px 0}
+  .head p{border-left:0;padding:0}
+  .bottom{grid-template-columns:1fr 1fr auto}
+  .pillnav a{padding:9px 14px;font-size:13px}
+}
+@media (max-width:680px){
+  .frame{padding:10px}
+  .card{border-radius:24px;min-height:calc(min(100vh,900px) - 20px)}
+  .top{padding:18px 18px}
+  .pillnav a:not(.on){display:none}
+  .menu-btn span:first-child{display:none}
+  /* the face lives in the top half; the copy owns the bottom half */
+  .figure{width:100%;opacity:.34;right:-6%}
+  .figure img,.figure video{height:58%;top:0;bottom:auto;right:-18%;
+    -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
+    mask-image:linear-gradient(180deg,#000 55%,transparent 100%)}
+  .copy{padding:0 22px 22px;align-self:end;max-width:100%;width:100%}
+  /* Syncopate is wide: the wordmark breaks into two lines and scales to the card */
+  .wordmark{font-size:clamp(30px,9.6vw,44px)}
+  .brand img{display:none}
+  .lede{font-size:15px;max-width:100%}
+  .ctas{gap:12px}
+  .vbar{display:none}
+  .bottom{grid-template-columns:1fr;gap:14px;padding:18px 22px 22px}
+  .stmt{border:0;padding:0}
+  .stmt+.stmt{padding-left:0}
+  .next{display:none}
+  .wrap{padding:0 18px}
+  section.block{padding:64px 0 24px}
+  .grid,.grid.four,.grid.two,.approach{grid-template-columns:1fr}
+  .cta{grid-template-columns:1fr;padding:40px 26px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-delay:0s !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+  .rings{opacity:.55}
+  .reveal{opacity:1 !important;transform:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="frame">
+<div class="card">
+  <svg class="rings" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle cx="980" cy="420" r="230"/><circle cx="980" cy="420" r="360"/><circle cx="980" cy="420" r="500"/><circle cx="980" cy="420" r="650"/>
+  </svg>
+  <div class="figure" aria-hidden="true"><video src="wall-assets/hero-being.mp4" poster="wall-assets/hero-poster.webp" width="1200" height="1688" autoplay muted loop playsinline preload="auto"></video></div>
+
+  <div class="top">
+    <div class="brand">
+      <a href="neosentience.html" aria-label="Neosentience"><img src="qrator-assets/neosentience-logo.png" alt="Neosentience"></a>
+    <nav class="pillnav" aria-label="Primary">
+      <a class="on" href="neosentience.html">Home</a>
+      <a href="#products">Products</a>
+      <a href="#consulting">Consulting</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    </div>
+    <div class="menu" id="menu">
+      <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" id="menu-toggle"><span>Menu</span><span aria-hidden="true">••</span></button>
+      <div class="menu-list" id="menu-list" role="menu">
+        <a role="menuitem" style="--c:var(--c-digisapien)" href="digisapien.html"><i></i>DigiSapien</a>
+        <a role="menuitem" style="--c:var(--c-nyaya)" href="nyaya-sahayak.html"><i></i>Nyaya Sahayak</a>
+        <a role="menuitem" style="--c:var(--c-chatdj)" href="chat-dj.html"><i></i>Chat DJ</a>
+        <a role="menuitem" style="--c:var(--c-vaani)" href="vaani-studio.html"><i></i>VAANI Studio</a>
+        <div class="sep"></div>
+        <a role="menuitem" style="--c:var(--c-qrator)" href="qrator.html"><i></i>QRATOR</a>
+        <a role="menuitem" style="--c:var(--c-magiq)" href="magiq-360.html"><i></i>Magiq 360</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="copy">
+    <div class="kicker">Built for India</div>
+    <h1 class="wordmark">AI that amplifies <em>human ingenuity.</em></h1>
+    <p class="lede">We build AI products that enhance and empower what people do best — for India’s languages, laws, sports, data and institutions. Shipped live, at national scale.</p>
+    <div class="ctas">
+      <a class="pill primary" href="#products">Discover <i>••</i></a>
+      <span class="vbar"></span>
+      <a class="connect" href="mailto:soham@neosentience.in"><i><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></i>Connect with us</a>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="stmt"><i>1</i><div><h3>Our mission</h3><p>AI products that enhance and empower human ingenuity — systems that see, listen, reason and respond in real time.</p></div></div>
+    <div class="stmt"><i>2</i><div><h3>Built for India</h3><p>Its languages, laws, sports, data and institutions — designed from the schema up and shipped live at national scale.</p></div></div>
+    <a class="next" href="#products" aria-label="Go to products"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <div class="socials">
+      <a href="mailto:soham@neosentience.in" aria-label="Email"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/></svg></a>
+      <a href="tel:+919967960018" aria-label="Phone"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a>
+      <a href="#products" aria-label="Products"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></a>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="wrap">
+
+  <section class="block" id="products">
+    <div class="head reveal">
+      <h2>Built in-house. <em>Owned end to end.</em></h2>
+      <p>Four deep-tech products, from research through to deployment hardware — designed, engineered and operated by us.</p>
+    </div>
+    <div class="grid four">
+      <a class="pcard reveal" style="--c:var(--c-digisapien)" href="digisapien.html">
+        <div class="pcard-top"><span class="pcard-cat">Digital humans</span><span class="pcard-status">Live</span></div>
+        <img src="digisapien-assets/digisapien-logo.png" alt="DigiSapien" class="pcard-logo lg" style="height:56px">
+        <div class="tagline">AI-powered digital beings.</div>
+        <p>A hyper-realistic, multi-lingual, emotionally resonant digital workforce. Reads attention and tone, responds in real time, deploys to kiosk, web or AR. Powered by our patent-pending Natural Cognition© stack.</p>
+        <div class="pcard-foot"><span>Patent pending</span><span class="pcard-link">Product →</span></div>
+      </a>
+      <a class="pcard reveal" style="--c:var(--c-nyaya)" href="nyaya-sahayak.html">
+        <div class="pcard-top"><span class="pcard-cat">Legal AI</span><span class="pcard-status">Built</span></div>
+        <img src="nyaya-assets/ns-logo.png" alt="Nyaya Sahayak" class="pcard-logo lg" style="height:48px">
+        <div class="tagline">The new criminal law, translated.</div>
+        <p>India replaced the IPC, CrPC and Evidence Act after 160 years. Nyaya Sahayak translates between the old codes and the new ones, drafts statutory documents and cites precedent — in English and 12 Indian languages.</p>
+        <div class="pcard-foot"><span>Own product</span><span class="pcard-link">Product →</span></div>
+      </a>
+      <a class="pcard reveal" style="--c:var(--c-chatdj)" href="chat-dj.html">
+        <div class="pcard-top"><span class="pcard-cat">Music AI</span><span class="pcard-status">In development</span></div>
+        <img src="chatdj-assets/logo.webp" alt="Chat DJ" class="pcard-logo lg">
+        <div class="tagline">Talk to it. It plays.</div>
+        <p>A live jam partner that learns your music folder and your genre, writes and evolves patterns as code in real time, and routes into your DJ rig as a deck you can mix against.</p>
+        <div class="pcard-foot"><span>Own product</span><span class="pcard-link">Product →</span></div>
+      </a>
+      <a class="pcard reveal" style="--c:var(--c-vaani)" href="vaani-studio.html">
+        <div class="pcard-top"><span class="pcard-cat">Dubbing AI</span><span class="pcard-status">Built</span></div>
+        <img src="vaani-assets/vaani-wordmark.svg" alt="VAANI Studio" class="pcard-logo lg" style="height:35px">
+        <div class="tagline">The language changes. So do the lips.</div>
+        <p>Dubs long-form video into Indian languages in the speaker's own cloned voice, then re-animates their lips to match. Every translated sentence passes a human review gate first — the feature no other dubbing tool has.</p>
+        <div class="pcard-foot"><span>Own product</span><span class="pcard-link">Product →</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="block" id="consulting">
+    <div class="head reveal">
+      <h2>Commissioned work. <em>Shipped live.</em></h2>
+      <p>We join teams as AI consultant and technical architect — designing the system from the data schema up, then running it in production.</p>
+    </div>
+    <div class="grid two">
+      <a class="pcard reveal" style="--c:var(--c-qrator)" href="qrator.html">
+        <div class="pcard-top"><span class="pcard-cat">Sports intelligence</span><span class="pcard-status">Shipped</span></div>
+        <img src="qrator-assets/qlogo.png" alt="QRATOR" class="pcard-logo" style="height:40px">
+        <div class="tagline">A cricketing brain, encoded in code.</div>
+        <p>Real-time AI analytics for live cricket broadcast. Reads every ball across 60 dimensions, reasons over 18 seasons of history, and hands commentators the fact that matters at the exact moment it matters. Ran an entire IPL season without downtime.</p>
+        <div class="pcard-foot"><span>For <b>Quidich Innovation Labs</b></span><span class="pcard-link">Case study →</span></div>
+      </a>
+      <a class="pcard reveal" style="--c:var(--c-magiq)" href="magiq-360.html">
+        <div class="pcard-top"><span class="pcard-cat">Immersive broadcast</span><span class="pcard-status">Shipped</span></div>
+        <img src="magiq360-assets/logo.webp" alt="Magiq 360" class="pcard-logo lg">
+        <div class="tagline">The moment, from every angle.</div>
+        <p>Bullet time for live sport — freezing the decisive moment and flying a camera around it, from a 90° turn to a full 360° orbit, or moving smoothly between two real cameras. Ran live across all 74 matches of IPL 2026.</p>
+        <div class="pcard-foot"><span>For <b>Quidich Innovation Labs</b></span><span class="pcard-link">Case study →</span></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="block" id="approach">
+    <div class="head reveal">
+      <h2>Research to <em>running system.</em></h2>
+      <p>We are not a prototype shop. Everything we build is designed to survive contact with production.</p>
+    </div>
+    <div class="approach">
+      <div class="appr reveal"><h3>Built for the region</h3><p>Indian faces, Indian languages, Indian context. Our models are designed for South Asia from the schema up — not a Western system with a translation layer bolted to the front.</p></div>
+      <div class="appr reveal"><h3>Real time, not batch</h3><p>Every product we ship answers within the window a human would. Sub-second reasoning, live inference, and operations pipelines that hold up on the night it actually matters.</p></div>
+      <div class="appr reveal"><h3>We run what we build</h3><p>Design, engineering and operations under one roof. When QRATOR was live across an IPL season, the team that wrote it was the team on call for it.</p></div>
+    </div>
+  </section>
+
+  <section class="cta reveal" id="contact">
+    <div>
+      <h2>Have a problem worth <em>thinking about?</em></h2>
+      <p>We take on a small number of consulting engagements a year, alongside our own product work. If it is hard, real time, and matters when it runs — we should talk.</p>
+    </div>
+    <a class="pill primary" href="mailto:soham@neosentience.in">Start a conversation <i>→</i></a>
+  </section>
+
+  <footer>
+    <div class="frow">
+      <img src="qrator-assets/neosentience-logo.png" alt="Neosentience">
+      <span class="fmeta">AI product studio · India</span>
+      <span class="fmeta"><a href="mailto:soham@neosentience.in">soham@neosentience.in</a> · +91 99679 60018</span>
+      <span class="fmeta">© 2026 Neosentience Technologies Pvt Ltd.</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var hv=document.querySelector(".figure video");
+  if(hv){ if(matchMedia("(prefers-reduced-motion: reduce)").matches){hv.removeAttribute("autoplay");hv.pause();}
+    else new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting) hv.play().catch(function(){}); else hv.pause(); });},{threshold:.1}).observe(hv); }
+  // menu
+  const m=document.getElementById('menu'),t=document.getElementById('menu-toggle');
+  t.addEventListener('click',e=>{e.stopPropagation();const o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});
+  document.addEventListener('click',()=>{m.classList.remove('open');t.setAttribute('aria-expanded','false')});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){m.classList.remove('open');t.setAttribute('aria-expanded','false')}});
+  // reveal
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+<script>
+/* House rule: a serif-italic accent either shares one line with the sans, or
+   starts its own line. It never breaks mid-phrase. Measured, not guessed:
+   set inline, see if the heading still fits one line, otherwise block. */
+(function(){
+  function fit(){
+    document.querySelectorAll('h1 em,h2 em,h3 em').forEach(function(em){
+      var h=em.parentElement; em.style.display='inline';
+      var fs=parseFloat(getComputedStyle(h).fontSize);
+      var one=h.getBoundingClientRect().height<=fs*1.45;
+      em.style.display=one?'inline':'block';
+    });
+  }
+  fit(); addEventListener('resize',fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>

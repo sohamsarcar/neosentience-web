@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="DigiSapien builds AI-powered digital beings that see, listen and respond — deployed across retail, real estate, airports and more.">
+<title>DigiSapien · Neosentience Case Study</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050608;
+  --bg-2:#0a0c11;
+  --bg-3:#0f1218;
+  --ink:#e8ecf1;
+  --ink-dim:#8a94a4;
+  --line:rgba(255,255,255,.08);
+  --accent:#3ee089;          /* DigiSapien green */
+  --accent-2:#00d4ff;         /* electric cyan */
+  --accent-3:#7c5cff;         /* violet */
+  --accent-4:#ff6b1a;         /* orange highlight */
+  --grad:linear-gradient(120deg,#3ee089,#4fe3c1,#22d3ee);
+  --grad-warm:linear-gradient(120deg,#00d4ff,#3ee089);
+
+  /* vertical rhythm — one scale used everywhere */    /* between major sections */      /* between a headline block and the grid below it */
+  /* ── structural rhythm (shared across every Neosentience page) ── */
+  --wrap:1240px;
+  --sp-section:64px;   /* symmetric: 128px between sections, no inline collapses */
+  --sp-block:48px;     /* heading → first grid/panel inside a section */
+  --nav-h:57px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Albert Sans',-apple-system,sans-serif;
+  font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background-image:
+  radial-gradient(ellipse 1200px 800px at 50% -200px,rgba(62,224,137,.08),transparent 60%),
+  radial-gradient(ellipse 900px 700px at 100% 400px,rgba(0,212,255,.06),transparent 60%),
+  radial-gradient(ellipse 800px 600px at 0% 1200px,rgba(124,92,255,.05),transparent 60%);
+}
+
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg,rgba(5,6,8,.95),rgba(5,6,8,.4));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{height:20px;width:auto;opacity:.92;display:block}
+.nav-meta{white-space:nowrap;font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-dim);font-weight:600}
+.nav-meta strong{color:var(--accent);font-weight:600}
+
+/* HERO */
+.hero{padding:150px 32px 56px;position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:80px;align-items:center;
+  max-width:1240px;margin:0 auto;width:100%}
+.hero-logo{
+  height:auto;width:170px;max-width:100%;
+  margin-bottom:36px;display:block;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:14px;margin-bottom:32px;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-dim)
+;font-weight:600}
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 12px var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+
+.hero-title{
+  font-family:'Albert Sans',sans-serif;font-weight:800;
+  font-size:clamp(42px,6vw,86px);letter-spacing:-.03em;line-height:1.02;
+  padding-bottom:.12em;
+}
+.hero-title em{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  padding-bottom:.06em;display:inline-block;line-height:1.05;
+}
+.hero-sub{
+  margin-top:32px;font-size:clamp(15px,1.35vw,18px);line-height:1.65;
+  color:var(--ink-dim);font-weight:300;max-width:560px;
+}
+.hero-sub strong{color:var(--ink);font-weight:500}
+
+/* Hero visual — kiosk image */
+.hero-visual{position:relative;height:720px;display:flex;align-items:center;justify-content:center}
+.hero-kiosk-img{
+  max-height:720px;width:auto;max-width:100%;object-fit:contain;
+  filter:drop-shadow(0 40px 80px rgba(0,212,255,.18)) drop-shadow(0 20px 40px rgba(62,224,137,.12));
+}
+/* HERO INLINE STATS (inside hero copy column) */
+.hero-stats-inline{
+  margin-top:40px;padding-top:30px;
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+  max-width:640px;
+}
+.stat-num{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  font-size:clamp(30px,3vw,42px);line-height:1;letter-spacing:-.01em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.stat-lbl{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-dim);font-weight:500;margin-top:10px;line-height:1.4}
+
+/* ══ MARKET STRIP — raised dark band ══
+   Stays in the dark palette, but lifted off the page ground with a
+   lighter surface, hairline edges and a soft cyan wash at the top. */
+.market-strip{
+  padding:var(--sp-section) 0;
+  position:relative;overflow:hidden;
+  background:
+    radial-gradient(ellipse 1000px 400px at 50% 0%,rgba(0,212,255,.07),transparent 72%),
+    linear-gradient(180deg,#0a0e15 0%,#0c1119 45%,#090c12 100%);
+  border-top:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
+}
+.market-strip-inner{max-width:1240px;margin:0 auto;padding:0 32px}
+.market-eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent-2);font-weight:600;margin-bottom:14px
+}
+.market-headline{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  font-size:clamp(24px,2.4vw,34px);line-height:1.32;max-width:920px;color:var(--ink)
+}
+.market-headline strong{
+  font-style:normal;font-family:'Albert Sans',sans-serif;font-weight:700;
+  background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;color:transparent
+}
+
+.market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:var(--sp-block)}
+.market-card{
+  padding:24px 22px;border-radius:22px;
+  background:linear-gradient(180deg,rgba(21,27,38,.85),rgba(15,19,27,.7));
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 12px 28px rgba(0,0,0,.35);
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.market-card:hover{
+  transform:translateY(-2px);border-color:rgba(62,224,137,.28);
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 18px 36px rgba(0,0,0,.45)
+}
+.market-card-year{font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.2em;color:var(--accent);text-transform:uppercase;
+  margin-bottom:10px;font-weight:600}
+.market-card-fact{font-size:13.5px;line-height:1.55;color:var(--ink);font-weight:400}
+.market-card-fact strong{color:var(--accent-2);font-weight:600}
+.src{
+  display:block;margin-top:14px;
+  font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-dim);opacity:.7;font-weight:500
+}
+.src-inline{display:inline-block;margin:0 0 0 10px;opacity:.6}
+
+.market-quote{
+  margin-top:24px;padding:26px 32px;border-radius:24px;
+  background:linear-gradient(120deg,rgba(62,224,137,.07),rgba(0,212,255,.05));
+  border:1px solid rgba(62,224,137,.2);
+  display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+}
+.market-quote-tag{
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;flex-shrink:0;
+  padding:7px 14px;border-radius:999px;background:rgba(62,224,137,.1);
+  border:1px solid rgba(62,224,137,.3);
+}
+.market-quote-body{
+  font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;
+  font-size:clamp(17px,1.5vw,22px);line-height:1.45;color:var(--ink);
+  flex:1;min-width:280px
+}
+.market-quote-body strong{font-style:normal;font-family:'Albert Sans',sans-serif;font-weight:600;
+  background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;color:transparent}
+.market-quote-body .src-inline{color:var(--ink-dim);opacity:.6}
+
+/* SECTIONS */
+.section{padding:var(--sp-section) 0;position:relative}
+/* §01 flows straight into the Natural Cognition panel — no double gap between them */
+/* #tech contributes no padding of its own — #where's top padding owns the gap,
+   otherwise the two adjacent sections stack a double space between them */
+/* soft ambient wash so each section reads as its own zone without a hard band */
+#product::before,#where::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;
+}
+#product::before{background:radial-gradient(ellipse 900px 500px at 22% 30%,rgba(62,224,137,.05),transparent 68%)}
+#where::before{background:radial-gradient(ellipse 900px 500px at 78% 28%,rgba(0,212,255,.05),transparent 68%)}
+.section-eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  font-weight:600;margin-bottom:24px
+}
+.section-eyebrow-num{color:var(--ink-dim)}
+h2.section-title{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:clamp(40px,5vw,72px);letter-spacing:-.025em;line-height:1.05;
+  padding-bottom:.08em;max-width:1000px
+}
+h2.section-title em{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.section-sub{
+  margin-top:28px;font-size:clamp(15px,1.25vw,18px);line-height:1.65;
+  color:var(--ink-dim);max-width:720px;font-weight:300
+}
+
+/* SPLIT LAYOUT — copy left, portrait right */
+.section-split{
+  display:grid;grid-template-columns:1.2fr .8fr;
+  gap:64px;align-items:center;
+}
+.section-split-copy{min-width:0}
+.section-split .section-sub{max-width:600px;margin-top:14px}
+/* narrower column than a full-bleed section — cap the title so it holds two lines */
+.section-split h2.section-title{font-size:clamp(30px,3.6vw,46px);padding-bottom:0}
+
+.section-portrait{
+  position:relative;margin:0;
+  border:none;border-radius:0;box-shadow:none;
+  background:transparent;overflow:visible;
+}
+.section-portrait img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  /* renders already ship on true black — only a light edge feather needed */
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 7%,#000 93%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 7%,#000 93%,transparent 100%);
+}
+/* capped so a tall portrait doesn't stretch the split row far past the copy */
+.p-tall{aspect-ratio:4/5;max-width:400px;margin-left:auto}
+.p-tall img{object-position:50% 34%}
+.p-wide{aspect-ratio:3/4;max-width:360px;margin-left:auto}
+.p-wide img{object-position:50% 50%}
+
+/* auto-rotating cast — crossfade */
+#sapienRotator .rot-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  opacity:0;transition:opacity 1.2s ease-in-out;
+}
+#sapienRotator .rot-img.is-active{opacity:1}
+
+.portrait-chip{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:14px;z-index:2;
+  display:inline-flex;align-items:center;gap:9px;
+  padding:8px 14px;border-radius:999px;
+  background:rgba(5,8,12,.55);
+  border:1px solid rgba(62,224,137,.28);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink);font-weight:600;white-space:nowrap;
+}
+.portrait-chip-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px var(--accent);animation:pulse 2s ease-in-out infinite;
+}
+
+/* TECH — Natural Cognition */
+.tech-hero{margin-top:var(--sp-block);padding:60px;border-radius:20px;
+  background:
+    radial-gradient(ellipse 600px 400px at 50% 0%,rgba(62,224,137,.08),transparent 70%),
+    linear-gradient(180deg,rgba(11,13,18,.9),rgba(15,18,25,.6));
+  border:1px solid var(--line);position:relative;overflow:hidden}
+.tech-title-row{display:flex;justify-content:space-between;align-items:flex-start;
+  gap:32px;flex-wrap:wrap;margin-bottom:50px}
+.tech-name{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:clamp(28px,3vw,44px);letter-spacing:-.02em;line-height:1.1
+}
+.tech-name em{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.tech-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:10px 16px;border-radius:999px;
+  background:rgba(255,107,26,.1);border:1px solid rgba(255,107,26,.35);
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent-4);font-weight:600;white-space:nowrap;
+  flex-shrink:0
+}
+.tech-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-4);
+  box-shadow:0 0 8px var(--accent-4)}
+
+/* SENSES — kiosk-centred features */
+.senses{
+  position:relative;margin-top:20px;
+  display:grid;
+  grid-template-columns:1fr minmax(240px,360px) 1fr;
+  grid-template-rows:1fr 1fr 1fr;
+  gap:24px 40px;align-items:center;
+  min-height:620px;
+}
+.sense-lines{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+.sense{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;
+  background:linear-gradient(180deg,rgba(15,20,28,.7),rgba(20,25,35,.5));
+  border:1px solid var(--line);border-radius:18px;
+  backdrop-filter:blur(6px);
+  transition:all .35s ease;position:relative;z-index:2;
+}
+.sense:hover{border-color:rgba(62,224,137,.35);background:linear-gradient(180deg,rgba(20,28,40,.85),rgba(25,32,45,.7))}
+.sense-l{grid-column:1;justify-self:end;max-width:280px;width:100%}
+.sense-r{grid-column:3;justify-self:start;max-width:280px;width:100%;text-align:right}
+.s-l1,.s-r1{grid-row:1}
+.s-l2,.s-r2{grid-row:2}
+.s-l3,.s-r3{grid-row:3}
+
+.sense-icon{
+  width:36px;height:36px;flex-shrink:0;
+  border-radius:8px;
+  background:linear-gradient(135deg,rgba(62,224,137,.15),rgba(0,212,255,.06));
+  border:1px solid rgba(62,224,137,.3);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);
+}
+.sense-icon svg{width:20px;height:20px}
+.sense-copy{flex:1;min-width:0}
+.sense-lbl{
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent-2);margin-bottom:4px;font-weight:600;
+}
+.sense-name{font-size:13.5px;font-weight:500;color:var(--ink);line-height:1.25}
+
+/* CENTER kiosk */
+.sense-kiosk{
+  grid-column:2;grid-row:1 / -1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+  padding:20px 0;
+}
+.sense-kiosk img{
+  max-height:520px;width:auto;max-width:100%;
+  filter:
+    drop-shadow(0 30px 60px rgba(0,212,255,.22))
+    drop-shadow(0 10px 30px rgba(62,224,137,.15));
+}
+.sense-core{
+  margin-top:18px;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(62,224,137,.1);border:1px solid rgba(62,224,137,.35);
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);font-weight:600;white-space:nowrap;
+}
+.sense-core-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 10px var(--accent);animation:pulse 2s ease-in-out infinite;
+}
+
+.pipe-caption{margin-top:36px;text-align:center;font-family:'Albert Sans',sans-serif;
+  font-size:14px;color:var(--ink-dim);font-style:italic;font-weight:300}
+.pipe-caption strong{color:var(--accent);font-weight:500;font-style:normal;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em}
+
+/* retail photograph — bright image, so it gets a contained frame
+   rather than the full-bleed treatment used for the dark renders */
+.retail{margin:44px 0 0;border-radius:26px;overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 30px 70px rgba(0,0,0,.55)}
+.retail img{width:100%;height:auto;display:block}
+.retail figcaption{padding:18px 24px;font-size:13.5px;line-height:1.6;
+  color:var(--ink-dim);background:linear-gradient(180deg,rgba(15,18,25,.9),rgba(10,13,19,.8));
+  border-top:1px solid var(--line)}
+.retail-tag{display:inline-block;margin-right:10px;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--accent);font-weight:600}
+
+/* WHERE — sectors */
+.sectors{margin-top:var(--sp-block);display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.sector{background:linear-gradient(180deg,rgba(11,13,18,.9),rgba(15,18,25,.7));
+  padding:32px 26px;transition:all .35s ease;position:relative;overflow:hidden}
+.sector:hover{background:linear-gradient(180deg,rgba(15,20,28,.95),rgba(20,25,35,.85))}
+.sector-idx{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  color:var(--ink-dim);text-transform:uppercase;margin-bottom:14px;font-weight:600;opacity:.6}
+.sector h4{font-family:'Albert Sans',sans-serif;font-size:20px;font-weight:600;
+  letter-spacing:-.015em;margin-bottom:10px;color:var(--ink)}
+.sector p{font-size:13px;line-height:1.55;color:var(--ink-dim);font-weight:300}
+.sector::after{content:'';position:absolute;bottom:0;left:0;height:2px;width:0;
+  background:var(--grad);transition:width .5s ease}
+.sector:hover::after{width:100%}
+
+/* DEPLOYMENT */
+.deploy{margin-top:var(--sp-block);display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.deploy-card{padding:28px 24px;border-radius:22px;
+  background:linear-gradient(180deg,rgba(11,13,18,.9),rgba(15,18,25,.6));
+  border:1px solid var(--line);text-align:center;transition:all .3s}
+.deploy-card:hover{border-color:rgba(0,212,255,.3);transform:translateY(-2px)}
+.deploy-icon{
+  width:56px;height:56px;margin:0 auto 18px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(62,224,137,.08));
+  border:1px solid rgba(0,212,255,.25);
+  display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--accent-2)
+}
+.deploy-card h5{font-family:'Albert Sans',sans-serif;font-size:14px;font-weight:600;
+  letter-spacing:.02em;margin-bottom:6px;color:var(--ink);text-transform:uppercase}
+.deploy-card p{font-size:12.5px;color:var(--ink-dim);font-weight:300;line-height:1.5}
+
+/* FOOTER */
+footer{padding:44px 0 56px;border-top:1px solid var(--line)}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.flogo{height:22px;width:auto;opacity:.85}
+.fmark{height:20px;width:auto;opacity:.75}
+.fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.fmeta a{transition:color .2s}
+.fmeta a:hover{color:var(--ink)}
+
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:60px}
+  .hero-visual{height:520px}
+  .hero-stats-inline{grid-template-columns:repeat(2,1fr);gap:28px 20px;max-width:100%}
+  .section-split{grid-template-columns:1fr;gap:40px}
+  .p-tall{aspect-ratio:1/1}
+  .p-tall img{object-position:50% 30%}
+  .p-wide{aspect-ratio:3/4;max-width:340px;margin:0 auto}
+  .p-wide img{object-position:50% 50%}
+  .market-grid{grid-template-columns:repeat(2,1fr)}
+  .sectors{grid-template-columns:1fr 1fr}
+  .senses{grid-template-columns:1fr;grid-template-rows:auto auto auto auto auto auto auto;gap:14px;min-height:auto}
+  .sense-l,.sense-r{grid-column:1;justify-self:stretch;max-width:100%;text-align:left}
+  .sense-r{flex-direction:row-reverse}
+  .sense-kiosk{grid-column:1;grid-row:auto;order:-1;margin-bottom:12px}
+  .sense-kiosk img{max-height:380px}
+  .sense-lines{display:none}
+  .s-l1,.s-l2,.s-l3,.s-r1,.s-r2,.s-r3{grid-row:auto}
+  .deploy{grid-template-columns:1fr}
+  .tech-hero{padding:36px 24px}
+  .market-quote{padding:24px;gap:18px}
+  nav{padding:16px 20px}
+}
+@media (max-width:560px){
+  :root{--sp-section:44px;--sp-block:36px}
+  .wrap{padding:0 20px}
+  nav{padding:14px 20px}
+  .nav-meta,.nav-cta{letter-spacing:.12em}
+  /* logo + full label is exactly 375px wide — the prefix goes, the product name stays */
+  .nav-pre{display:none}
+  .hero{padding-top:115px}
+  .sectors,.hero-stats-inline,.market-grid{grid-template-columns:1fr}
+  .wrap,.market-strip-inner{padding:0 20px}
+}
+
+/* ── MOTION PREFERENCE ──────────────────────────────────────────────────────
+   Every page here animates on scroll. Under prefers-reduced-motion the whole
+   page must still arrive in its final readable state, so reveals are forced
+   visible rather than left at opacity:0 waiting on an animation that will
+   never run. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+}
+
+/* ── FOCUS ──────────────────────────────────────────────────────────────────
+   Keyboard focus needs a visible indicator on every operable control. */
+:focus-visible{
+  outline:2px solid var(--accent);
+  /* deliberately no border-radius here — the outline already follows the
+     element's own radius, and setting one flattens pill buttons to 4px */
+  outline-offset:3px;
+}
+
+/* ═════════ HOUSE LAYER — shared with the homepage: type, nav, buttons, labels ═════════ */
+:root{--acc:var(--accent);--acc-ink:#06170d;--c-digisapien:#3ee089;--c-nyaya:#4a6cff;--c-chatdj:#ff3d81;--c-vaani:#a855f7;--c-qrator:#ffb84a;--c-magiq:#00d4ff;--h-ease:cubic-bezier(.16,1,.3,1)}
+html,body{font-family:'Albert Sans',system-ui,sans-serif;font-weight:300}
+h1,h2,h3,h4{font-family:'Albert Sans',system-ui,sans-serif}
+h1 em,h2 em,.hero h1 em,.hero-title em,h2.section-title em,.tech-name em,.section h2 em,.cta h2 em,.stat-num,.deg-n,.a-n,.market-headline strong,.market-quote-body strong{
+  background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;-webkit-text-fill-color:initial;color:var(--acc)!important}
+.hero h1 em::after{display:none}
+/* section headings share the homepage scale; only the hero h1 is larger */
+h2,.section h2,.head h2,.cta h2{font-size:clamp(30px,3.4vw,46px)!important;line-height:1.05!important;letter-spacing:-.025em!important}
+/* house footer, identical on every page */
+footer{padding:46px 0 60px!important;border-top:0!important;background:none!important}
+footer .frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+footer .flogo{height:20px;width:auto;opacity:.85}
+footer .fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+footer .fmeta a:hover{color:#fff}
+/* section rhythm: product→tech was 233px content-to-content; the rest of the site sits at 105–165px */
+#product{padding-bottom:24px!important}
+.tech-hero{margin-top:0!important}
+/* top bar */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
+.topbar .brand{display:flex;align-items:center;gap:22px}
+.topbar .brand img{height:32px;width:auto;opacity:.95;display:block}
+/* the page's own nav{} element rule (fixed, full-width) must not reach the pill */
+.pillnav{position:static;top:auto;left:auto;right:auto;z-index:auto;justify-content:flex-start;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none;
+  display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pillnav a{padding:10px 20px;border-radius:999px;font-weight:500;font-size:14px;color:rgba(255,255,255,.72);transition:color .3s var(--h-ease),background .3s var(--h-ease)}
+.pillnav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.menu{position:relative}
+.menu-btn{display:flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;color:inherit;font:inherit}
+.menu-btn span{padding:14px 22px;font-weight:500;font-size:14px;color:rgba(255,255,255,.75)}
+.menu-btn span+span{border-left:1px solid rgba(255,255,255,.12);padding:14px 16px;letter-spacing:.2em;color:#fff}
+.menu-list{position:absolute;right:0;top:calc(100% + 10px);min-width:260px;padding:10px;border-radius:20px;background:rgba(6,8,10,.94);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(16px);display:none;flex-direction:column;gap:2px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+.menu.open .menu-list{display:flex}
+.menu-list a{--c:var(--acc);display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:rgba(255,255,255,.75)}
+.menu-list a:hover,.menu-list a[aria-current]{background:rgba(255,255,255,.06);color:#fff}
+.menu-list a i{width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.menu-list .sep{height:1px;background:rgba(255,255,255,.1);margin:6px 8px}
+/* hero kicker: the homepage tag style, in the page accent */
+.hero-eyebrow{font-family:'Syncopate',sans-serif!important;font-weight:700!important;font-size:12px!important;letter-spacing:.3em!important;text-transform:uppercase!important;
+  color:var(--acc)!important;background:none!important;border:0!important;padding:0!important;border-radius:0!important;backdrop-filter:none!important}
+.hero-eyebrow .dot,.hero-eyebrow .hero-dot,.hero-eyebrow .hero-tag-dot,.hero-eyebrow span.dot{display:none!important}
+.hero-eyebrow::before,.hero-eyebrow::after,.hero-eyebrow > span:empty,.hero-eyebrow > i{display:none!important}
+/* primary buttons: the homepage pill, in the page accent */
+.btn,.cta-btn,.gate-btn.open{display:inline-flex;align-items:center;gap:14px;height:58px;padding:0 28px;border-radius:999px;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:16px;font-weight:600;letter-spacing:0;text-transform:none;
+  background:var(--acc);border:1px solid var(--acc);color:var(--acc-ink);box-shadow:none;transition:transform .35s var(--h-ease),box-shadow .35s var(--h-ease),filter .35s var(--h-ease)}
+.btn:hover,.cta-btn:hover,.gate-btn.open:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(0,0,0,.7);filter:brightness(1.08)}
+/* footer meta */
+.fmeta,.footer-inner,.foot-copy,.footer-contact{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:680px){
+  .topbar{padding:18px 18px}
+  .pillnav a:not(:first-child){display:none}
+  .menu-btn span:first-child{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="topbar">
+  <div class="brand"><a href="neosentience.html" aria-label="Neosentience"><img src="qrator-assets/neosentience-logo.png" alt="Neosentience"></a>
+    <nav class="pillnav" aria-label="Primary">
+      <a href="neosentience.html">Home</a><a href="neosentience.html#products">Products</a><a href="neosentience.html#consulting">Consulting</a><a href="neosentience.html#contact">Contact</a>
+    </nav></div>
+  <div class="menu" id="menu">
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" id="menu-toggle"><span>Menu</span><span aria-hidden="true">••</span></button>
+    <div class="menu-list" id="menu-list" role="menu">
+        <a role="menuitem" style="--c:var(--c-digisapien)" href="digisapien.html" aria-current="page"><i></i>DigiSapien</a>
+        <a role="menuitem" style="--c:var(--c-nyaya)" href="nyaya-sahayak.html"><i></i>Nyaya Sahayak</a>
+        <a role="menuitem" style="--c:var(--c-chatdj)" href="chat-dj.html"><i></i>Chat DJ</a>
+        <a role="menuitem" style="--c:var(--c-vaani)" href="vaani-studio.html"><i></i>VAANI Studio</a>
+        <div class="sep"></div>
+        <a role="menuitem" style="--c:var(--c-qrator)" href="qrator.html"><i></i>QRATOR</a>
+        <a role="menuitem" style="--c:var(--c-magiq)" href="magiq-360.html"><i></i>Magiq 360</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <img src="digisapien-assets/digisapien-logo.png" alt="DigiSapien" class="hero-logo">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        <span>A Neosentience Product · Patent-Pending Natural Cognition©</span>
+      </div>
+      <h1 class="hero-title">
+        AI Powered<br><em>digital beings.</em>
+      </h1>
+      <p class="hero-sub">
+        <strong>DigiSapien</strong> is a hyper-realistic, multi-lingual, emotionally
+        resonant digital human — trained to see, listen, and respond in real time.
+        A customer-facing AI workforce that scales infinitely, forgets nothing,
+        and shows up the same way every single time.
+      </p>
+
+      <div class="hero-stats-inline">
+        <div class="stat">
+          <div class="stat-num">6</div>
+          <div class="stat-lbl">Real-time human senses</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">22+</div>
+          <div class="stat-lbl">Indian & regional languages</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">24/7</div>
+          <div class="stat-lbl">Zero-fatigue availability</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$440B</div>
+          <div class="stat-lbl">Virtual humans market by 2031</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="digisapien-assets/kiosk-hero.webp" alt="DigiSapien kiosk" class="hero-kiosk-img">
+    </div>
+  </div>
+</section>
+
+
+<!-- MARKET STRIP -->
+<section class="market-strip reveal">
+  <div class="market-strip-inner">
+    <div class="market-eyebrow">The Moment · Why now</div>
+    <div class="market-headline">
+      Digital humans have moved from lab demo to boardroom priority. Enterprises are seeing <strong>17% higher conversion</strong>, <strong>30% higher CSAT</strong> and <strong>positive ROI within 12–18 months</strong> — and the market they run on is growing <strong>40% a year.</strong>
+    </div>
+    <div class="market-grid">
+      <div class="market-card">
+        <div class="market-card-year">Retail</div>
+        <div class="market-card-fact">Retailers see <strong>17% higher conversion</strong> when shoppers engage a digital human for 90+ seconds <span class="src">Anam.ai · 2026</span></div>
+      </div>
+      <div class="market-card">
+        <div class="market-card-year">Banking</div>
+        <div class="market-card-fact">Global bank deployment: <strong>+30% CSAT</strong> and <strong>−20% operational cost</strong> from digital-human rollout <span class="src">Meegle · 2026 case study</span></div>
+      </div>
+      <div class="market-card">
+        <div class="market-card-year">By 2026</div>
+        <div class="market-card-fact">Digital Human Market: <strong>$7.96 Bn in 2026</strong>, on track for <strong>$26 Bn by 2031</strong> <span class="src">Mordor Intelligence</span></div>
+      </div>
+      <div class="market-card">
+        <div class="market-card-year">By 2030</div>
+        <div class="market-card-fact">Digital humans is a <strong>$258 Bn market</strong> · 40.1% CAGR from $47.7 Bn in 2025 <span class="src">The Business Research Company</span></div>
+      </div>
+    </div>
+
+    <div class="market-quote">
+      <div class="market-quote-tag">Deployed today</div>
+      <div class="market-quote-body">
+        One leading retail bank's digital human handled <strong>676 million customer conversations</strong> in a single year — and now drives <strong>55% of the bank's digital sales.</strong>
+        <span class="src src-inline">Mastercard Business Intelligence · 2026</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- §01 THE PRODUCT -->
+<section class="section" id="product">
+  <div class="wrap">
+    <div class="section-split">
+      <div class="section-split-copy">
+        <div class="section-eyebrow"><span class="section-eyebrow-num">01</span> · The Product</div>
+        <h2 class="section-title reveal">Not a chatbot with a face.<br><em>A being with senses.</em></h2>
+        <p class="section-sub reveal">
+          Most "digital humans" today are talking heads bolted onto a large language model.
+          DigiSapien is different — it perceives who is in front of it, reads their attention
+          and tone, adapts in real time, and replies with autonomous facial and body animation
+          driven by the moment, not a canned loop.
+        </p>
+      </div>
+
+      <figure class="section-portrait reveal p-tall">
+        <img src="digisapien-assets/face-closeup.webp" alt="Hyper-realistic DigiSapien face render">
+        <figcaption class="portrait-chip">
+          <span class="portrait-chip-dot"></span>Real-time 3D · 60 fps
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- §02 THE TECHNOLOGY -->
+<section class="section" id="tech">
+  <div class="wrap">
+    <div class="tech-hero reveal">
+      <div class="tech-title-row">
+        <div class="tech-name">
+          <em>Natural Cognition©</em><br>
+          The engine that makes it feel alive.
+        </div>
+        <div class="tech-badge">
+          <span class="tech-badge-dot"></span>
+          Patent Pending
+        </div>
+      </div>
+
+      <div class="senses">
+        <!-- LEFT · INPUTS -->
+        <div class="sense sense-l s-l1">
+          <div class="sense-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5" fill="currentColor" fill-opacity=".25"/></svg>
+          </div>
+          <div class="sense-copy">
+            <div class="sense-lbl">Input · Vision</div>
+            <div class="sense-name">Face + Eye Tracking</div>
+          </div>
+        </div>
+        <div class="sense sense-l s-l2">
+          <div class="sense-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4v16M8 8v8M4 10v4M16 8v8M20 10v4"/></svg>
+          </div>
+          <div class="sense-copy">
+            <div class="sense-lbl">Input · Audio</div>
+            <div class="sense-name">Speech + Tone Detection</div>
+          </div>
+        </div>
+        <div class="sense sense-l s-l3">
+          <div class="sense-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 8v8l9 5 9-5V8z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>
+          </div>
+          <div class="sense-copy">
+            <div class="sense-lbl">Input · Space</div>
+            <div class="sense-name">Spatial Awareness</div>
+          </div>
+        </div>
+
+        <!-- CENTER · KIOSK -->
+        <div class="sense-kiosk">
+          <img src="digisapien-assets/kiosk-features.webp" alt="DigiSapien kiosk">
+          <div class="sense-core">
+            <span class="sense-core-dot"></span>
+            Natural Cognition Core
+          </div>
+        </div>
+
+        <!-- RIGHT · OUTPUTS -->
+        <div class="sense sense-r s-r1">
+          <div class="sense-copy">
+            <div class="sense-lbl">Output · Voice</div>
+            <div class="sense-name">Text-to-Speech</div>
+          </div>
+          <div class="sense-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 9v6h4l5 4V5L9 9zM17 8a5 5 0 0 1 0 8"/></svg>
+          </div>
+        </div>
+        <div class="sense sense-r s-r2">
+          <div class="sense-copy">
+            <div class="sense-lbl">Output · Presence</div>
+            <div class="sense-name">Real-time 3D · GPU</div>
+          </div>
+          <div class="sense-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 3 7.5v9L12 21l9-4.5v-9zM3 7.5 12 12l9-4.5M12 12v9"/></svg>
+          </div>
+        </div>
+        <div class="sense sense-r s-r3">
+          <div class="sense-copy">
+            <div class="sense-lbl">Output · Behaviour</div>
+            <div class="sense-name">Autonomous Animation</div>
+          </div>
+          <div class="sense-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="3"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/></svg>
+          </div>
+        </div>
+
+        <!-- SVG connector lines -->
+        <svg class="sense-lines" viewBox="0 0 1000 620" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#3ee089" stop-opacity=".15"/>
+              <stop offset=".5" stop-color="#00d4ff" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#3ee089" stop-opacity=".15"/>
+            </linearGradient>
+          </defs>
+          <!-- inputs → kiosk -->
+          <path d="M 300 130 Q 400 130 460 300" stroke="url(#lineGrad)" stroke-width="1" fill="none"/>
+          <path d="M 300 310 Q 400 310 460 310" stroke="url(#lineGrad)" stroke-width="1" fill="none"/>
+          <path d="M 300 490 Q 400 490 460 320" stroke="url(#lineGrad)" stroke-width="1" fill="none"/>
+          <!-- kiosk → outputs -->
+          <path d="M 540 300 Q 600 130 700 130" stroke="url(#lineGrad)" stroke-width="1" fill="none"/>
+          <path d="M 540 310 Q 600 310 700 310" stroke="url(#lineGrad)" stroke-width="1" fill="none"/>
+          <path d="M 540 320 Q 600 490 700 490" stroke="url(#lineGrad)" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+
+      <div class="pipe-caption">
+        <strong>END-TO-END LATENCY</strong> · From spoken question to spoken response, in real time, on a single GPU.
+      </div>
+    </div>
+
+    <!-- IN THE AISLE — retail deployment -->
+    <figure class="retail reveal">
+      <img src="digisapien-assets/retail-shelf.webp"
+           alt="A DigiSapien assistant mounted on an appliance shelf in a store">
+      <figcaption>
+        <span class="retail-tag">In the aisle</span>
+        Shelf-mounted at the point of decision — answering questions about the
+        product in front of the shopper, in their own language.
+      </figcaption>
+    </figure>
+
+  </div>
+</section>
+
+<!-- §03 WHERE IT WORKS -->
+<section class="section" id="where">
+  <div class="wrap">
+    <div class="section-split">
+      <div class="section-split-copy">
+        <div class="section-eyebrow"><span class="section-eyebrow-num">02</span> · Where it works</div>
+        <h2 class="section-title reveal">One being. <em>Across industries.</em></h2>
+        <p class="section-sub reveal">
+          DigiSapien is deliberately sector-agnostic — the same core intelligence adapts to
+          the room it walks into. An airport terminal. A real-estate sales gallery. A bank branch.
+          A car showroom. A hospital lobby. A retail floor. A five-star reception.
+          The face changes. The Natural Cognition© stack doesn't.
+        </p>
+      </div>
+
+      <figure class="section-portrait reveal p-wide" id="sapienRotator">
+        <img class="rot-img is-active" src="digisapien-assets/face-closeup-2.webp" alt="DigiSapien full-body render">
+        <img class="rot-img" src="digisapien-assets/face-closeup-3.webp" alt="">
+        <img class="rot-img" src="digisapien-assets/face-closeup-4.webp" alt="">
+        <img class="rot-img" src="digisapien-assets/face-closeup-5.webp" alt="">
+        <figcaption class="portrait-chip">
+          <span class="portrait-chip-dot"></span>One stack · Many faces
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="sectors reveal">
+      <div class="sector">
+        <div class="sector-idx">01 · Real Estate</div>
+        <h4>Always-on sales concierge</h4>
+        <p>Walks buyers through floor plans, pricing and inventory at the sales gallery, on the site, or on the app — every language, every hour.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">02 · Airports</div>
+        <h4>Multilingual wayfinder</h4>
+        <p>Terminal directions, gate updates, immigration and customs guidance for millions of passengers — every arrival in their own language.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">03 · Sales & Marketing</div>
+        <h4>Always-on brand host</h4>
+        <p>Personalised, engaging experiences that lift interaction and conversion — with recall of every past visit.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">04 · Retail</div>
+        <h4>Personal shopper, at scale</h4>
+        <p>Reads mood, remembers preference, tailors recommendation — every aisle, every store, every hour.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">05 · Healthcare</div>
+        <h4>Front-desk that listens</h4>
+        <p>Patient intake, information, remote monitoring — with the patience for the tenth question of the day.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">06 · Customer Service</div>
+        <h4>24/7 first response</h4>
+        <p>Instant, human-like resolution for the 80% of queries that don't need a human — freeing agents for the ones that do.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">07 · Entertainment</div>
+        <h4>Digital twins of celebs</h4>
+        <p>Licensed AI twins of stars and influencers — fan interaction, brand endorsements, virtual events, on demand.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">08 · Education</div>
+        <h4>Personal tutor for every learner</h4>
+        <p>Adaptive tutoring, interactive simulations, patient repetition — in the learner's language, at their pace.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">09 · Travel & Hospitality</div>
+        <h4>Multilingual concierge</h4>
+        <p>Tourist guides, museum experts, hotel greeters — every guest served in their own language, on arrival.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">10 · Enterprise</div>
+        <h4>Virtual receptionist & onboarding</h4>
+        <p>Employee onboarding, knowledge management, meeting hosts, internal helpdesk — a colleague that never leaves.</p>
+      </div>
+      <div class="sector">
+        <div class="sector-idx">11 · Banking & Finance</div>
+        <h4>Personal advisor, on tap</h4>
+        <p>Personalised financial advice, product explainers, streamlined onboarding — in Hindi, Tamil, Arabic, English.</p>
+      </div>
+    </div>
+
+    <!-- DEPLOYMENT -->
+    <div class="deploy reveal">
+      <div class="deploy-card">
+        <div class="deploy-icon">▮</div>
+        <h5>Hardware Kiosk</h5>
+        <p>Ultra-HD screen kiosk with integrated camera + audio — drop-in for showrooms, branches, lobbies.</p>
+      </div>
+      <div class="deploy-card">
+        <div class="deploy-icon">◱</div>
+        <h5>Web · App · Metaverse</h5>
+        <p>Same being, delivered through the browser, native app or immersive worlds — no additional hardware needed.</p>
+      </div>
+      <div class="deploy-card">
+        <div class="deploy-icon">⌘</div>
+        <h5>Augmented Reality</h5>
+        <p>Bring the being into the customer's room, tabletop or headset — spatially aware, gaze-locked, life-scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <img src="qrator-assets/neosentience-logo.png" alt="Neosentience" class="flogo">
+      <span class="fmeta">AI product studio · India</span>
+      <span class="fmeta"><a href="mailto:soham@neosentience.in">soham@neosentience.in</a> · +91 99679 60018</span>
+      <span class="fmeta">© 2026 Neosentience Technologies Pvt Ltd.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* §02 portrait rotator — cycles only the renders that actually exist */
+(function(){
+  const fig = document.getElementById('sapienRotator');
+  if(!fig) return;
+  fig.querySelectorAll('.rot-img').forEach(img=>{
+    img.addEventListener('error',()=>img.remove());
+  });
+  window.addEventListener('load',()=>{
+    const live = [...fig.querySelectorAll('.rot-img')].filter(i=>i.naturalWidth>0);
+    if(live.length < 2) return;
+    live.forEach(i=>i.classList.remove('is-active'));
+    live[0].classList.add('is-active');
+    let n = 0;
+    setInterval(()=>{
+      live[n].classList.remove('is-active');
+      n = (n+1) % live.length;
+      live[n].classList.add('is-active');
+    }, 4500);
+  });
+})();
+</script>
+
+<script>(function(){var m=document.getElementById('menu'),t=document.getElementById('menu-toggle');if(!m||!t)return;t.addEventListener('click',function(e){e.stopPropagation();var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});document.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false')});document.addEventListener('keydown',function(e){if(e.key==='Escape'){m.classList.remove('open');t.setAttribute('aria-expanded','false')}})})();</script>
+<script>
+/* House rule: a serif-italic accent either shares one line with the sans, or
+   starts its own line. It never breaks mid-phrase. Measured, not guessed:
+   set inline, see if the heading still fits one line, otherwise block. */
+(function(){
+  function fit(){
+    document.querySelectorAll('h1 em,h2 em,h3 em').forEach(function(em){
+      var h=em.parentElement; em.style.display='inline';
+      var fs=parseFloat(getComputedStyle(h).fontSize);
+      var one=h.getBoundingClientRect().height<=fs*1.45;
+      em.style.display=one?'inline':'block';
+    });
+  }
+  fit(); addEventListener('resize',fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>

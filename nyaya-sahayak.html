@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Nyaya Sahayak translates IPC sections into the new BNS code, in plain language and in Gujarati.">
+<title>Nyaya Sahayak — AI Assistant for India's New Criminal Laws</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#050608;
+  --panel:#0c1017;
+  --panel-2:#11161f;
+  --ink:#e8ecf1;
+  --ink-dim:#8a94a4;
+  --ink-faint:#6e7a8e;
+  --line:rgba(255,255,255,.09);
+
+  --blue:#4a6cff;        /* Nyaya Sahayak royal blue */
+  --blue-soft:#7b93ff;
+  --green:#3ee089;       /* Neosentience green */
+  --amber:#ffb84a;
+  --red:#ff6b7a;
+  --grad:linear-gradient(120deg,#4a6cff,#7b93ff,#3ee089);
+  /* ── structural rhythm (shared across every Neosentience page) ── */
+  --wrap:1240px;
+  --sp-section:64px;   /* symmetric: 128px between sections, no inline collapses */
+  --sp-block:48px;     /* heading → first grid/panel inside a section */
+  --nav-h:57px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--ink);
+  font-family:'Albert Sans',-apple-system,sans-serif;font-weight:300;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background-image:
+  radial-gradient(ellipse 1100px 700px at 50% -200px,rgba(74,108,255,.11),transparent 62%),
+  radial-gradient(ellipse 900px 600px at 100% 900px,rgba(62,224,137,.05),transparent 62%);}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg,rgba(5,6,8,.95),rgba(5,6,8,.4));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{height:20px;width:auto;opacity:.92;display:block}
+.nav-meta{white-space:nowrap;font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;font-weight:600;color:var(--blue-soft)}
+
+/* HERO */
+.hero{padding:150px 32px 60px;text-align:center}
+.hero-logo{width:230px;max-width:62%;height:auto;margin:0 auto 28px}
+.gov-badge{
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:26px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(62,224,137,.09);border:1px solid rgba(62,224,137,.3);
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--green);font-weight:600}
+.gov-dot{width:6px;height:6px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 10px var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+
+h1{font-family:'Albert Sans',sans-serif;font-weight:800;
+  font-size:clamp(38px,5.6vw,74px);letter-spacing:-.032em;line-height:1.04;
+  /* 16ch left the italic clause 5px short of one line — the measure is on the
+     content box, so the .2em side padding has to come off it first */
+  max-width:23ch;margin:0 auto;
+  /* room for the italic's overhang so nothing is sliced at the h1 edge either */
+  padding:0 .2em .1em}
+h1 em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  /* the italic clause opens its own line instead of breaking mid-phrase */
+  display:block;
+  letter-spacing:-.005em;padding:0 .16em;
+  /* background-clip:text only paints inside each line fragment's box. Italic
+     glyphs overhang on BOTH sides — right at the cap, left at the baseline —
+     so whichever end a letter lands on, it needs room. clone applies this
+     padding to every wrapped line, not just the last one. */
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{margin:26px auto 0;font-size:clamp(15px,1.3vw,18px);line-height:1.65;
+  color:var(--ink-dim);max-width:600px}
+.hero-sub strong{color:var(--ink);font-weight:500}
+
+/* ── HERO IMAGE ──
+   Full-bleed edge to edge. Natural aspect, so nothing is cropped. */
+.trio{margin:40px 0 0;width:100vw;position:relative;left:50%;transform:translateX(-50%)}
+.trio img{width:100%;height:auto;display:block}
+
+/* ── DEMO ── */
+.demo{margin:64px auto 0;max-width:1060px;text-align:left}
+.demo-shell{
+  border:1px solid var(--line);border-radius:26px;overflow:hidden;
+  background:linear-gradient(180deg,var(--panel),#080b11);
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+}
+.demo-bar{display:flex;align-items:center;gap:9px;
+  padding:13px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot.r{background:#ff5f57}.dot.y{background:#febc2e}.dot.g{background:#28c840}
+.demo-url{margin-left:12px;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  color:var(--ink-faint);letter-spacing:.04em}
+
+.demo-body{padding:38px 40px 34px}
+.demo-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--blue-soft);font-weight:600;margin-bottom:14px}
+
+.chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
+.chip{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;
+  padding:8px 14px;border-radius:999px;cursor:pointer;
+  background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink-dim);
+  transition:all .25s;user-select:none}
+.chip:hover{border-color:rgba(74,108,255,.45);color:var(--ink);background:rgba(74,108,255,.08)}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#04091e;font-weight:600}
+
+.askrow{display:flex;gap:10px}
+.askrow input{
+  flex:1;padding:15px 18px;border-radius:11px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line);
+  color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;outline:none;
+  transition:border-color .25s}
+.askrow input::placeholder{color:var(--ink-faint)}
+.askrow input:focus{border-color:rgba(74,108,255,.5)}
+.askbtn{padding:15px 24px;border-radius:11px;border:none;cursor:pointer;
+  background:var(--blue);color:#04091e;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:600;transition:all .25s;white-space:nowrap}
+.askbtn:hover{background:var(--blue-soft)}
+.askbtn:disabled{opacity:.45;cursor:default}
+
+/* result */
+.result{margin-top:22px;min-height:60px}
+.thinking{display:flex;align-items:center;gap:11px;padding:16px 0;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint)}
+.thinking i{width:7px;height:7px;border-radius:50%;background:var(--blue);
+  animation:bounce 1.2s infinite}
+.thinking i:nth-child(2){animation-delay:.15s}
+.thinking i:nth-child(3){animation-delay:.3s;margin-right:8px}
+@keyframes bounce{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-5px)}}
+
+.ans{animation:fade .5s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.law-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;
+  margin-bottom:20px}
+.law{padding:18px;border-radius:18px;border:1px solid var(--line);
+  background:rgba(255,255,255,.02)}
+.law.old{border-color:rgba(255,107,122,.26);background:rgba(255,107,122,.05)}
+.law.new{border-color:rgba(62,224,137,.28);background:rgba(62,224,137,.05)}
+.law-tag{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;font-weight:600;margin-bottom:9px}
+.law.old .law-tag{color:var(--red)}
+.law.new .law-tag{color:var(--green)}
+.law-sec{font-size:19px;font-weight:700;letter-spacing:-.015em;margin-bottom:5px}
+.law-desc{font-size:13px;color:var(--ink-dim);line-height:1.5}
+.arrow{display:flex;align-items:center;justify-content:center;
+  color:var(--blue-soft);font-size:22px;opacity:.7}
+
+.changes{padding:18px;border-radius:18px;background:rgba(74,108,255,.06);
+  border:1px solid rgba(74,108,255,.22)}
+.changes-h{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--blue-soft);font-weight:600;margin-bottom:12px}
+.changes ul{list-style:none}
+.changes li{font-size:13.5px;line-height:1.6;color:var(--ink);padding-left:18px;
+  position:relative;margin-bottom:9px}
+.changes li:last-child{margin-bottom:0}
+.changes li::before{content:'';position:absolute;left:0;top:9px;
+  width:5px;height:5px;border-radius:50%;background:var(--blue-soft)}
+.changes li b{color:var(--amber);font-weight:600}
+
+.cite{margin-top:14px;padding:15px 18px;border-radius:18px;
+  border:1px dashed rgba(255,184,74,.35);background:rgba(255,184,74,.04)}
+.cite-h{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:8px}
+.cite p{font-size:13px;color:var(--ink-dim);line-height:1.55}
+.cite b{color:var(--ink);font-weight:600}
+
+.langbar{margin-top:16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.langbar span{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-faint)}
+.lang{font-size:12px;padding:6px 12px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);color:var(--ink-dim);background:transparent;transition:all .25s}
+.lang:hover{border-color:rgba(74,108,255,.4);color:var(--ink)}
+.lang.on{background:rgba(74,108,255,.14);border-color:rgba(74,108,255,.5);color:var(--blue-soft);font-weight:500}
+.demo-note{margin-top:16px;font-size:11.5px;color:var(--ink-faint);font-style:italic;text-align:center}
+
+/* SECTIONS */
+section.blk{padding:var(--sp-section) 0}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--blue-soft);font-weight:600;margin-bottom:14px}
+h2{font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:clamp(28px,3.4vw,44px);letter-spacing:-.025em;line-height:1.1;max-width:20ch}
+h2 em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin-top:16px;font-size:15.5px;color:var(--ink-dim);max-width:640px;line-height:1.65}
+
+/* the switch */
+.switch{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.sw{padding:24px;border-radius:22px;border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--panel),rgba(8,11,17,.7));transition:all .3s}
+.sw:hover{border-color:rgba(74,108,255,.3);transform:translateY(-2px)}
+.sw-old{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);
+  letter-spacing:.08em;margin-bottom:6px}
+.sw-arrow{color:var(--ink-faint);font-size:15px;margin:6px 0}
+.sw-new{font-size:16px;font-weight:600;color:var(--green);letter-spacing:-.01em}
+.sw-full{font-size:12px;color:var(--ink-dim);margin-top:5px;line-height:1.45}
+
+/* capability list */
+.caps{margin-top:42px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.cap{display:flex;gap:15px;padding:20px 22px;border-radius:13px;
+  border:1px solid var(--line);background:rgba(255,255,255,.018);transition:all .3s}
+.cap:hover{border-color:rgba(74,108,255,.28);background:rgba(74,108,255,.04)}
+.cap-n{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue-soft);
+  font-weight:600;flex-shrink:0;padding-top:2px}
+.cap h4{font-size:15.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:5px}
+.cap p{font-size:13px;color:var(--ink-dim);line-height:1.55}
+
+/* audience */
+.aud{margin-top:42px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.a{padding:26px 20px;border-radius:22px;text-align:center;
+  border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),rgba(8,11,17,.6));
+  transition:all .3s}
+.a:hover{border-color:rgba(74,108,255,.3);transform:translateY(-2px)}
+.a-n{font-family:'Instrument Serif',serif;font-style:italic;font-size:38px;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.a-l{margin-top:10px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-dim);font-weight:500;line-height:1.45}
+
+/* CTA / footer */
+.cta{padding:var(--sp-section) 0;text-align:center;border-top:1px solid var(--line);
+  background:radial-gradient(ellipse 700px 340px at 50% 40%,rgba(74,108,255,.08),transparent 70%)}
+.cta h2{margin:0 auto 20px}
+.cta p{font-size:15px;color:var(--ink-dim);max-width:500px;margin:0 auto 30px}
+.btn{display:inline-flex;align-items:center;gap:11px;padding:15px 30px;border-radius:999px;
+  background:var(--blue);color:#04091e;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;
+  transition:transform .3s,box-shadow .3s;box-shadow:0 8px 30px rgba(74,108,255,.3)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(74,108,255,.45)}
+
+footer{padding:44px 0 56px;border-top:1px solid var(--line)}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.flogo{height:22px;width:auto;opacity:.85}
+.fmark{height:20px;width:auto;opacity:.75}
+.fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.fmeta a{transition:color .2s}
+.fmeta a:hover{color:var(--ink)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .switch,.caps{grid-template-columns:1fr}
+  .aud{grid-template-columns:repeat(2,1fr)}
+  .law-pair{grid-template-columns:1fr;gap:10px}
+  .arrow{transform:rotate(90deg);padding:4px 0}
+}
+@media (max-width:560px){
+  :root{--sp-section:44px;--sp-block:36px}
+  .wrap{padding:0 20px}
+  nav{padding:14px 20px}
+  .nav-meta,.nav-cta{letter-spacing:.12em}
+  .hero{padding-top:115px}
+  .demo-body{padding:20px}
+  .askrow{flex-direction:column}
+  .aud{grid-template-columns:1fr}
+}
+
+/* ── MOTION PREFERENCE ──────────────────────────────────────────────────────
+   Every page here animates on scroll. Under prefers-reduced-motion the whole
+   page must still arrive in its final readable state, so reveals are forced
+   visible rather than left at opacity:0 waiting on an animation that will
+   never run. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+}
+
+/* ── FOCUS ──────────────────────────────────────────────────────────────────
+   Keyboard focus needs a visible indicator on every operable control. */
+:focus-visible{
+  outline:2px solid var(--blue);
+  /* deliberately no border-radius here — the outline already follows the
+     element's own radius, and setting one flattens pill buttons to 4px */
+  outline-offset:3px;
+}
+
+/* ═════════ HOUSE LAYER — shared with the homepage: type, nav, buttons, labels ═════════ */
+:root{--acc:var(--blue);--acc-ink:#eef2ff;--c-digisapien:#3ee089;--c-nyaya:#4a6cff;--c-chatdj:#ff3d81;--c-vaani:#a855f7;--c-qrator:#ffb84a;--c-magiq:#00d4ff;--h-ease:cubic-bezier(.16,1,.3,1)}
+html,body{font-family:'Albert Sans',system-ui,sans-serif;font-weight:300}
+h1,h2,h3,h4{font-family:'Albert Sans',system-ui,sans-serif}
+h1 em,h2 em,.hero h1 em,.hero-title em,h2.section-title em,.tech-name em,.section h2 em,.cta h2 em,.stat-num,.deg-n,.a-n,.market-headline strong,.market-quote-body strong{
+  background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;-webkit-text-fill-color:initial;color:var(--acc)!important}
+.hero h1 em::after{display:none}
+/* section headings share the homepage scale; only the hero h1 is larger */
+h2,.section h2,.head h2,.cta h2{font-size:clamp(30px,3.4vw,46px)!important;line-height:1.05!important;letter-spacing:-.025em!important}
+/* house footer, identical on every page */
+footer{padding:46px 0 60px!important;border-top:0!important;background:none!important}
+footer .frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+footer .flogo{height:20px;width:auto;opacity:.85}
+footer .fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+footer .fmeta a:hover{color:#fff}
+/* Nyaya: centred throughout, like the hero */
+section.blk .wrap,.cta .wrap{text-align:center}
+section.blk > .wrap > .eyebrow,section.blk > .wrap > h2,section.blk > .wrap > .lead,.cta h2,.cta p{margin-left:auto;margin-right:auto}
+section.blk .wrap > *:not(.demo){text-align:center}
+.demo,.demo *{text-align:left}
+/* section rhythm: the closing CTA sat 200px+ below the last section */
+.cta{padding-top:44px!important}
+/* top bar */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
+.topbar .brand{display:flex;align-items:center;gap:22px}
+.topbar .brand img{height:32px;width:auto;opacity:.95;display:block}
+/* the page's own nav{} element rule (fixed, full-width) must not reach the pill */
+.pillnav{position:static;top:auto;left:auto;right:auto;z-index:auto;justify-content:flex-start;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none;
+  display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pillnav a{padding:10px 20px;border-radius:999px;font-weight:500;font-size:14px;color:rgba(255,255,255,.72);transition:color .3s var(--h-ease),background .3s var(--h-ease)}
+.pillnav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.menu{position:relative}
+.menu-btn{display:flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;color:inherit;font:inherit}
+.menu-btn span{padding:14px 22px;font-weight:500;font-size:14px;color:rgba(255,255,255,.75)}
+.menu-btn span+span{border-left:1px solid rgba(255,255,255,.12);padding:14px 16px;letter-spacing:.2em;color:#fff}
+.menu-list{position:absolute;right:0;top:calc(100% + 10px);min-width:260px;padding:10px;border-radius:20px;background:rgba(6,8,10,.94);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(16px);display:none;flex-direction:column;gap:2px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+.menu.open .menu-list{display:flex}
+.menu-list a{--c:var(--acc);display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:rgba(255,255,255,.75)}
+.menu-list a:hover,.menu-list a[aria-current]{background:rgba(255,255,255,.06);color:#fff}
+.menu-list a i{width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.menu-list .sep{height:1px;background:rgba(255,255,255,.1);margin:6px 8px}
+/* hero kicker: the homepage tag style, in the page accent */
+.gov-badge{font-family:'Syncopate',sans-serif!important;font-weight:700!important;font-size:12px!important;letter-spacing:.3em!important;text-transform:uppercase!important;
+  color:var(--acc)!important;background:none!important;border:0!important;padding:0!important;border-radius:0!important;backdrop-filter:none!important}
+.gov-badge .dot,.gov-badge .hero-dot,.gov-badge .hero-tag-dot,.gov-badge span.dot{display:none!important}
+.gov-badge::before,.gov-badge::after,.gov-badge > span:empty,.gov-badge > i{display:none!important}
+/* primary buttons: the homepage pill, in the page accent */
+.btn,.cta-btn,.gate-btn.open{display:inline-flex;align-items:center;gap:14px;height:58px;padding:0 28px;border-radius:999px;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:16px;font-weight:600;letter-spacing:0;text-transform:none;
+  background:var(--acc);border:1px solid var(--acc);color:var(--acc-ink);box-shadow:none;transition:transform .35s var(--h-ease),box-shadow .35s var(--h-ease),filter .35s var(--h-ease)}
+.btn:hover,.cta-btn:hover,.gate-btn.open:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(0,0,0,.7);filter:brightness(1.08)}
+/* footer meta */
+.fmeta,.footer-inner,.foot-copy,.footer-contact{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:680px){
+  .topbar{padding:18px 18px}
+  .pillnav a:not(:first-child){display:none}
+  .menu-btn span:first-child{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><a href="neosentience.html" aria-label="Neosentience"><img src="qrator-assets/neosentience-logo.png" alt="Neosentience"></a>
+    <nav class="pillnav" aria-label="Primary">
+      <a href="neosentience.html">Home</a><a href="neosentience.html#products">Products</a><a href="neosentience.html#consulting">Consulting</a><a href="neosentience.html#contact">Contact</a>
+    </nav></div>
+  <div class="menu" id="menu">
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" id="menu-toggle"><span>Menu</span><span aria-hidden="true">••</span></button>
+    <div class="menu-list" id="menu-list" role="menu">
+        <a role="menuitem" style="--c:var(--c-digisapien)" href="digisapien.html"><i></i>DigiSapien</a>
+        <a role="menuitem" style="--c:var(--c-nyaya)" href="nyaya-sahayak.html" aria-current="page"><i></i>Nyaya Sahayak</a>
+        <a role="menuitem" style="--c:var(--c-chatdj)" href="chat-dj.html"><i></i>Chat DJ</a>
+        <a role="menuitem" style="--c:var(--c-vaani)" href="vaani-studio.html"><i></i>VAANI Studio</a>
+        <div class="sep"></div>
+        <a role="menuitem" style="--c:var(--c-qrator)" href="qrator.html"><i></i>QRATOR</a>
+        <a role="menuitem" style="--c:var(--c-magiq)" href="magiq-360.html"><i></i>Magiq 360</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="nyaya-assets/ns-logo.png" alt="Nyaya Sahayak" class="hero-logo">
+
+  <div class="gov-badge">
+    <span class="gov-dot"></span>
+    Built for India’s new criminal law
+  </div>
+
+  <h1>India rewrote its criminal law. <em>We taught an AI the difference.</em></h1>
+
+  <p class="hero-sub">
+    On 1 July 2024 the IPC, CrPC and Evidence Act were replaced after 160 years.
+    <strong>Nyaya Sahayak</strong> translates between the old codes and the new ones —
+    for police, lawyers, judiciary and law students, in English and 12 Indian languages.
+  </p>
+
+  <!-- HERO IMAGE — full-bleed band, feathered into the black -->
+  <figure class="trio">
+    <img src="nyaya-assets/hero-trio.webp"
+         alt="A police officer, an AI assistant and an advocate">
+  </figure>
+
+  <!-- INTERACTIVE DEMO -->
+  <div class="demo">
+    <div class="demo-shell">
+      <div class="demo-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="demo-url">Nyaya Sahayak · AI Assistant for New Criminal Laws</span>
+      </div>
+
+      <div class="demo-body">
+        <div class="demo-label">Try it · Translate an old section</div>
+
+        <div class="chips" id="chips">
+          <div class="chip" data-k="ipc420">IPC 420</div>
+          <div class="chip" data-k="ipc320">IPC 320</div>
+          <div class="chip" data-k="crpc167">CrPC 167(2)</div>
+        </div>
+
+        <div class="askrow">
+          <input id="q" placeholder="Type a section — e.g. ipc 420" autocomplete="off">
+          <button class="askbtn" id="go">Ask</button>
+        </div>
+
+        <div class="result" id="result"></div>
+
+        <div class="demo-note">
+          A sample of the mapping. The assistant is trained on the full BNS, BNSS and BSA corpus.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SWITCH -->
+<section class="blk">
+  <div class="wrap">
+    <div class="eyebrow reveal">The change</div>
+    <h2 class="reveal">Three statutes. <em>One overnight switch.</em></h2>
+    <p class="lead reveal">
+      Every FIR, charge sheet and argument written since July 2024 has to use the new
+      codes — while every case still in court, and every precedent ever cited, is written
+      in the old ones. Both systems now run at once.
+    </p>
+
+    <div class="switch reveal">
+      <div class="sw">
+        <div class="sw-old">Indian Penal Code · IPC</div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-new">BNS</div>
+        <div class="sw-full">Bharatiya Nyaya Sanhita — what is an offence, and its punishment</div>
+      </div>
+      <div class="sw">
+        <div class="sw-old">Code of Criminal Procedure · CrPC</div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-new">BNSS</div>
+        <div class="sw-full">Bharatiya Nagarik Suraksha Sanhita — how a case is investigated and tried</div>
+      </div>
+      <div class="sw">
+        <div class="sw-old">Indian Evidence Act · IEA</div>
+        <div class="sw-arrow">↓</div>
+        <div class="sw-new">BSA</div>
+        <div class="sw-full">Bharatiya Sakshya Adhiniyam — what counts as proof</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT DOES -->
+<section class="blk">
+  <div class="wrap">
+    <div class="eyebrow reveal">What it does</div>
+    <h2 class="reveal">More than a lookup table.</h2>
+    <p class="lead reveal">
+      Built on a retrieval-augmented model trained on the full statutory corpus — so it
+      reasons about a situation, not just a section number.
+    </p>
+
+    <div class="caps reveal">
+      <div class="cap">
+        <div class="cap-n">01</div>
+        <div>
+          <h4>Translate old to new</h4>
+          <p>Any IPC, CrPC or IEA section mapped to its BNS, BNSS or BSA equivalent, with every substantive change marked.</p>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="cap-n">02</div>
+        <div>
+          <h4>Read a whole incident</h4>
+          <p>Describe a crime in plain language and get the applicable BNS sections plus the BNSS procedure to follow.</p>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="cap-n">03</div>
+        <div>
+          <h4>Draft statutory documents</h4>
+          <p>Generates BNSS-compliant forms and notices — charge sheets, committal notices — filled from the case facts.</p>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="cap-n">04</div>
+        <div>
+          <h4>Cite the precedent</h4>
+          <p>Surfaces prior judgments on the equivalent old section, with citation, so settled law is not lost in the switch.</p>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="cap-n">05</div>
+        <div>
+          <h4>Simulate the argument</h4>
+          <p>Drafts arguments for either side and the likely outcomes — a sparring partner for case preparation.</p>
+        </div>
+      </div>
+      <div class="cap">
+        <div class="cap-n">06</div>
+        <div>
+          <h4>Answer in 12 languages</h4>
+          <p>Hindi, Gujarati, Marathi, Bengali, Tamil, Telugu, Kannada, Malayalam, Punjabi, Odia, Assamese, Urdu — and English.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO -->
+<section class="blk">
+  <div class="wrap">
+    <div class="eyebrow reveal">Who it is for</div>
+    <h2 class="reveal">Everyone who has to <em>re-learn the law.</em></h2>
+
+    <div class="aud reveal">
+      <div class="a"><div class="a-n">1.4M</div><div class="a-l">Lawyers</div></div>
+      <div class="a"><div class="a-n">2.6M</div><div class="a-l">State police force</div></div>
+      <div class="a"><div class="a-n">0.5M</div><div class="a-l">Law students</div></div>
+      <div class="a"><div class="a-n">15K</div><div class="a-l">Corporate legal depts</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="cta">
+  <div class="wrap">
+    <h2 class="reveal">160 years of precedent, <em>carried across.</em></h2>
+    <p class="reveal">
+      Nyaya Sahayak was designed and built by Neosentience — an AI
+      assistant for the officers, lawyers and courts working through India's largest
+      legal transition in living memory.
+    </p>
+    <a class="btn reveal" href="mailto:soham@neosentience.in">Talk to us →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <img src="qrator-assets/neosentience-logo.png" alt="Neosentience" class="flogo">
+      <span class="fmeta">AI product studio · India</span>
+      <span class="fmeta"><a href="mailto:soham@neosentience.in">soham@neosentience.in</a> · +91 99679 60018</span>
+      <span class="fmeta">© 2026 Neosentience Technologies Pvt Ltd.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── section data (sourced from the Nyaya Sahayak deck) ── */
+const DB = {
+  ipc420:{
+    old:{sec:'IPC 420', desc:'Cheating and dishonestly inducing delivery of property'},
+    neu:{sec:'BNS 318(4)', desc:'Cheating'},
+    changes:[
+      'Punishment for cheating raised from <b>1 year</b> (IPC 417) to <b>3 years</b> (BNS 318(2)).',
+      'Cheating a person whose interest the offender was bound to protect raised from <b>3 years</b> (IPC 418) to <b>5 years</b> (BNS 318(3)).'
+    ]
+  },
+  ipc320:{
+    old:{sec:'IPC 320', desc:'Grievous hurt'},
+    neu:{sec:'BNS 116', desc:'Grievous hurt'},
+    changes:[
+      'Definition carried over from the IPC with updated provisions.',
+      'The qualifying period of pain reduced from <b>20 days</b> to <b>15 days</b> under BNS 116(h).'
+    ],
+    gu:{
+      oldSec:'ધારા 320: ગંભીર ઈજા',
+      neuSec:'ધારા 116: ગંભીર ઈજા',
+      changes:['\'પીડાના દિવસો\' BNS ની કલમ 116(h) માં <b>20 દિવસથી ઘટાડીને 15 દિવસ</b> કરવામાં આવ્યા છે, જે IPC ની કલમ 320 માં 20 દિવસ હતા.']
+    }
+  },
+  crpc167:{
+    old:{sec:'CrPC 167(2)', desc:'Procedure when investigation cannot be completed in twenty-four hours'},
+    neu:{sec:'BNSS 187', desc:'Procedure when investigation cannot be completed in twenty-four hours'},
+    changes:[
+      'CrPC allowed detention up to <b>15 days</b> in total. BNSS allows 15 days, or up to <b>60 days</b> for offences punishable with death, life, or not less than ten years.',
+      'The words <b>"medium of electronic video linkage"</b> are replaced with <b>"audio-video electronic means"</b>.'
+    ],
+    cite:{
+      name:'Uday Mohanlal Acharya vs State of Maharashtra (2001)',
+      ref:'AIR 2001 SC 1910',
+      note:'The Supreme Court held that if the charge sheet is not filed within the stipulated period under Section 167(2) CrPC, the accused is entitled to be released on bail.'
+    }
+  }
+};
+
+const ALIAS = {
+  '420':'ipc420','ipc420':'ipc420','ipc 420':'ipc420',
+  '320':'ipc320','ipc320':'ipc320','ipc 320':'ipc320',
+  '167':'crpc167','crpc167':'crpc167','crpc 167':'crpc167',
+  'crpc 167(2)':'crpc167','167(2)':'crpc167','crpc167(2)':'crpc167'
+};
+
+const q = document.getElementById('q');
+const go = document.getElementById('go');
+const out = document.getElementById('result');
+const chips = [...document.querySelectorAll('.chip')];
+let lang = 'en', current = null;
+
+function resolve(raw){
+  const s = raw.toLowerCase().trim().replace(/\s+/g,' ');
+  if(ALIAS[s]) return ALIAS[s];
+  const digits = s.replace(/[^0-9]/g,'');
+  if(s.includes('crpc') && digits.startsWith('167')) return 'crpc167';
+  return ALIAS[digits] || null;
+}
+
+function render(key){
+  const d = DB[key];
+  const useGu = lang === 'gu' && d.gu;
+  const oldSec = useGu ? d.gu.oldSec : d.old.sec + ' — ' + d.old.desc;
+  const neuSec = useGu ? d.gu.neuSec : d.neu.sec + ' — ' + d.neu.desc;
+  const changes = useGu ? d.gu.changes : d.changes;
+
+  let html = '<div class="ans">' +
+    '<div class="law-pair">' +
+      '<div class="law old"><div class="law-tag">Old law</div>' +
+        '<div class="law-sec">'+ (useGu ? d.gu.oldSec : d.old.sec) +'</div>' +
+        '<div class="law-desc">'+ (useGu ? '' : d.old.desc) +'</div></div>' +
+      '<div class="arrow">→</div>' +
+      '<div class="law new"><div class="law-tag">New law</div>' +
+        '<div class="law-sec">'+ (useGu ? d.gu.neuSec : d.neu.sec) +'</div>' +
+        '<div class="law-desc">'+ (useGu ? '' : d.neu.desc) +'</div></div>' +
+    '</div>' +
+    '<div class="changes"><div class="changes-h">Changes made</div><ul>' +
+      changes.map(c=>'<li>'+c+'</li>').join('') +
+    '</ul></div>';
+
+  if(d.cite){
+    html += '<div class="cite"><div class="cite-h">Reference of previous case</div>' +
+      '<p><b>'+d.cite.name+'</b> · '+d.cite.ref+'<br>'+d.cite.note+'</p></div>';
+  }
+
+  if(d.gu){
+    html += '<div class="langbar"><span>Answer in</span>' +
+      '<button class="lang'+(lang==='en'?' on':'')+'" data-l="en">English</button>' +
+      '<button class="lang'+(lang==='gu'?' on':'')+'" data-l="gu">ગુજરાતી</button>' +
+      '</div>';
+  }
+  html += '</div>';
+  out.innerHTML = html;
+
+  out.querySelectorAll('.lang').forEach(b=>{
+    b.onclick = ()=>{ lang = b.dataset.l; render(key); };
+  });
+}
+
+function ask(raw){
+  const key = resolve(raw);
+  chips.forEach(c=>c.classList.toggle('on', c.dataset.k === key));
+  if(!key){
+    out.innerHTML = '<div class="ans"><div class="cite"><div class="cite-h">Not in this demo</div>' +
+      '<p>This preview carries three sample sections — <b>IPC 420</b>, <b>IPC 320</b> and <b>CrPC 167(2)</b>. ' +
+      'The assistant itself is trained on the complete statute.</p></div></div>';
+    return;
+  }
+  current = key; lang = 'en';
+  out.innerHTML = '<div class="thinking"><i></i><i></i><i></i>Searching the statute</div>';
+  setTimeout(()=>render(key), 620);
+}
+
+go.onclick = ()=>ask(q.value);
+q.onkeydown = e=>{ if(e.key === 'Enter') ask(q.value); };
+chips.forEach(c=>c.onclick = ()=>{ q.value = c.textContent; ask(c.dataset.k); });
+
+/* open on the first example so the page never looks empty */
+q.value = 'IPC 420';
+ask('ipc420');
+
+const io = new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+<script>(function(){var m=document.getElementById('menu'),t=document.getElementById('menu-toggle');if(!m||!t)return;t.addEventListener('click',function(e){e.stopPropagation();var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});document.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false')});document.addEventListener('keydown',function(e){if(e.key==='Escape'){m.classList.remove('open');t.setAttribute('aria-expanded','false')}})})();</script>
+<script>
+/* House rule: a serif-italic accent either shares one line with the sans, or
+   starts its own line. It never breaks mid-phrase. Measured, not guessed:
+   set inline, see if the heading still fits one line, otherwise block. */
+(function(){
+  function fit(){
+    document.querySelectorAll('h1 em,h2 em,h3 em').forEach(function(em){
+      var h=em.parentElement; em.style.display='inline';
+      var fs=parseFloat(getComputedStyle(h).fontSize);
+      var one=h.getBoundingClientRect().height<=fs*1.45;
+      em.style.display=one?'inline':'block';
+    });
+  }
+  fit(); addEventListener('resize',fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>

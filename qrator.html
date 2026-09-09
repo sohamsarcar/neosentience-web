@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="QRATOR is a real-time AI cricket intelligence system that reads every ball across 60 dimensions and powered the full IPL 2026 season.">
+<title>QRATOR — Neosentience Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050608;
+  --bg-2:#0b0d12;
+  --bg-3:#0f1219;
+  --ink:#f2f4f7;
+  --ink-dim:#8a92a3;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --accent:#ffb84a;
+  --accent-2:#ff6b1a;
+  --accent-3:#6ef0ff;
+  --accent-4:#e63946;
+  --grad: linear-gradient(120deg,#ffb84a 0%,#ff6b1a 55%,#e63946 100%);
+  /* ── structural rhythm (shared across every Neosentience page) ── */
+  --wrap:1240px;
+  --sp-section:64px;   /* symmetric: 128px between sections, no inline collapses */
+  --sp-block:48px;     /* heading → first grid/panel inside a section */
+  --nav-h:57px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:'Albert Sans',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+.bg-grid{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(1200px 800px at 15% -10%, rgba(255,184,74,.10), transparent 60%),
+    radial-gradient(1000px 700px at 90% 25%, rgba(255,107,26,.08), transparent 60%),
+    radial-gradient(1400px 900px at 50% 110%, rgba(230,57,70,.06), transparent 55%);
+}
+.bg-grid::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.wrap{position:relative;z-index:1;max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+.cricket-ball{
+  position:absolute;width:200px;height:200px;pointer-events:none;opacity:.15;
+  filter:blur(.5px);
+}
+.cricket-ball svg{width:100%;height:100%}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg,rgba(5,6,8,.95),rgba(5,6,8,.4));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{height:20px;width:auto;opacity:.92;display:block}
+.nav-links{display:flex;gap:36px;font-size:14px;color:var(--ink-dim)}
+.nav-links a:hover{color:var(--ink);transition:.2s}
+/* right-hand nav slot matches the product pages' mono meta label — a pill
+   button here made the bar 73px against 57px everywhere else */
+.nav-cta{white-space:nowrap;font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;font-weight:600;color:var(--accent);transition:opacity .2s}
+.nav-cta:hover{opacity:.75}
+
+/* HERO */
+.hero{padding:150px 0 80px;position:relative;overflow:hidden}
+.hero .cricket-ball.b1{top:80px;right:-40px;width:280px;height:280px;opacity:.10;z-index:0}
+.hero .cricket-ball.b2{bottom:-60px;left:-80px;width:340px;height:340px;opacity:.08;z-index:0}
+
+.hero-layout{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:stretch;
+  margin-bottom:80px;
+}
+.hero-visual{
+  position:relative;border-radius:20px;overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 40px 100px -30px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.04);
+  min-height:100%;
+  align-self:stretch;
+}
+.hero-visual img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:contrast(1.05) saturate(1.1);
+  min-height:640px;
+}
+.hero-visual::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(5,6,8,.1) 0%,rgba(5,6,8,0) 40%,rgba(5,6,8,.85) 100%),
+    linear-gradient(90deg,rgba(5,6,8,.4) 0%,transparent 30%);
+}
+.hero-visual-overlay{
+  position:absolute;left:24px;right:24px;bottom:24px;z-index:2;
+  color:var(--ink);
+}
+.hv-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 10px;border-radius:999px;
+  background:rgba(255,184,74,.18);border:1px solid rgba(255,184,74,.4);
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;backdrop-filter:blur(8px);
+;font-weight:600}
+.hv-tag-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
+.hv-title{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:24px;line-height:1.2;letter-spacing:-.015em;
+  text-shadow:0 4px 20px rgba(0,0,0,.7);
+}
+.hv-meta{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-dim);margin-top:10px;
+}
+/* Corner data ticker */
+.hv-ticker{
+  position:absolute;top:20px;left:20px;z-index:2;
+  padding:10px 14px;border-radius:8px;
+  background:rgba(5,6,8,.75);backdrop-filter:blur(10px);border:1px solid var(--line-2);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;
+  color:var(--accent);line-height:1.7;
+}
+.hv-ticker .lbl{color:var(--ink-dim);margin-right:6px}
+.hv-ticker .val{color:var(--ink)}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:7px 14px;border-radius:999px;
+  background:rgba(255,184,74,.06);border:1px solid rgba(255,184,74,.25);
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  font-weight:500;margin-bottom:40px;
+}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.logo-block{margin-bottom:56px;display:flex;align-items:center;gap:36px;flex-wrap:wrap}
+.qrator-logo{max-width:170px;width:100%;filter:drop-shadow(0 6px 20px rgba(255,107,26,.3))}
+.qrator-logo img{width:100%;height:auto;display:block}
+
+.hero h1{
+  /* house display face: Inter 800, with the serif reserved for the italic
+     accent clause only — matches the product pages and the homepage */
+  font-family:'Albert Sans',sans-serif;
+  /* the hero grid column is ~640px, not the 960px max-width — and Inter 800
+     sets much wider than Instrument Serif did at the same size, so the scale
+     comes down to keep the italic clause on one line */
+  font-size:clamp(40px,5.2vw,76px);
+  font-weight:800;line-height:1.04;letter-spacing:-.034em;
+  margin-bottom:32px;max-width:960px;
+  padding-bottom:.1em;
+}
+.hero h1 em{
+  font-family:'Instrument Serif',serif;font-weight:400;
+  font-style:italic;letter-spacing:-.005em;
+  /* house rule: the italic clause opens its own line instead of breaking
+     mid-phrase at whichever word happens to hit the measure */
+  display:block;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  position:relative;
+  padding-bottom:.06em;
+}
+.hero h1 em::after{
+  content:"";position:absolute;top:0;left:-20%;width:40%;height:100%;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);
+  -webkit-background-clip:text;background-clip:text;
+  mix-blend-mode:overlay;
+  animation:sheen 4.5s ease-in-out infinite;
+}
+@keyframes sheen{0%{transform:translateX(-30%)}60%,100%{transform:translateX(350%)}}
+
+.hero-lede{
+  font-size:clamp(15px,1.26vw,18px);line-height:1.6;
+  color:var(--ink-dim);max-width:680px;margin-bottom:44px;font-weight:400;
+}
+.hero-lede strong{color:var(--ink);font-weight:500}
+
+.partners{
+  display:flex;flex-wrap:wrap;gap:0;margin-top:24px;
+  border:1px solid var(--line);border-radius:24px;
+  background:linear-gradient(135deg,rgba(255,184,74,.03),rgba(230,57,70,.03));
+  overflow:hidden;max-width:900px;
+}
+.partner{
+  flex:1;min-width:260px;padding:24px 28px;
+  border-right:1px solid var(--line);
+}
+.partner:last-child{border-right:none}
+.partner-lbl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);font-weight:500;margin-bottom:8px}
+.partner-name{font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-.005em;margin-bottom:4px}
+.partner-role{font-size:13px;color:var(--ink-dim);line-height:1.5}
+
+.hero-stats{
+  margin-top:100px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  position:relative;
+}
+.stat{padding:34px 24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat-num{
+  font-family:'Instrument Serif',serif;
+  font-size:52px;line-height:1;letter-spacing:-.02em;margin-bottom:10px;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.stat-lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);font-weight:500}
+
+/* BBB data strip — the raw material */
+.bbb-strip{
+  padding:var(--sp-section) 0;position:relative;
+  background:linear-gradient(180deg,transparent,rgba(255,184,74,.02),transparent);
+  border-top:1px solid var(--line);
+  overflow:hidden;
+}
+.bbb-strip-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;margin-bottom:24px;flex-wrap:wrap;
+}
+.bbb-eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  font-weight:600;margin-bottom:6px;
+}
+.bbb-note{
+  font-family:'Albert Sans',sans-serif;font-size:13px;color:var(--ink-dim);
+}
+.bbb-live{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 12px;border-radius:999px;
+  background:rgba(230,57,70,.12);border:1px solid rgba(230,57,70,.35);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:#ff6b7a;font-weight:600;
+}
+.bbb-live-dot{
+  width:6px;height:6px;border-radius:50%;background:#ff3b3b;
+  box-shadow:0 0 8px #ff3b3b;
+  animation:pulse 1.4s ease-in-out infinite;
+}
+
+.bbb-scroll-wrap{
+  width:100vw;margin-left:calc(-50vw + 50%);
+  overflow-x:auto;overflow-y:hidden;
+  padding:0 4vw 14px;
+  mask-image:linear-gradient(90deg,transparent,black 4vw,black calc(100% - 4vw),transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,black 4vw,black calc(100% - 4vw),transparent);
+  scrollbar-width:thin;scrollbar-color:rgba(255,184,74,.25) transparent;
+}
+.bbb-scroll-wrap::-webkit-scrollbar{height:6px}
+.bbb-scroll-wrap::-webkit-scrollbar-track{background:transparent}
+.bbb-scroll-wrap::-webkit-scrollbar-thumb{background:rgba(255,184,74,.25);border-radius:3px}
+.bbb-scroll-wrap::-webkit-scrollbar-thumb:hover{background:rgba(255,184,74,.5)}
+
+.bbb-table{
+  border-collapse:separate;border-spacing:0;
+  border:1px solid var(--line);border-radius:18px;
+  background:linear-gradient(180deg,rgba(11,13,18,.9),rgba(15,18,25,.7));
+  font-family:'Albert Sans',sans-serif;
+  width:max-content;min-width:100%;
+  margin:0 auto;
+}
+.bbb-table thead th{
+  padding:12px 14px;text-align:left;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:600;
+  background:rgba(255,184,74,.04);
+  border-bottom:1px solid rgba(255,184,74,.15);
+  white-space:nowrap;
+}
+.bbb-table tbody td{
+  padding:16px 14px;font-size:12.5px;color:var(--ink);
+  white-space:nowrap;font-weight:400;
+  border-right:1px solid rgba(255,255,255,.03);
+}
+.bbb-table tbody td:last-child{border-right:none}
+.bbb-table thead th:first-child,
+.bbb-table tbody td:first-child{padding-left:22px}
+.bbb-table thead th:last-child,
+.bbb-table tbody td:last-child{padding-right:22px}
+.bbb-table .mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-dim);letter-spacing:.02em}
+.bbb-table .accent{color:var(--accent);font-weight:600}
+.bbb-table .accent-2{color:var(--accent-2);font-weight:600}
+.bbb-table .dim{color:#4a5468;font-style:italic;font-size:11.5px}
+.bbb-table .null{color:#3a4152;font-family:'JetBrains Mono',monospace;font-size:11px}
+.bbb-table .pill{
+  display:inline-block;padding:2px 8px;border-radius:3px;
+  font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;
+}
+.bbb-table .pill-four{background:rgba(255,184,74,.15);color:var(--accent);border:1px solid rgba(255,184,74,.3)}
+.bbb-table .pill-hand{background:rgba(138,175,200,.1);color:#8aafc8}
+.bbb-table .pill-kind{background:rgba(74,222,128,.08);color:#4ade80}
+
+.bbb-footer-note{
+  margin-top:22px;text-align:center;
+  font-family:'Albert Sans',sans-serif;font-size:12.5px;color:var(--ink-dim);
+  font-style:italic;
+}
+.bbb-scroll-hint{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);opacity:.6;
+}
+.bbb-scroll-hint span{width:24px;height:1px;background:currentColor}
+
+/* SECTIONS */
+.section{padding:var(--sp-section) 0;position:relative}
+.section-eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+  font-weight:600;margin-bottom:24px;
+}
+.section h2{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:clamp(30px,3.9vw,52px);line-height:1.1;letter-spacing:-.026em;
+  margin-bottom:32px;max-width:900px;padding-bottom:.06em;
+}
+/* the em must now declare the serif itself — it no longer inherits one */
+.section h2 em{
+  font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  display:block;padding:0 .12em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.section-sub{font-size:18px;line-height:1.55;color:var(--ink-dim);max-width:660px;margin-bottom:56px}
+
+/* SECTION 2 — What QRATOR is */
+.what{border-top:1px solid var(--line);position:relative;overflow:hidden}
+.what .cricket-ball{top:120px;right:-100px;opacity:.08}
+
+.what-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;margin-bottom:80px}
+.what-image{
+  position:relative;aspect-ratio:1.2/1;border-radius:20px;overflow:hidden;
+  background:radial-gradient(circle at 50% 50%, rgba(255,184,74,.15), transparent 65%);
+  border:1px solid var(--line);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.7);
+}
+.what-image svg.stadium-scene{width:100%;height:100%;display:block}
+
+/* Cinematic overlay for the IPL action image */
+.what-image-cinematic{
+  aspect-ratio:1/1.15;border-radius:24px;
+  box-shadow:0 60px 140px -40px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.06);
+}
+.what-image-photo{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:contrast(1.08) saturate(1.15) brightness(1.02);
+}
+.what-image-gradient{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(5,6,8,.2) 0%,rgba(5,6,8,0) 25%,rgba(5,6,8,.0) 45%,rgba(5,6,8,.6) 75%,rgba(5,6,8,.92) 100%),
+    linear-gradient(90deg,rgba(5,6,8,.35) 0%,transparent 30%,transparent 70%,rgba(5,6,8,.25) 100%);
+}
+
+/* Portrait treatment for the commentator scene */
+.what-image-tall{aspect-ratio:4/5}
+.what-image-photo-tall{
+  filter:contrast(1.06) saturate(1.1) brightness(1.02);
+}
+
+/* Subtle bottom caption — image is the hero, this is context */
+.scene-caption{
+  position:absolute;left:20px;right:20px;bottom:20px;z-index:3;
+  padding:16px 18px;
+  background:rgba(11,13,18,.72);
+  backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  box-shadow:0 24px 60px -24px rgba(0,0,0,.8);
+}
+.scene-caption-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Albert Sans',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.18em;
+  color:var(--accent);text-transform:uppercase;margin-bottom:8px;
+}
+.scene-caption-text{
+  font-family:'Albert Sans',sans-serif;font-weight:400;font-size:13.5px;line-height:1.55;
+  color:var(--ink);
+}
+.scene-caption-text strong{font-weight:600}
+
+/* Annotation callout pointing at tablet in the commentator scene */
+.annotation-callout{
+  position:absolute;
+  top:44%;right:6%;
+  z-index:4;
+  display:flex;flex-direction:column;align-items:flex-start;
+  pointer-events:none;
+  animation:annotate-in 1s .5s ease-out both;
+}
+@keyframes annotate-in{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:none}
+}
+.annotation-callout svg{
+  display:block;margin-left:0;
+  filter:drop-shadow(0 0 6px rgba(255,184,74,.5));
+}
+.annotation-label{
+  padding:8px 12px;border-radius:8px;
+  background:rgba(11,13,18,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,184,74,.4);
+  box-shadow:0 8px 24px -6px rgba(0,0,0,.6);
+  margin-top:-4px;
+}
+.annotation-title{
+  font-family:'Albert Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;
+  color:var(--accent);text-transform:uppercase;
+}
+.annotation-sub{
+  font-family:'Albert Sans',sans-serif;font-weight:400;font-size:10.5px;
+  color:var(--ink-dim);margin-top:2px;
+}
+
+/* Broadcast chip — compact glassmorphic panels */
+.broadcast-chip{
+  position:absolute;z-index:3;
+  background:rgba(11,13,18,.82);
+  backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  box-shadow:0 12px 30px -12px rgba(0,0,0,.7);
+}
+.broadcast-chip-tl{top:16px;left:16px;padding:8px 12px;display:flex;align-items:center;gap:10px}
+.broadcast-chip-tr{top:16px;right:16px;padding:8px 12px;display:flex;align-items:center;gap:10px}
+
+/* TL — compact live score */
+.bc-live-dot{
+  width:6px;height:6px;border-radius:50%;background:#ff3b3b;
+  box-shadow:0 0 8px #ff3b3b;
+  animation:pulse 1.4s ease-in-out infinite;flex-shrink:0;
+}
+.bc-live-label{font-family:'Albert Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.14em;color:#ff3b3b}
+.bc-divider{width:1px;height:14px;background:rgba(255,255,255,.18)}
+.bc-score-mini{
+  font-family:'Albert Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;color:var(--ink);
+  text-transform:uppercase;
+}
+.bc-score-mini .runs{color:var(--accent);font-weight:700}
+.bc-score-mini .tgt{color:var(--ink-dim);font-weight:500;margin-left:6px}
+.bc-rrr-mini{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 7px;border-radius:4px;
+  background:rgba(230,57,70,.18);border:1px solid rgba(230,57,70,.35);
+  font-family:'Albert Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;
+  color:#ff6b7a;text-transform:uppercase;
+}
+
+/* TR — compact QRATOR indicator */
+.bc-logo{height:16px;width:auto;display:block;filter:drop-shadow(0 2px 6px rgba(255,107,26,.4))}
+.bc-status{
+  display:flex;align-items:center;gap:5px;
+  font-family:'Albert Sans',sans-serif;font-weight:600;font-size:10.5px;letter-spacing:.14em;
+  color:var(--accent);text-transform:uppercase;
+}
+.bc-status-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+  animation:pulse 1.6s ease-in-out infinite;
+}
+
+/* BOTTOM — Story card mock (matches real QRATOR broadcast card language) — compact 30% smaller */
+.story-card-mock{
+  position:absolute;z-index:3;
+  left:16px;right:16px;bottom:16px;
+  padding:14px 16px;
+  background:rgba(11,17,26,.94);
+  backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:8px;
+  box-shadow:
+    0 24px 60px -24px rgba(0,0,0,.85),
+    inset 0 2px 0 -1px var(--accent),
+    inset 0 -2px 0 -1px #60a5fa;
+}
+.scm-header{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.scm-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 8px;border-radius:4px;
+  font-family:'Albert Sans',sans-serif;font-size:9px;letter-spacing:.16em;font-weight:600;
+  text-transform:uppercase;
+}
+.scm-badge-record{
+  background:rgba(230,57,70,.15);color:#ff6b7a;
+  border:1px solid rgba(230,57,70,.45);
+}
+.scm-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:'Albert Sans',sans-serif;font-size:10px;font-weight:500;
+  color:#60a5fa;letter-spacing:.08em;text-transform:uppercase;
+}
+.scm-headline{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:16px;line-height:1.2;
+  color:var(--ink);margin-bottom:8px;letter-spacing:-.005em;
+}
+.scm-body{
+  font-family:'Albert Sans',sans-serif;font-weight:400;
+  font-size:11px;line-height:1.5;
+  color:#c2cfdc;margin-bottom:11px;
+}
+.scm-body strong{color:var(--ink);font-weight:700}
+.scm-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;
+}
+.scm-stat{
+  padding:7px 9px;border-radius:6px;
+  text-align:left;
+}
+.scm-stat-red{background:#ffbaba;color:#7a0e17}
+.scm-stat-amber{background:#ffd88a;color:#5a3800}
+.scm-stat-green{background:#a8e6c1;color:#0a4d1f}
+.scm-stat-blue{background:#a8d4ff;color:#0a2540}
+.scm-stat-val{
+  font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:17px;line-height:1;letter-spacing:-.01em;margin-bottom:2px;
+}
+.scm-stat-lbl{
+  font-family:'Albert Sans',sans-serif;font-weight:600;
+  font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  opacity:.85;line-height:1.2;
+}
+
+.what-copy{display:flex;flex-direction:column;gap:20px}
+.what-item{
+  padding:22px 26px;border-radius:18px;background:var(--bg-2);border:1px solid var(--line);
+  transition:.3s;
+}
+.what-item:hover{border-color:var(--accent);background:var(--bg-3)}
+.what-item-title{
+  font-size:15px;font-weight:600;letter-spacing:-.005em;margin-bottom:6px;
+  display:flex;align-items:center;gap:12px;
+}
+.what-item-icon{
+  width:24px;height:24px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(255,184,74,.15);color:var(--accent);
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
+}
+.what-item-desc{font-size:13.5px;line-height:1.55;color:var(--ink-dim)}
+
+/* Live samples */
+.samples-header{margin-bottom:40px}
+
+/* Carousel */
+.carousel{
+  position:relative;width:100%;max-width:1100px;margin:0 auto;
+  perspective:1600px;
+}
+.carousel-stage{
+  position:relative;height:520px;
+  display:flex;align-items:center;justify-content:center;
+}
+.carousel-slide{
+  position:absolute;top:50%;left:50%;
+  border-radius:22px;overflow:hidden;
+  border:1px solid var(--line-2);background:#0a0d13;
+  cursor:pointer;
+  transition:
+    transform .8s cubic-bezier(.22,.9,.3,1.15),
+    opacity .8s cubic-bezier(.22,.9,.3,1.15),
+    filter .8s cubic-bezier(.22,.9,.3,1.15),
+    box-shadow .8s cubic-bezier(.22,.9,.3,1.15);
+  will-change:transform,opacity;
+}
+.carousel-slide img{display:block;width:100%;height:auto}
+.carousel-slide::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 65%,rgba(5,6,8,.4));
+}
+/* States: center, previous (left), next (right), far (offscreen) */
+.carousel-slide.pos-center{
+  transform:translate(-50%,-50%) scale(1) translateZ(0);
+  opacity:1;filter:none;z-index:5;width:640px;
+  box-shadow:
+    0 50px 120px -30px rgba(0,0,0,.9),
+    0 0 0 1px rgba(255,184,74,.15),
+    0 0 80px -10px rgba(255,184,74,.15);
+}
+.carousel-slide.pos-prev{
+  transform:translate(-135%,-50%) scale(.72) rotateY(22deg);
+  opacity:.5;filter:blur(2px) saturate(.6);z-index:3;width:640px;
+}
+.carousel-slide.pos-next{
+  transform:translate(35%,-50%) scale(.72) rotateY(-22deg);
+  opacity:.5;filter:blur(2px) saturate(.6);z-index:3;width:640px;
+}
+.carousel-slide.pos-far-prev{
+  transform:translate(-180%,-50%) scale(.55) rotateY(30deg);
+  opacity:0;filter:blur(6px);z-index:1;width:640px;pointer-events:none;
+}
+.carousel-slide.pos-far-next{
+  transform:translate(80%,-50%) scale(.55) rotateY(-30deg);
+  opacity:0;filter:blur(6px);z-index:1;width:640px;pointer-events:none;
+}
+
+/* Controls below */
+.carousel-controls{
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  margin-top:40px;
+}
+.carousel-dots{display:flex;gap:6px;align-items:center;flex-wrap:wrap;max-width:520px;justify-content:center}
+.carousel-dot{
+  width:18px;height:3px;border-radius:2px;
+  background:rgba(255,255,255,.14);
+  cursor:pointer;transition:all .4s ease;
+  border:none;padding:0;
+}
+.carousel-dot.active{
+  width:36px;background:var(--accent);
+  box-shadow:0 0 12px rgba(255,184,74,.5);
+}
+.carousel-counter{
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;
+  color:var(--ink-dim);
+}
+.carousel-counter .cur{color:var(--accent);font-weight:600}
+
+/* Autoplay progress bar */
+.carousel-progress{
+  position:absolute;left:0;right:0;bottom:-24px;
+  height:2px;background:rgba(255,255,255,.06);
+  border-radius:2px;overflow:hidden;
+}
+.carousel-progress-bar{
+  height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  width:0%;transition:width .1s linear;
+}
+
+/* SECTION 3 — How we built it */
+.build{border-top:1px solid var(--line);position:relative;background:linear-gradient(180deg,transparent,rgba(255,184,74,.03) 40%,transparent)}
+.build .cricket-ball.b1{top:80px;left:-100px;opacity:.08}
+.build .cricket-ball.b2{bottom:60px;right:-80px;opacity:.06}
+
+.build-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:80px}
+
+.brain-quote{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(24px,2.8vw,36px);
+  line-height:1.2;font-weight:400;font-style:italic;color:var(--ink);
+  padding-left:28px;border-left:2px solid var(--accent);margin-top:24px;
+}
+.brain-quote span{color:var(--accent)}
+
+.neural{aspect-ratio:1;position:relative;border-radius:24px;overflow:hidden;
+  background:radial-gradient(circle at 50% 50%, rgba(255,184,74,.15), transparent 65%);
+}
+.neural svg{width:100%;height:100%;display:block}
+
+.tribute{
+  padding:56px;border-radius:24px;
+  background:linear-gradient(135deg,rgba(255,184,74,.05),rgba(230,57,70,.04));
+  border:1px solid var(--line-2);
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center;
+}
+.tribute::before{
+  content:"";position:absolute;top:-30%;right:-15%;width:500px;height:500px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,184,74,.15),transparent 70%);
+  pointer-events:none;
+}
+.tribute-label{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:16px}
+.tribute h3{
+  font-family:'Albert Sans',sans-serif;font-weight:700;font-style:normal;
+  font-size:clamp(24px,2.9vw,36px);line-height:1.2;letter-spacing:-.024em;
+}
+.tribute h3 em{color:var(--accent);font-style:italic;font-weight:400;font-family:'Instrument Serif',serif}
+.tribute-facts{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:24px 32px}
+.tf{border-top:1px solid var(--line-2);padding-top:14px}
+.tf-num{font-family:'Instrument Serif',serif;font-size:32px;line-height:1;letter-spacing:-.02em;color:var(--ink);margin-bottom:6px}
+.tf-lbl{font-size:12px;color:var(--ink-dim);line-height:1.5}
+
+footer{padding:44px 0 56px;border-top:1px solid var(--line)}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.flogo{height:22px;width:auto;opacity:.85}
+.fmark{height:20px;width:auto;opacity:.75}
+.fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.fmeta a{transition:color .2s}
+.fmeta a:hover{color:var(--ink)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease-out, transform .8s ease-out}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .hero-layout{grid-template-columns:1fr;gap:40px}
+  .hero-visual{aspect-ratio:5/6;min-height:0}
+  .hero-visual img{min-height:0}
+  .what-grid,.build-grid,.tribute{grid-template-columns:1fr;gap:40px;padding:32px}
+  .samples-featured{grid-template-columns:1fr}
+  .carousel-stage{height:auto;min-height:280px;padding:20px 0}
+  .carousel-slide.pos-center{width:88vw}
+  .carousel-slide.pos-prev,.carousel-slide.pos-next{width:88vw;opacity:.25;transform:translate(-50%,-50%) scale(.85)}
+  .carousel-slide.pos-far-prev,.carousel-slide.pos-far-next{width:88vw;opacity:0}
+  .nav-links{display:none}
+  /* Cinematic overlay — collapse on mobile */
+  .scene-caption{padding:12px 14px;left:12px;right:12px;bottom:12px}
+  .scene-caption-text{font-size:12px}
+  .annotation-callout{top:32%;right:8%}
+  .annotation-callout svg{width:60px;height:32px}
+  .annotation-title{font-size:10px}
+  .annotation-sub{font-size:9.5px}
+  .partners{flex-direction:column}
+  .partner{border-right:none;border-bottom:1px solid var(--line)}
+  .partner:last-child{border-bottom:none}
+  .hv-title{font-size:22px}
+}
+
+@media (max-width:560px){
+  :root{--sp-section:44px;--sp-block:36px}
+  .wrap{padding:0 20px}
+  nav{padding:14px 20px}
+  .nav-meta,.nav-cta{letter-spacing:.12em}
+  .hero{padding-top:115px}
+}
+
+/* ── MOTION PREFERENCE ──────────────────────────────────────────────────────
+   Every page here animates on scroll. Under prefers-reduced-motion the whole
+   page must still arrive in its final readable state, so reveals are forced
+   visible rather than left at opacity:0 waiting on an animation that will
+   never run. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+}
+
+/* ── FOCUS ──────────────────────────────────────────────────────────────────
+   Keyboard focus needs a visible indicator on every operable control. */
+:focus-visible{
+  outline:2px solid var(--accent);
+  /* deliberately no border-radius here — the outline already follows the
+     element's own radius, and setting one flattens pill buttons to 4px */
+  outline-offset:3px;
+}
+
+/* ═════════ HOUSE LAYER — shared with the homepage: type, nav, buttons, labels ═════════ */
+:root{--acc:var(--accent);--acc-ink:#1f1200;--c-digisapien:#3ee089;--c-nyaya:#4a6cff;--c-chatdj:#ff3d81;--c-vaani:#a855f7;--c-qrator:#ffb84a;--c-magiq:#00d4ff;--h-ease:cubic-bezier(.16,1,.3,1)}
+html,body{font-family:'Albert Sans',system-ui,sans-serif;font-weight:300}
+h1,h2,h3,h4{font-family:'Albert Sans',system-ui,sans-serif}
+h1 em,h2 em,.hero h1 em,.hero-title em,h2.section-title em,.tech-name em,.section h2 em,.cta h2 em,.stat-num,.deg-n,.a-n,.market-headline strong,.market-quote-body strong{
+  background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;-webkit-text-fill-color:initial;color:var(--acc)!important}
+.hero h1 em::after{display:none}
+/* section headings share the homepage scale; only the hero h1 is larger */
+h2,.section h2,.head h2,.cta h2{font-size:clamp(30px,3.4vw,46px)!important;line-height:1.05!important;letter-spacing:-.025em!important}
+/* house footer, identical on every page */
+footer{padding:46px 0 60px!important;border-top:0!important;background:none!important}
+footer .frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+footer .flogo{height:20px;width:auto;opacity:.85}
+footer .fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+footer .fmeta a:hover{color:#fff}
+/* top bar */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
+.topbar .brand{display:flex;align-items:center;gap:22px}
+.topbar .brand img{height:32px;width:auto;opacity:.95;display:block}
+/* the page's own nav{} element rule (fixed, full-width) must not reach the pill */
+.pillnav{position:static;top:auto;left:auto;right:auto;z-index:auto;justify-content:flex-start;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none;
+  display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pillnav a{padding:10px 20px;border-radius:999px;font-weight:500;font-size:14px;color:rgba(255,255,255,.72);transition:color .3s var(--h-ease),background .3s var(--h-ease)}
+.pillnav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.menu{position:relative}
+.menu-btn{display:flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;color:inherit;font:inherit}
+.menu-btn span{padding:14px 22px;font-weight:500;font-size:14px;color:rgba(255,255,255,.75)}
+.menu-btn span+span{border-left:1px solid rgba(255,255,255,.12);padding:14px 16px;letter-spacing:.2em;color:#fff}
+.menu-list{position:absolute;right:0;top:calc(100% + 10px);min-width:260px;padding:10px;border-radius:20px;background:rgba(6,8,10,.94);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(16px);display:none;flex-direction:column;gap:2px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+.menu.open .menu-list{display:flex}
+.menu-list a{--c:var(--acc);display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:rgba(255,255,255,.75)}
+.menu-list a:hover,.menu-list a[aria-current]{background:rgba(255,255,255,.06);color:#fff}
+.menu-list a i{width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.menu-list .sep{height:1px;background:rgba(255,255,255,.1);margin:6px 8px}
+/* hero kicker: the homepage tag style, in the page accent */
+.hero-tag{font-family:'Syncopate',sans-serif!important;font-weight:700!important;font-size:12px!important;letter-spacing:.3em!important;text-transform:uppercase!important;
+  color:var(--acc)!important;background:none!important;border:0!important;padding:0!important;border-radius:0!important;backdrop-filter:none!important}
+.hero-tag .dot,.hero-tag .hero-dot,.hero-tag .hero-tag-dot,.hero-tag span.dot{display:none!important}
+.hero-tag::before,.hero-tag::after,.hero-tag > span:empty,.hero-tag > i{display:none!important}
+/* primary buttons: the homepage pill, in the page accent */
+.btn,.cta-btn,.gate-btn.open{display:inline-flex;align-items:center;gap:14px;height:58px;padding:0 28px;border-radius:999px;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:16px;font-weight:600;letter-spacing:0;text-transform:none;
+  background:var(--acc);border:1px solid var(--acc);color:var(--acc-ink);box-shadow:none;transition:transform .35s var(--h-ease),box-shadow .35s var(--h-ease),filter .35s var(--h-ease)}
+.btn:hover,.cta-btn:hover,.gate-btn.open:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(0,0,0,.7);filter:brightness(1.08)}
+/* footer meta */
+.fmeta,.footer-inner,.foot-copy,.footer-contact{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:680px){
+  .topbar{padding:18px 18px}
+  .pillnav a:not(:first-child){display:none}
+  .menu-btn span:first-child{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="cricket-ball-svg" viewBox="0 0 200 200">
+      <defs>
+        <radialGradient id="ballGrad" cx="35%" cy="30%">
+          <stop offset="0%" stop-color="#ff6b6b"/>
+          <stop offset="55%" stop-color="#c92a2a"/>
+          <stop offset="100%" stop-color="#5a0a0a"/>
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="88" fill="url(#ballGrad)" stroke="#3a0505" stroke-width="1.2"/>
+      <path d="M 25 100 Q 100 60 175 100" fill="none" stroke="#ffe4b5" stroke-width="2" stroke-dasharray="3 4" opacity=".9"/>
+      <path d="M 25 100 Q 100 140 175 100" fill="none" stroke="#ffe4b5" stroke-width="2" stroke-dasharray="3 4" opacity=".9"/>
+      <ellipse cx="72" cy="60" rx="30" ry="18" fill="rgba(255,255,255,.18)" transform="rotate(-30 72 60)"/>
+    </symbol>
+    <symbol id="stumps-svg" viewBox="0 0 200 200">
+      <rect x="60" y="40" width="10" height="140" fill="#e8d0a4" stroke="#5a3a1a" stroke-width="1"/>
+      <rect x="95" y="40" width="10" height="140" fill="#e8d0a4" stroke="#5a3a1a" stroke-width="1"/>
+      <rect x="130" y="40" width="10" height="140" fill="#e8d0a4" stroke="#5a3a1a" stroke-width="1"/>
+      <rect x="55" y="32" width="55" height="8" fill="#c99a5a" stroke="#5a3a1a"/>
+      <rect x="90" y="32" width="55" height="8" fill="#c99a5a" stroke="#5a3a1a"/>
+      <line x1="30" y1="180" x2="170" y2="180" stroke="#8aafc8" stroke-width="1.5" opacity=".4"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="brand"><a href="neosentience.html" aria-label="Neosentience"><img src="qrator-assets/neosentience-logo.png" alt="Neosentience"></a>
+    <nav class="pillnav" aria-label="Primary">
+      <a href="neosentience.html">Home</a><a href="neosentience.html#products">Products</a><a href="neosentience.html#consulting">Consulting</a><a href="neosentience.html#contact">Contact</a>
+    </nav></div>
+  <div class="menu" id="menu">
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" id="menu-toggle"><span>Menu</span><span aria-hidden="true">••</span></button>
+    <div class="menu-list" id="menu-list" role="menu">
+        <a role="menuitem" style="--c:var(--c-digisapien)" href="digisapien.html"><i></i>DigiSapien</a>
+        <a role="menuitem" style="--c:var(--c-nyaya)" href="nyaya-sahayak.html"><i></i>Nyaya Sahayak</a>
+        <a role="menuitem" style="--c:var(--c-chatdj)" href="chat-dj.html"><i></i>Chat DJ</a>
+        <a role="menuitem" style="--c:var(--c-vaani)" href="vaani-studio.html"><i></i>VAANI Studio</a>
+        <div class="sep"></div>
+        <a role="menuitem" style="--c:var(--c-qrator)" href="qrator.html" aria-current="page"><i></i>QRATOR</a>
+        <a role="menuitem" style="--c:var(--c-magiq)" href="magiq-360.html"><i></i>Magiq 360</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="cricket-ball b1"><svg><use href="#cricket-ball-svg"/></svg></div>
+  <div class="cricket-ball b2"><svg><use href="#cricket-ball-svg"/></svg></div>
+
+  <div class="wrap">
+    <div class="hero-tag"><span class="hero-tag-dot"></span>Case Study · Live sports intelligence</div>
+
+    <div class="logo-block">
+      <div class="qrator-logo">
+        <img src="qrator-assets/qlogo.png" alt="QRATOR — Real-Time Cricket Intelligence">
+      </div>
+    </div>
+
+    <div class="hero-layout">
+      <div>
+        <h1>Every ball, <em>a story worth telling.</em></h1>
+
+        <p class="hero-lede">
+          <strong>QRATOR</strong> is a real-time AI intelligence system — powered by an AI cricket
+          brain we call the <strong style="color:var(--accent)">Context Engine</strong> — that watches
+          a live cricket match and generates the most valuable analytical story for every ball,
+          grounded in a decade of ball-by-ball history, ranked, deduplicated, and delivered to the
+          broadcast desk in under two seconds. It powered the entire <strong>IPL 2026</strong> season.
+        </p>
+
+        <div class="partners">
+          <div class="partner">
+            <div class="partner-lbl">Designed for</div>
+            <div class="partner-name">Quidich Innovation Labs</div>
+            <div class="partner-role">Sports broadcast tech · Live match operations</div>
+          </div>
+          <div class="partner">
+            <div class="partner-lbl">AI consulting &amp; technical architecture</div>
+            <div class="partner-name">Neosentience Technologies</div>
+            <div class="partner-role">System design · Context engine · LLM integration</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual: commentator scene with QRATOR on tablet -->
+      <div class="hero-visual reveal">
+        <img src="qrator-assets/comm.webp" alt="Commentators at IPL 2026 with QRATOR on tablet">
+        <div class="hero-visual-overlay">
+          <span class="hv-tag"><span class="hv-tag-dot"></span>On Air</span>
+          <div class="hv-title">A commentator's silent expert, running the numbers in real time.</div>
+          <div class="hv-meta">POWERED THE FULL IPL 2026 SEASON · 74 MATCHES</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stats reveal">
+      <div class="stat"><div class="stat-num">18 yrs</div><div class="stat-lbl">Of IPL data</div></div>
+      <div class="stat"><div class="stat-num">324M+</div><div class="stat-lbl">Data points analysed</div></div>
+      <div class="stat"><div class="stat-num">&lt;2s</div><div class="stat-lbl">Ball → screen</div></div>
+      <div class="stat"><div class="stat-num">35K+</div><div class="stat-lbl">Stories in 74 IPL matches</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     BBB DATA STRIP — the raw material QRATOR sees every ball
+     ═══════════════════════════════════════════════════ -->
+<section class="bbb-strip reveal">
+  <div class="wrap">
+    <div class="bbb-strip-header">
+      <div>
+        <div class="bbb-eyebrow">The Raw Material · Ball-by-ball feed</div>
+        <div class="bbb-note">Every delivery captured across 55+ dimensions. IPL 2026 · MI vs DC · Over 3–4.</div>
+      </div>
+      <div class="bbb-live">
+        <span class="bbb-live-dot"></span>
+        <span>Live stream</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bbb-scroll-wrap">
+    <table class="bbb-table">
+      <thead>
+        <tr>
+          <th>p_match</th><th>inns</th><th>bat</th><th>p_bat</th><th>team_bat</th>
+          <th>bowl</th><th>p_bowl</th><th>team_bowl</th><th>ball</th><th>ball_id</th>
+          <th>outcome</th><th>score</th><th>out</th><th>dismissal</th><th>p_out</th>
+          <th>over</th><th>noball</th><th>wide</th><th>byes</th><th>legbyes</th>
+          <th>cur_bat_runs</th><th>cur_bat_bf</th><th>cur_bowl_ovr</th><th>cur_bowl_wkts</th><th>cur_bowl_runs</th>
+          <th>inns_runs</th><th>inns_wkts</th><th>inns_balls</th><th>inns_runs_rem</th><th>inns_balls_rem</th>
+          <th>inns_rr</th><th>inns_rrr</th><th>target</th><th>max_balls</th><th>date</th>
+          <th>year</th><th>ground</th><th>country</th><th>winner</th><th>toss</th>
+          <th>competition</th><th>bat_hand</th><th>bowl_style</th><th>bowl_kind</th><th>batruns</th>
+          <th>ballfaced</th><th>bowlruns</th><th>bat_out</th><th>wagonX</th><th>wagonY</th>
+          <th>wagonZone</th><th>line</th><th>length</th><th>shot</th><th>control</th>
+          <th>predscore</th><th>wprob</th><th>nb</th><th>bruns</th><th>shot_type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mono">1527681</td>
+          <td class="mono">1</td>
+          <td>Ryan Rickelton</td>
+          <td class="mono">605661</td>
+          <td>Mumbai Indians</td>
+          <td>Mukesh Kumar</td>
+          <td class="mono">926851</td>
+          <td>Delhi Capitals</td>
+          <td class="mono">1</td>
+          <td class="mono">0.01</td>
+          <td><span class="pill pill-four">four</span></td>
+          <td class="accent">4</td>
+          <td class="dim">False</td>
+          <td class="null">—</td>
+          <td class="null">—</td>
+          <td class="mono">1</td>
+          <td class="mono">0</td>
+          <td class="mono">0</td>
+          <td class="mono">0</td>
+          <td class="mono">0</td>
+          <td class="mono">4</td>
+          <td class="mono">1</td>
+          <td class="mono">0.1</td>
+          <td class="mono">0</td>
+          <td class="mono">4</td>
+          <td class="mono">4</td>
+          <td class="mono">0</td>
+          <td class="mono">1</td>
+          <td class="null">—</td>
+          <td class="mono">119</td>
+          <td class="mono">24.0</td>
+          <td class="null">—</td>
+          <td class="null">—</td>
+          <td class="mono">120</td>
+          <td class="mono">04-04-2026 15:30:00</td>
+          <td class="mono">2026</td>
+          <td>Arun Jaitley Stadium, Delhi</td>
+          <td>India</td>
+          <td>Delhi Capitals</td>
+          <td>Delhi Capitals</td>
+          <td class="mono">IPL</td>
+          <td><span class="pill pill-hand">LHB</span></td>
+          <td class="mono">RM</td>
+          <td><span class="pill pill-kind">pace bowler</span></td>
+          <td class="accent">4</td>
+          <td class="mono">1</td>
+          <td class="accent">4</td>
+          <td class="dim">False</td>
+          <td class="mono">7</td>
+          <td class="mono">243</td>
+          <td class="mono">6</td>
+          <td>DOWN_LEG</td>
+          <td>GOOD_LENGTH</td>
+          <td>FLICK</td>
+          <td class="mono">1.0</td>
+          <td class="mono">211.0</td>
+          <td class="accent-2 mono">63.41</td>
+          <td class="mono">0</td>
+          <td class="mono">4</td>
+          <td>FLICK</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bbb-scroll-hint">
+    <span></span>Scroll horizontally · 60 columns<span></span>
+  </div>
+
+  <div class="wrap">
+    <div class="bbb-footer-note">
+      One ball. Sixty dimensions. Multiply that across 300,000+ deliveries and 18 IPL seasons — <strong style="color:var(--accent)">324 million data points</strong> the Context Engine reasons over, every single ball.
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="section what" id="what">
+  <div class="cricket-ball"><svg><use href="#cricket-ball-svg"/></svg></div>
+
+  <div class="wrap">
+    <div class="section-eyebrow">01 · The product</div>
+    <h2 class="reveal">Not a scoreboard. <em>An expert.</em></h2>
+    <p class="section-sub reveal">
+      Traditional scoreboards describe what happened. QRATOR contextualises it — every ball
+      viewed through the lens of a decade of cricket history, so a commentator gets the fact
+      that actually matters, at the exact moment it matters.
+    </p>
+
+    <div class="what-grid">
+      <div class="what-image reveal what-image-cinematic">
+        <img src="qrator-assets/ipl-action.webp" alt="Kohli batting — IPL 2026"
+             class="what-image-photo">
+        <div class="what-image-gradient"></div>
+
+        <!-- TOP-LEFT — Compact live score -->
+        <div class="broadcast-chip broadcast-chip-tl">
+          <span class="bc-live-dot"></span>
+          <span class="bc-live-label">LIVE</span>
+          <span class="bc-divider"></span>
+          <span class="bc-score-mini">RCB <span class="runs">156/4</span> <span class="tgt">· TGT 187</span></span>
+          <span class="bc-rrr-mini">RRR 12.40</span>
+        </div>
+
+        <!-- BOTTOM — Story card mock in real QRATOR broadcast style -->
+        <div class="story-card-mock">
+          <div class="scm-header">
+            <span class="scm-badge scm-badge-record">CHASE MATH</span>
+            <span class="scm-tag">🎯 Kohli vs GT</span>
+          </div>
+          <div class="scm-headline">
+            Kohli — Chasing 31 in 10, Only 22% of Teams Get Home From Here
+          </div>
+          <div class="scm-body">
+            <strong>Kohli</strong> at <strong>48(31)</strong>, SR <strong>155</strong>. In IPL 2023-26, teams
+            needing 30+ off the final two overs have won just <strong>22%</strong> of the time.
+          </div>
+          <div class="scm-stats">
+            <div class="scm-stat scm-stat-red">
+              <div class="scm-stat-val">31</div>
+              <div class="scm-stat-lbl">Runs Needed</div>
+            </div>
+            <div class="scm-stat scm-stat-amber">
+              <div class="scm-stat-val">10</div>
+              <div class="scm-stat-lbl">Balls Left</div>
+            </div>
+            <div class="scm-stat scm-stat-green">
+              <div class="scm-stat-val">22%</div>
+              <div class="scm-stat-lbl">Win Rate</div>
+            </div>
+            <div class="scm-stat scm-stat-blue">
+              <div class="scm-stat-val">48*</div>
+              <div class="scm-stat-lbl">Kohli (31)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="what-copy">
+        <div class="what-item reveal">
+          <div class="what-item-title"><span class="what-item-icon">01</span> Live story generation</div>
+          <div class="what-item-desc">200+ specialised generators fire against every ball. Career milestones, chase math, matchup H2H, phase records, dominance moments — each with its own trigger and priority.</div>
+        </div>
+        <div class="what-item reveal">
+          <div class="what-item-title"><span class="what-item-icon">02</span> Pre-match briefings</div>
+          <div class="what-item-desc">30+ card deep-dives auto-generated every morning of a match day. Team DNA, venue records, top-order battles, playoff scenarios — producer-ready.</div>
+        </div>
+        <div class="what-item reveal">
+          <div class="what-item-title"><span class="what-item-icon">03</span> Editorial intelligence</div>
+          <div class="what-item-desc">The Context Engine ranks, deduplicates and rotates so a commentator gets 12 fresh cards — not 40 raw facts. Human-grade editorial judgement, at machine scale.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="samples-header">
+      <div class="section-eyebrow" style="margin-top:60px">Live samples</div>
+      <h2 class="reveal" style="font-size:clamp(32px,4vw,52px)">Real cards, <em>real matches.</em></h2>
+    </div>
+
+    <div class="carousel reveal" id="storyCarousel">
+      <div class="carousel-stage">
+        <div class="carousel-slide"><img src="qrator-assets/sel-01.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-02.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-03.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-04.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-05.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-06.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-07.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-08.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-09.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-10.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-11.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-12.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-13.png" alt="QRATOR live story card"></div>
+        <div class="carousel-slide"><img src="qrator-assets/sel-14.png" alt="QRATOR live story card"></div>
+        <div class="carousel-progress"><div class="carousel-progress-bar" id="carouselProgress"></div></div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-counter"><span class="cur" id="carouselCur">07</span> / 14</div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE BUILT IT -->
+<section class="section build" id="build">
+  <div class="cricket-ball b1"><svg><use href="#cricket-ball-svg"/></svg></div>
+  <div class="cricket-ball b2"><svg><use href="#cricket-ball-svg"/></svg></div>
+
+  <div class="wrap">
+    <div class="section-eyebrow">02 · How we built it</div>
+    <h2 class="reveal">A cricketing brain, <em>we call the Context Engine.</em></h2>
+    <p class="section-sub reveal">
+      At the heart of QRATOR sits our biggest bet — the <strong style="color:var(--accent)">Context Engine</strong>.
+      A cricketing brain that watches every ball, weighs it against a decade of history, and
+      decides in under two seconds which story is worth telling. That judgement, made hundreds
+      of times a match across an entire IPL season, is what turns raw data into broadcast intelligence.
+    </p>
+
+    <div class="build-grid">
+      <div class="neural reveal">
+        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="nodeGrad" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#ffb84a" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#ffb84a" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffb84a" stop-opacity=".6"/>
+              <stop offset="100%" stop-color="#e63946" stop-opacity=".3"/>
+            </linearGradient>
+          </defs>
+          <g stroke="url(#lineGrad)" stroke-width="1" fill="none" opacity=".7">
+            <line x1="250" y1="250" x2="90" y2="90"/>
+            <line x1="250" y1="250" x2="410" y2="90"/>
+            <line x1="250" y1="250" x2="90" y2="410"/>
+            <line x1="250" y1="250" x2="410" y2="410"/>
+            <line x1="250" y1="250" x2="60" y2="250"/>
+            <line x1="250" y1="250" x2="440" y2="250"/>
+            <line x1="250" y1="250" x2="250" y2="60"/>
+            <line x1="250" y1="250" x2="250" y2="440"/>
+            <line x1="90" y1="90" x2="250" y2="60"/>
+            <line x1="410" y1="90" x2="250" y2="60"/>
+            <line x1="90" y1="410" x2="250" y2="440"/>
+            <line x1="410" y1="410" x2="250" y2="440"/>
+            <line x1="90" y1="90" x2="60" y2="250"/>
+            <line x1="90" y1="410" x2="60" y2="250"/>
+            <line x1="410" y1="90" x2="440" y2="250"/>
+            <line x1="410" y1="410" x2="440" y2="250"/>
+          </g>
+          <g>
+            <circle cx="90" cy="90" r="6" fill="#ffb84a"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin="0s"/></circle>
+            <circle cx="410" cy="90" r="6" fill="#ff6b1a"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin=".4s"/></circle>
+            <circle cx="90" cy="410" r="6" fill="#e63946"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin=".8s"/></circle>
+            <circle cx="410" cy="410" r="6" fill="#ffb84a"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin="1.2s"/></circle>
+            <circle cx="60" cy="250" r="5" fill="#ff6b1a"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin=".2s"/></circle>
+            <circle cx="440" cy="250" r="5" fill="#e63946"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin=".6s"/></circle>
+            <circle cx="250" cy="60" r="5" fill="#ffb84a"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin="1s"/></circle>
+            <circle cx="250" cy="440" r="5" fill="#ff6b1a"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite" begin="1.4s"/></circle>
+          </g>
+          <circle cx="250" cy="250" r="60" fill="url(#nodeGrad)" opacity=".6"/>
+          <circle cx="250" cy="250" r="16" fill="#ffb84a">
+            <animate attributeName="r" values="14;22;14" dur="2.4s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;.5;1" dur="2.4s" repeatCount="indefinite"/>
+          </circle>
+          <text x="250" y="325" text-anchor="middle" fill="#8a92a3" font-family="JetBrains Mono" font-size="10" letter-spacing="2">CONTEXT ENGINE</text>
+        </svg>
+      </div>
+
+      <div>
+        <h3 style="font-family:'Albert Sans',sans-serif;font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:16px">The Context Engine</h3>
+        <p style="color:var(--ink-dim);line-height:1.65;font-size:15px">
+          If the generators are QRATOR's voice, the Context Engine is its mind. It continuously
+          classifies every ball across twelve nested dimensions — phase, batter state, bowler
+          state, tournament stakes, historical rarity, matchup type — and decides which stories
+          should even be considered for firing, let alone published.
+        </p>
+        <div class="brain-quote">
+          The engine's real output is not stories.<br>
+          It is <span>editorial judgement at scale.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tribute reveal">
+      <div>
+        <div class="tribute-label">The partnership</div>
+        <h3>Quidich brought the sport. <em>We brought the AI.</em></h3>
+        <p style="color:var(--ink-dim);line-height:1.65;font-size:15px;margin-top:20px;max-width:520px">
+          Over four months of development and three months of live-season operations, our team
+          shipped 300+ system-level improvements based on analyst feedback after every match.
+          QRATOR is now a living reference architecture for real-time sports intelligence.
+        </p>
+      </div>
+      <div class="tribute-facts">
+        <div class="tf"><div class="tf-num">4 mo</div><div class="tf-lbl">Design + build</div></div>
+        <div class="tf"><div class="tf-num">3 mo</div><div class="tf-lbl">Live season ops</div></div>
+        <div class="tf"><div class="tf-num">300+</div><div class="tf-lbl">Fixes shipped in-season</div></div>
+        <div class="tf"><div class="tf-num">0</div><div class="tf-lbl">Match-day outages</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <img src="qrator-assets/neosentience-logo.png" alt="Neosentience" class="flogo">
+      <span class="fmeta">AI product studio · India</span>
+      <span class="fmeta"><a href="mailto:soham@neosentience.in">soham@neosentience.in</a> · +91 99679 60018</span>
+      <span class="fmeta">© 2026 Neosentience Technologies Pvt Ltd.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Reveal on scroll
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Story carousel — auto-advancing, coverflow-style
+(function(){
+  const carousel = document.getElementById('storyCarousel');
+  if (!carousel) return;
+  const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+  const dotsWrap = document.getElementById('carouselDots');
+  const counter = document.getElementById('carouselCur');
+  const progressBar = document.getElementById('carouselProgress');
+  const N = slides.length;
+  let idx = 6; // Start on sel-07 (Ayush Mhatre — Explosive Shot)
+  const AUTO_MS = 12000;
+  let timer = null, progressTimer = null, progress = 0;
+
+  // Build dots
+  slides.forEach((_, i)=>{
+    const b = document.createElement('button');
+    b.className = 'carousel-dot';
+    b.setAttribute('aria-label', `Go to slide ${i+1}`);
+    b.addEventListener('click', ()=>{ goTo(i); restart(); });
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function position(i){
+    const diff = ((i - idx) % N + N) % N;
+    if (diff === 0) return 'pos-center';
+    if (diff === 1) return 'pos-next';
+    if (diff === N-1) return 'pos-prev';
+    if (diff === 2) return 'pos-far-next';
+    if (diff === N-2) return 'pos-far-prev';
+    // Beyond visible range — treat as far
+    return diff < N/2 ? 'pos-far-next' : 'pos-far-prev';
+  }
+
+  function render(){
+    slides.forEach((s, i)=>{
+      s.className = 'carousel-slide ' + position(i);
+    });
+    dots.forEach((d, i)=> d.classList.toggle('active', i === idx));
+    counter.textContent = String(idx+1).padStart(2,'0');
+  }
+
+  function goTo(i){ idx = (i + N) % N; render(); }
+  function next(){ goTo(idx + 1); }
+
+  function startProgress(){
+    progress = 0; progressBar.style.width = '0%';
+    const step = 50;
+    progressTimer = setInterval(()=>{
+      progress += (step / AUTO_MS) * 100;
+      progressBar.style.width = Math.min(progress, 100) + '%';
+    }, step);
+  }
+  function stopProgress(){ if (progressTimer) clearInterval(progressTimer); progressBar.style.width='0%'; progress=0; }
+
+  function start(){
+    stop();
+    startProgress();
+    timer = setInterval(()=>{ next(); stopProgress(); startProgress(); }, AUTO_MS);
+  }
+  function stop(){ if (timer) clearInterval(timer); stopProgress(); }
+  function restart(){ stop(); start(); }
+
+  // Click side slides to navigate
+  slides.forEach((s, i)=>{
+    s.addEventListener('click', ()=>{
+      if (s.classList.contains('pos-next')) goTo(idx+1);
+      else if (s.classList.contains('pos-prev')) goTo(idx-1);
+      restart();
+    });
+  });
+
+  // Pause on hover
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+
+  // Kick off when in view
+  const cio = new IntersectionObserver((entries)=>{
+    entries.forEach(e => {
+      if (e.isIntersecting) start();
+      else stop();
+    });
+  },{threshold:.2});
+  cio.observe(carousel);
+
+  render();
+})();
+</script>
+<script>(function(){var m=document.getElementById('menu'),t=document.getElementById('menu-toggle');if(!m||!t)return;t.addEventListener('click',function(e){e.stopPropagation();var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});document.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false')});document.addEventListener('keydown',function(e){if(e.key==='Escape'){m.classList.remove('open');t.setAttribute('aria-expanded','false')}})})();</script>
+<script>
+/* House rule: a serif-italic accent either shares one line with the sans, or
+   starts its own line. It never breaks mid-phrase. Measured, not guessed:
+   set inline, see if the heading still fits one line, otherwise block. */
+(function(){
+  function fit(){
+    document.querySelectorAll('h1 em,h2 em,h3 em').forEach(function(em){
+      var h=em.parentElement; em.style.display='inline';
+      var fs=parseFloat(getComputedStyle(h).fontSize);
+      var one=h.getBoundingClientRect().height<=fs*1.45;
+      em.style.display=one?'inline':'block';
+    });
+  }
+  fit(); addEventListener('resize',fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>

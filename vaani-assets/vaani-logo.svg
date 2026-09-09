@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -24 468 226" width="468" height="226"
+     role="img" aria-label="VAANI Studio">
+  <title>VAANI Studio</title>
+
+  <defs>
+    <linearGradient id="vaaniGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="420" y2="0">
+      <stop offset="0"   stop-color="#a855f7"/>
+      <stop offset="0.55" stop-color="#8f6ae0"/>
+      <stop offset="1"   stop-color="#e0b34a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ── VAANI ──
+       Every glyph is straight-line geometry: cap height 100, one shared
+       baseline at y=100, uniform 13-unit stroke. Drawn as paths rather than
+       type, so the file carries no font dependency. -->
+  <g fill="none" stroke="url(#vaaniGrad)" stroke-width="13"
+     stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="8">
+
+    <!-- V -->
+    <path d="M 0,0 L 36,100 L 72,0"/>
+
+    <!-- A -->
+    <path d="M 106,100 L 142,0 L 178,100"/>
+    <path d="M 116.8,70 L 167.2,70"/>
+
+    <!-- A -->
+    <path d="M 212,100 L 248,0 L 284,100"/>
+    <path d="M 222.8,70 L 273.2,70"/>
+
+    <!-- N -->
+    <path d="M 318,100 L 318,0 L 386,100 L 386,0"/>
+
+    <!-- I -->
+    <path d="M 420,0 L 420,100"/>
+  </g>
+
+  <!-- ── STUDIO ──
+       Cap height 28, 3.6-unit stroke, wide tracking, optically centred
+       beneath the wordmark. -->
+  <g fill="none" stroke="#e0b34a" stroke-width="3.6"
+     stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+
+    <!-- S -->
+    <path d="M 124,156 C 124,152 121,150 117,150 C 113,150 110,152 110,156
+             C 110,160 113,162 117,164 C 121,166 124,168 124,172
+             C 124,176 121,178 117,178 C 113,178 110,176 110,172"/>
+    <!-- T -->
+    <path d="M 148,150 L 168,150 M 158,150 L 158,178"/>
+    <!-- U -->
+    <path d="M 190,150 L 190,169 A 9,9 0 0 0 208,169 L 208,150"/>
+    <!-- D -->
+    <path d="M 230,178 L 230,150 L 236,150 C 243,150 248,156 248,164
+             C 248,172 243,178 236,178 Z"/>
+    <!-- I -->
+    <path d="M 270,150 L 270,178"/>
+    <!-- O -->
+    <ellipse cx="302" cy="164" rx="10" ry="14"/>
+  </g>
+</svg>
