@@ -428,16 +428,16 @@ footer .fmeta a:hover{color:#fff}
 <!-- SCRIPTURE FEATURES -->
 <section class="blk" id="scripture">
   <div class="wrap">
-    <div class="eyebrow reveal">Built for discourse &middot; In development</div>
+    <div class="eyebrow reveal">Built for discourse</div>
     <h2 class="reveal">Built for scripture, <em>not just speech.</em></h2>
     <p class="lead reveal">
-      A machine dub treats a Gita verse like any other sentence. Two features now in development
-      make sure Dub Anant never does.
+      A machine dub treats a Gita verse like any other sentence. Two features make sure
+      Dub Anant never does.
     </p>
 
     <div class="feats reveal">
       <article class="feat">
-        <div class="feat-head"><span class="feat-num">01</span><span class="feat-tag">Sloka Lock</span><span class="feat-pill">In development</span></div>
+        <div class="feat-head"><span class="feat-num">01</span><span class="feat-tag">Sloka Lock</span></div>
         <h3>The verse stays in the guru&rsquo;s own voice.</h3>
         <p>Every discourse carries Sanskrit slokas, mantras and bhajans that must never be translated or re-voiced. A machine dub of <b>&ldquo;Om Namah Shivaya&rdquo;</b> into Hindi is not a translation, it is a mistake. Sloka Lock detects chanted Sanskrit from its metrical cadence, our glossary and transliteration matching, leaves the original audio untouched across those spans, and renders the meaning as an on-screen subtitle instead. The recitation survives the dub verbatim.</p>
         <div class="feat-demo" aria-hidden="true">
@@ -451,7 +451,7 @@ footer .fmeta a:hover{color:#fff}
       </article>
 
       <article class="feat">
-        <div class="feat-head"><span class="feat-num">02</span><span class="feat-tag">Shastra Dictionary</span><span class="feat-pill">In development</span></div>
+        <div class="feat-head"><span class="feat-num">02</span><span class="feat-tag">Shastra Dictionary</span></div>
         <h3>Thousands of canonical renderings, in the box.</h3>
         <p>Other tools hand you a blank prompt box. We ship the dictionary: deity names, Vedantic terms, text names and honorifics, curated per language and reviewed by scholars. It is tradition-aware, with Advaita and Vaishnava registers, and carries a reverent-register toggle: Sanskritised Hindi over Hindustani, <b>aap, never tum</b>.</p>
         <div class="feat-demo" aria-hidden="true">
@@ -585,6 +585,15 @@ footer .fmeta a:hover{color:#fff}
 
 
 
+<script>
+/* scroll reveal */
+(function(){
+  const els=[...document.querySelectorAll('.reveal')];
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  els.forEach(el=>io.observe(el));
+})();
+</script>
 <script>(function(){var m=document.getElementById('menu'),t=document.getElementById('menu-toggle');if(!m||!t)return;t.addEventListener('click',function(e){e.stopPropagation();var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});document.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false')});document.addEventListener('keydown',function(e){if(e.key==='Escape'){m.classList.remove('open');t.setAttribute('aria-expanded','false')}})})();</script>
 <script>
 /* House rule: a serif-italic accent either shares one line with the sans, or
