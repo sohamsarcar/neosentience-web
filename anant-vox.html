@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+<meta name="description" content="ANANT VOX dubs long-form video into Indian languages in the speaker’s own cloned voice, then re-animates their lips to match.">
+<!-- social preview -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Neosentience">
+<meta property="og:title" content="ANANT VOX — Dubbing built for Indian languages">
+<meta property="og:description" content="ANANT VOX dubs long-form video into Indian languages in the speaker’s own cloned voice, then re-animates their lips to match.">
+<meta property="og:url" content="https://neosentience.in/anant-vox.html">
+<meta property="og:image" content="https://neosentience.in/wall-assets/og-anant-vox.jpg">
+<meta property="og:image:secure_url" content="https://neosentience.in/wall-assets/og-anant-vox.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ANANT VOX — Dubbing built for Indian languages">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ANANT VOX — Dubbing built for Indian languages">
+<meta name="twitter:description" content="ANANT VOX dubs long-form video into Indian languages in the speaker’s own cloned voice, then re-animates their lips to match.">
+<meta name="twitter:image" content="https://neosentience.in/wall-assets/og-anant-vox.jpg">
+<title>ANANT VOX — Dubbing built for Indian languages</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#06050a;
+  --panel:#100d18;
+  --ink:#ece8f4;
+  --ink-dim:#948aa8;
+  --ink-faint:#7f7397;
+  --line:rgba(255,255,255,.09);
+
+  --violet:#a855f7;
+  --gold:#e0b34a;
+  --green:#3ee089;
+  --cyan:#22d3ee;
+  --grad:linear-gradient(120deg,#a855f7,#8f6ae0,#e0b34a);
+  /* ── structural rhythm (shared across every Neosentience page) ── */
+  --wrap:1240px;
+  --sp-section:64px;   /* symmetric: 128px between sections, no inline collapses */
+  --sp-block:48px;     /* heading → first grid/panel inside a section */
+  --nav-h:57px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--ink);
+  font-family:'Albert Sans',-apple-system,sans-serif;font-weight:300;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{background-image:
+  radial-gradient(ellipse 1100px 700px at 50% -220px,rgba(168,85,247,.13),transparent 62%),
+  radial-gradient(ellipse 900px 600px at 100% 800px,rgba(34,211,238,.06),transparent 62%);}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 32px;display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg,rgba(5,6,8,.95),rgba(5,6,8,.4));
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{height:20px;width:auto;opacity:.92;display:block}
+.nav-meta{white-space:nowrap;font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.2em;
+  text-transform:uppercase;font-weight:600;color:var(--violet)}
+
+/* HERO */
+.hero{padding:150px 32px 30px;text-align:center}
+.hero-logo{width:440px;max-width:86%;height:auto;margin:0 auto 30px}
+.pill{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.32);
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--violet);font-weight:600}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--violet);
+  box-shadow:0 0 10px var(--violet);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+
+h1{font-family:'Albert Sans',sans-serif;font-weight:800;
+  font-size:clamp(40px,6vw,82px);letter-spacing:-.034em;line-height:1.04;
+  /* 16ch left the roman clause 17px short of fitting once the .2em side
+     padding is taken off — the measure is on the content box, not clientWidth */
+  max-width:17.5ch;margin:0 auto;padding:0 .2em .1em}
+h1 em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  /* block so the italic clause always starts its own line instead of breaking
+     mid-phrase after whichever word happens to hit the 16ch wrap point */
+  display:block;
+  letter-spacing:-.005em;padding:0 .16em;
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{margin:26px auto 0;font-size:clamp(15px,1.3vw,18px);line-height:1.65;
+  color:var(--ink-dim);max-width:640px}
+.hero-sub strong{color:var(--ink);font-weight:500}
+.devanagari{font-size:clamp(17px,1.6vw,21px);color:var(--gold);margin-top:22px;
+  font-weight:400;letter-spacing:.01em}
+
+/* SECTIONS */
+section.blk{padding:var(--sp-section) 0}
+section.blk > .wrap > .eyebrow,
+section.blk > .wrap > h2,
+section.blk > .wrap > .lead{text-align:center;margin-left:auto;margin-right:auto}
+.eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--violet);font-weight:600;margin-bottom:14px}
+h2{font-family:'Albert Sans',sans-serif;font-weight:700;
+  font-size:clamp(28px,3.5vw,46px);letter-spacing:-.026em;line-height:1.1;max-width:22ch;
+  padding-bottom:.06em}
+h2 em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
+  /* block so the italic clause always starts its own line instead of breaking
+     mid-phrase after whichever word happens to hit the 22ch wrap point */
+  display:block;
+  padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin-top:16px;font-size:15.5px;color:var(--ink-dim);max-width:680px;line-height:1.65}
+
+/* ── ACHARYA BAND ── */
+.band{position:relative;margin:34px 0 0;line-height:0}
+.band img{display:block;width:100%;height:auto}
+/* the render already falls off to near-black at every edge; this overlay
+   dissolves the remaining hard rectangle into the page ground. done with a
+   background overlay rather than mask-composite, which degrades badly when
+   the intersect keyword is unsupported. */
+.band::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to right,var(--bg) 0,rgba(6,5,10,0) 17%,rgba(6,5,10,0) 83%,var(--bg) 100%),
+    linear-gradient(to bottom,var(--bg) 0,rgba(6,5,10,0) 15%,rgba(6,5,10,0) 76%,var(--bg) 100%)}
+
+/* ── REVIEW DESK ── */
+.desk{margin:46px auto 0;max-width:1000px;
+  border:1px solid var(--line);border-radius:26px;overflow:hidden;
+  background:linear-gradient(180deg,var(--panel),#0a0810);
+  box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.desk-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:15px 22px;border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.02);flex-wrap:wrap}
+.desk-title{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-faint)}
+.desk-count{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:600;color:var(--violet)}
+.desk-body{padding:8px 0}
+
+.seg{display:grid;grid-template-columns:64px 1fr 1fr 128px;gap:18px;align-items:center;
+  padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.05);transition:background .3s}
+.seg:last-child{border-bottom:none}
+.seg.ok{background:rgba(62,224,137,.045)}
+.seg-t{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-faint);
+  letter-spacing:.04em}
+.seg-src{font-size:15px;line-height:1.5;color:var(--ink)}
+.seg-tgt{font-size:14px;line-height:1.5;color:var(--ink-dim);
+  padding:9px 12px;border-radius:9px;border:1px dashed rgba(255,255,255,.12);
+  background:rgba(255,255,255,.02)}
+.seg.ok .seg-tgt{border-style:solid;border-color:rgba(62,224,137,.3);color:var(--ink)}
+.ok-btn{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:600;cursor:pointer;user-select:none;
+  padding:10px 14px;border-radius:999px;text-align:center;
+  border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink-dim);
+  transition:all .25s}
+.ok-btn:hover{border-color:rgba(62,224,137,.5);color:var(--ink)}
+.ok-btn.on{background:rgba(62,224,137,.16);border-color:rgba(62,224,137,.5);
+  color:var(--green)}
+.ok-btn.on::before{content:'✓ ';font-weight:700}
+
+.gate{padding:24px 22px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  background:rgba(255,255,255,.015)}
+.gate-msg{font-size:13.5px;color:var(--ink-dim);flex:1;min-width:240px}
+.gate-msg b{color:var(--gold);font-weight:600}
+.gate-btn{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;padding:14px 24px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--ink-faint);
+  cursor:not-allowed;transition:all .4s;white-space:nowrap}
+.gate-btn.open{background:var(--green);border-color:var(--green);color:#04170d;
+  cursor:pointer;box-shadow:0 8px 30px rgba(62,224,137,.3)}
+.desk-note{margin-top:16px;text-align:center;font-size:11.5px;
+  color:var(--ink-faint);font-style:italic}
+
+/* ── PIPELINE ── */
+.pipe{margin-top:46px;display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.ps{padding:18px 12px;border-radius:18px;border:1px solid var(--line);
+  background:linear-gradient(180deg,var(--panel),rgba(10,8,16,.7));text-align:center;
+  transition:all .3s}
+.ps:hover{border-color:rgba(168,85,247,.35);transform:translateY(-2px)}
+.ps.gatestep{border-color:rgba(224,179,74,.45);background:rgba(224,179,74,.07)}
+.ps-n{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;
+  color:var(--ink-faint);margin-bottom:9px;font-weight:600}
+.ps.gatestep .ps-n{color:var(--gold)}
+.ps-h{font-size:12.5px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.ps.gatestep .ps-h{color:var(--gold)}
+
+/* ── DIFFERENTIATORS ── */
+.diffs{margin-top:46px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.diff{padding:26px 24px;border-radius:22px;border:1px solid var(--line);
+  background:rgba(255,255,255,.018);transition:all .3s}
+.diff:hover{border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.04)}
+.diff-t{font-family:'Albert Sans',system-ui,sans-serif;font-size:13px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:14px}
+.diff h4{font-size:17px;font-weight:600;letter-spacing:-.012em;margin-bottom:8px}
+.diff p{font-size:13.5px;color:var(--ink-dim);line-height:1.6}
+.diff p b{color:var(--ink);font-weight:500}
+
+/* ── LANGUAGES ── */
+.langs{margin-top:38px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.lang{padding:11px 18px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.03);font-size:14px;color:var(--ink-dim);
+  transition:all .3s}
+.lang:hover{border-color:rgba(224,179,74,.45);color:var(--ink);background:rgba(224,179,74,.07)}
+.lang span{color:var(--gold);margin-right:8px}
+
+.lang.live{border-color:rgba(224,179,74,.42);background:rgba(224,179,74,.08);color:var(--ink)}
+.foreign{margin:38px auto 0;max-width:720px;padding:24px 28px;border-radius:22px;
+  border:1px solid var(--line);background:rgba(255,255,255,.02);text-align:center}
+.foreign-h{font-family:'Albert Sans',system-ui,sans-serif;font-size:13px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:12px}
+.foreign p{font-size:14px;line-height:1.65;color:var(--ink-dim)}
+.foreign p b{color:var(--ink);font-weight:500}
+
+/* close */
+.cta{padding:var(--sp-section) 0;text-align:center;border-top:1px solid var(--line);
+  background:radial-gradient(ellipse 700px 340px at 50% 40%,rgba(168,85,247,.09),transparent 70%)}
+.cta h2{margin:0 auto 20px}
+.cta p{font-size:15px;color:var(--ink-dim);max-width:540px;margin:0 auto 30px}
+.btn{display:inline-flex;align-items:center;gap:11px;padding:15px 30px;border-radius:999px;
+  background:var(--violet);color:#12031f;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;
+  transition:transform .3s,box-shadow .3s;box-shadow:0 8px 30px rgba(168,85,247,.3)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 42px rgba(168,85,247,.45)}
+
+footer{padding:44px 0 56px;border-top:1px solid var(--line)}
+.frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.flogo{height:22px;width:auto;opacity:.85}
+.fmark{height:20px;width:auto;opacity:.75}
+.fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint);font-weight:600}
+.fmeta a{transition:color .2s}
+.fmeta a:hover{color:var(--ink)}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  /* a 2.36:1 band at phone width collapses to a ~160px letterbox and the
+     subject all but disappears — crop in instead of scaling down */
+  .band img{height:300px;object-fit:cover;object-position:50% 50%}
+  .pipe{grid-template-columns:repeat(2,1fr)}
+  .diffs{grid-template-columns:1fr}
+  .seg{grid-template-columns:1fr;gap:10px}
+  .seg-t{order:-1}
+}
+@media (max-width:560px){
+  :root{--sp-section:44px;--sp-block:36px}
+  .wrap{padding:0 20px}
+  nav{padding:14px 20px}
+  .nav-meta,.nav-cta{letter-spacing:.12em}
+  .hero{padding-top:115px}
+  .band img{height:250px}
+  .pipe{grid-template-columns:1fr}
+}
+
+/* ── MOTION PREFERENCE ──────────────────────────────────────────────────────
+   Every page here animates on scroll. Under prefers-reduced-motion the whole
+   page must still arrive in its final readable state, so reveals are forced
+   visible rather than left at opacity:0 waiting on an animation that will
+   never run. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+}
+
+/* ── FOCUS ──────────────────────────────────────────────────────────────────
+   Keyboard focus needs a visible indicator on every operable control. */
+:focus-visible{
+  outline:2px solid var(--violet);
+  /* deliberately no border-radius here — the outline already follows the
+     element's own radius, and setting one flattens pill buttons to 4px */
+  outline-offset:3px;
+}
+
+/* ═════════ HOUSE LAYER — shared with the homepage: type, nav, buttons, labels ═════════ */
+:root{--acc:var(--violet);--acc-ink:#12031f;--c-digisapien:#3ee089;--c-nyaya:#4a6cff;--c-chatdj:#ff3d81;--c-anantvox:#a855f7;--c-qrator:#ffb84a;--c-magiq:#00d4ff;--h-ease:cubic-bezier(.16,1,.3,1)}
+html,body{font-family:'Albert Sans',system-ui,sans-serif;font-weight:300}
+h1,h2,h3,h4{font-family:'Albert Sans',system-ui,sans-serif}
+h1 em,h2 em,.hero h1 em,.hero-title em,h2.section-title em,.tech-name em,.section h2 em,.cta h2 em,.stat-num,.deg-n,.a-n,.market-headline strong,.market-quote-body strong{
+  background:none!important;-webkit-background-clip:initial!important;background-clip:initial!important;-webkit-text-fill-color:initial;color:var(--acc)!important}
+.hero h1 em::after{display:none}
+/* section headings share the homepage scale; only the hero h1 is larger */
+h2,.section h2,.head h2,.cta h2{font-size:clamp(30px,3.4vw,46px)!important;line-height:1.05!important;letter-spacing:-.025em!important}
+/* house footer, identical on every page */
+footer{padding:46px 0 60px!important;border-top:0!important;background:none!important}
+footer .frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding-top:26px;border-top:1px solid rgba(255,255,255,.12)}
+footer .flogo{height:20px;width:auto;opacity:.85}
+footer .fmeta{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+footer .fmeta a:hover{color:#fff}
+/* section rhythm: the closing CTA sat 200px+ below the last section */
+.cta{padding-top:44px!important}
+/* top bar */
+.topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
+.topbar .brand{display:flex;align-items:center;gap:22px}
+.topbar .brand img{height:32px;width:auto;opacity:.95;display:block}
+/* the page's own nav{} element rule (fixed, full-width) must not reach the pill */
+.pillnav{position:static;top:auto;left:auto;right:auto;z-index:auto;justify-content:flex-start;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none;
+  display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.pillnav a{padding:10px 20px;border-radius:999px;font-weight:500;font-size:14px;color:rgba(255,255,255,.72);transition:color .3s var(--h-ease),background .3s var(--h-ease)}
+.pillnav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.menu{position:relative}
+.menu-btn{display:flex;align-items:center;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;color:inherit;font:inherit}
+.menu-btn span{padding:14px 22px;font-weight:500;font-size:14px;color:rgba(255,255,255,.75)}
+.menu-btn span+span{border-left:1px solid rgba(255,255,255,.12);padding:14px 16px;letter-spacing:.2em;color:#fff}
+.menu-list{position:absolute;right:0;top:calc(100% + 10px);min-width:260px;padding:10px;border-radius:20px;background:rgba(6,8,10,.94);border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(16px);display:none;flex-direction:column;gap:2px;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+.menu.open .menu-list{display:flex}
+.menu-list a{--c:var(--acc);display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:rgba(255,255,255,.75)}
+.menu-list a:hover,.menu-list a[aria-current]{background:rgba(255,255,255,.06);color:#fff}
+.menu-list a i{width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.menu-list .sep{height:1px;background:rgba(255,255,255,.1);margin:6px 8px}
+/* hero kicker: the homepage tag style, in the page accent */
+.pill{font-family:'Syncopate',sans-serif!important;font-weight:700!important;font-size:12px!important;letter-spacing:.3em!important;text-transform:uppercase!important;
+  color:var(--acc)!important;background:none!important;border:0!important;padding:0!important;border-radius:0!important;backdrop-filter:none!important}
+.pill .dot,.pill .hero-dot,.pill .hero-tag-dot,.pill span.dot{display:none!important}
+.pill::before,.pill::after,.pill > span:empty,.pill > i{display:none!important}
+/* primary buttons: the homepage pill, in the page accent */
+.btn,.cta-btn,.gate-btn.open{display:inline-flex;align-items:center;gap:14px;height:58px;padding:0 28px;border-radius:999px;
+  font-family:'Albert Sans',system-ui,sans-serif;font-size:16px;font-weight:600;letter-spacing:0;text-transform:none;
+  background:var(--acc);border:1px solid var(--acc);color:var(--acc-ink);box-shadow:none;transition:transform .35s var(--h-ease),box-shadow .35s var(--h-ease),filter .35s var(--h-ease)}
+.btn:hover,.cta-btn:hover,.gate-btn.open:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(0,0,0,.7);filter:brightness(1.08)}
+/* footer meta */
+.fmeta,.footer-inner,.foot-copy,.footer-contact{font-family:'Albert Sans',system-ui,sans-serif;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:680px){
+  .topbar{padding:18px 18px}
+  .pillnav a:not(:first-child){display:none}
+  .menu-btn span:first-child{display:none}
+  .topbar{gap:12px}
+  .topbar .brand{gap:12px}
+  .topbar .brand>a{flex:none;display:flex}
+  .topbar .brand img{height:18px;width:auto;max-width:none;flex:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand"><a href="neosentience.html" aria-label="Neosentience"><img src="qrator-assets/neosentience-logo.png" alt="Neosentience"></a>
+    <nav class="pillnav" aria-label="Primary">
+      <a href="neosentience.html">Home</a><a href="neosentience.html#products">Products</a><a href="neosentience.html#consulting">Consulting</a><a href="neosentience.html#contact">Contact</a>
+    </nav></div>
+  <div class="menu" id="menu">
+    <button class="menu-btn" aria-expanded="false" aria-controls="menu-list" id="menu-toggle"><span>Menu</span><span aria-hidden="true">••</span></button>
+    <div class="menu-list" id="menu-list" role="menu">
+        <a role="menuitem" style="--c:var(--c-digisapien)" href="digisapien.html"><i></i>DigiSapien</a>
+        <a role="menuitem" style="--c:var(--c-nyaya)" href="nyaya-sahayak.html"><i></i>Nyaya Sahayak</a>
+        <a role="menuitem" style="--c:var(--c-chatdj)" href="chat-dj.html"><i></i>Chat DJ</a>
+        <a role="menuitem" style="--c:var(--c-anantvox)" href="anant-vox.html" aria-current="page"><i></i>ANANT VOX</a>
+        <div class="sep"></div>
+        <a role="menuitem" style="--c:var(--c-qrator)" href="qrator.html"><i></i>QRATOR</a>
+        <a role="menuitem" style="--c:var(--c-magiq)" href="magiq-360.html"><i></i>Magiq 360</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="anantvox-assets/anantvox-logo.svg" alt="ANANT VOX" class="hero-logo">
+
+  <div class="pill"><span class="dot"></span>Dubbing &middot; Voice cloning &middot; Lip sync</div>
+
+  <h1>The language changes. <em>So do the lips.</em></h1>
+
+  <p class="hero-sub">
+    <strong>ANANT VOX</strong> dubs long-form video into Indian languages in the speaker's own
+    cloned voice, then re-animates their lips to match. Every translated sentence passes a
+    human review gate first — because for scripture, law and teaching, an approximate
+    translation is worse than none.
+  </p>
+
+  <div class="devanagari">भारत की भाषाओं के लिए बना</div>
+</section>
+
+<!-- ACHARYA -->
+<figure class="band">
+  <img src="anantvox-assets/acharya.jpg"
+       alt="An acharya mid-discourse, seated before a small audience"
+       width="2400" height="1018" loading="lazy" decoding="async">
+</figure>
+
+<!-- REVIEW GATE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="eyebrow reveal">The review gate</div>
+    <h2 class="reveal">The feature <em>nobody else has.</em></h2>
+    <p class="lead reveal">
+      Every other dubbing tool voices whatever the model produced. ANANT VOX stops, and waits.
+      An acharya, a professor, an editor reads every segment beside its original and approves
+      it — or rewrites it. Voicing cannot begin until the last one is blessed. Try it below.
+    </p>
+
+    <div class="desk reveal">
+      <div class="desk-bar">
+        <div class="desk-title">Review desk &middot; Hindi &rarr; English &middot; 4 segments</div>
+        <div class="desk-count" id="count">0 of 4 approved</div>
+      </div>
+
+      <div class="desk-body" id="segs">
+        <div class="seg" data-i="0">
+          <div class="seg-t">00:12</div>
+          <div class="seg-src">आज हम गीता के दूसरे अध्याय पर विचार करेंगे।</div>
+          <div class="seg-tgt">Today we will reflect on the second chapter of the Gita.</div>
+          <div class="ok-btn">Approve</div>
+        </div>
+        <div class="seg" data-i="1">
+          <div class="seg-t">00:19</div>
+          <div class="seg-src">आत्मा न जन्म लेती है, न मरती है।</div>
+          <div class="seg-tgt">The soul is neither born, nor does it die.</div>
+          <div class="ok-btn">Approve</div>
+        </div>
+        <div class="seg" data-i="2">
+          <div class="seg-t">00:26</div>
+          <div class="seg-src">यह ज्ञान ही मुक्ति का मार्ग है।</div>
+          <div class="seg-tgt">This knowledge alone is the path to liberation.</div>
+          <div class="ok-btn">Approve</div>
+        </div>
+        <div class="seg" data-i="3">
+          <div class="seg-t">00:33</div>
+          <div class="seg-src">अब हम अगले श्लोक की ओर बढ़ते हैं।</div>
+          <div class="seg-tgt">Now let us move to the next verse.</div>
+          <div class="ok-btn">Approve</div>
+        </div>
+      </div>
+
+      <div class="gate">
+        <div class="gate-msg" id="gatemsg">
+          <b>Gate closed.</b> Voicing is locked until every segment is approved.
+        </div>
+        <div class="gate-btn" id="gatebtn">Continue &rarr; voice &amp; assemble</div>
+      </div>
+    </div>
+
+    <div class="desk-note">
+      Edit any segment and its approval resets — and any audio already voiced for it is invalidated.
+    </div>
+  </div>
+</section>
+
+<!-- PIPELINE -->
+<section class="blk">
+  <div class="wrap">
+    <div class="eyebrow reveal">The pipeline</div>
+    <h2 class="reveal">Seven stages. <em>One of them is a person.</em></h2>
+
+    <div class="pipe reveal">
+      <div class="ps"><div class="ps-n">01</div><div class="ps-h">Extract audio</div></div>
+      <div class="ps"><div class="ps-n">02</div><div class="ps-h">Transcribe</div></div>
+      <div class="ps"><div class="ps-n">03</div><div class="ps-h">Translate</div></div>
+      <div class="ps gatestep"><div class="ps-n">04 · Gate</div><div class="ps-h">Human review</div></div>
+      <div class="ps"><div class="ps-n">05</div><div class="ps-h">Voice &mdash; cloned</div></div>
+      <div class="ps"><div class="ps-n">06</div><div class="ps-h">Assemble</div></div>
+      <div class="ps"><div class="ps-n">07</div><div class="ps-h">Lip sync</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENTIATORS -->
+<section class="blk">
+  <div class="wrap">
+    <div class="eyebrow reveal">Why it exists</div>
+    <h2 class="reveal">Built for the work <em>everyone else skipped.</em></h2>
+
+    <div class="diffs reveal">
+      <div class="diff">
+        <div class="diff-t">Long form</div>
+        <h4>Hours, not clips</h4>
+        <p>Engineered for <b>25-hour course libraries</b> — resumable, per-segment, and re-voicing only what changed. The clip-oriented tools cap out at 26 minutes or drift after 90 seconds.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-t">Their own voice</div>
+        <h4>The speaker, in another language</h4>
+        <p>A cloned voice carries the teacher's own timbre into the target language, so a congregation still hears <b>the person they know</b> — not a stock narrator.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-t">Glossary</div>
+        <h4>Sacred terms stay fixed</h4>
+        <p>Deity names and doctrinal vocabulary are pinned to agreed renderings and enforced on every translation request, so terminology <b>never drifts between episodes</b>.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-t">Indic-first</div>
+        <h4>Tuned for how Indian speech expands</h4>
+        <p>Danda-aware segmentation and silence-borrowing calibrated to Indic expansion ratios. When a line runs long, it is automatically re-tightened to fit its slot — or flagged for a human.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-t">Ownership</div>
+        <h4>It can stay in the building</h4>
+        <p>Available as a self-hosted studio edition, where the voice model and the content <b>never leave the organisation</b> — the thing no cloud-only competitor can offer.</p>
+      </div>
+      <div class="diff">
+        <div class="diff-t">Honest pricing</div>
+        <h4>The cost, before you run it</h4>
+        <p>Per-minute cost shown on screen before a job starts, including the lip-sync estimate — chunks, speech seconds and vendor cost. <b>No credit obfuscation.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="blk">
+  <div class="wrap">
+    <div class="eyebrow reveal">Languages</div>
+    <h2 class="reveal">The ones that <em>actually get spoken.</em></h2>
+
+    <div class="langs reveal">
+      <div class="lang live"><span>हि</span>Hindi</div>
+      <div class="lang live"><span>த</span>Tamil</div>
+      <div class="lang live"><span>తె</span>Telugu</div>
+      <div class="lang live"><span>ಕ</span>Kannada</div>
+      <div class="lang live"><span>മ</span>Malayalam</div>
+      <div class="lang live"><span>En</span>English</div>
+      <div class="lang live"><span>বা</span>Bengali</div>
+      <div class="lang live"><span>म</span>Marathi</div>
+      <div class="lang live"><span>ગુ</span>Gujarati</div>
+      <div class="lang live"><span>ਪੰ</span>Punjabi</div>
+      <div class="lang live"><span>ଓ</span>Odia</div>
+      <div class="lang live"><span>اُر</span>Urdu</div>
+      <div class="lang live"><span>অ</span>Assamese</div>
+    </div>
+
+
+    <div class="foreign">
+      <div class="foreign-h">And beyond India</div>
+      <p>
+        The pipeline is not Indic-only — translation and voice cloning both work across
+        European and East Asian languages, so the same sermon, lecture or session can cross
+        into <b>English, Spanish, French, German, Portuguese, Arabic, Indonesian</b> and more.
+        The review gate works identically whichever language it is going into.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="cta">
+  <div class="wrap">
+    <h2 class="reveal">A translation someone <em>put their name to.</em></h2>
+    <p class="reveal">
+      ANANT VOX is a Neosentience product, built for institutions where getting the words
+      right matters more than getting them fast.
+    </p>
+    <a class="btn reveal" href="mailto:soham@neosentience.in">Talk to us &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <img src="qrator-assets/neosentience-logo.png" alt="Neosentience" class="flogo">
+      <span class="fmeta">AI product studio · India</span>
+      <span class="fmeta"><a href="mailto:soham@neosentience.in">soham@neosentience.in</a> · +91 99679 60018</span>
+      <span class="fmeta">© 2026 Neosentience Technologies Pvt Ltd.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── REVIEW GATE ──
+   The gate is the product's differentiator, so the demo enforces it literally:
+   the continue button cannot open until every segment is approved. */
+(function(){
+  const segs = [...document.querySelectorAll('.seg')];
+  const countEl = document.getElementById('count');
+  const btn = document.getElementById('gatebtn');
+  const msg = document.getElementById('gatemsg');
+  const total = segs.length;
+
+  function refresh(){
+    const done = segs.filter(s => s.classList.contains('ok')).length;
+    countEl.textContent = done + ' of ' + total + ' approved';
+    const open = done === total;
+    btn.classList.toggle('open', open);
+    msg.innerHTML = open
+      ? '<b>Gate open.</b> Every segment has been approved — voicing can begin.'
+      : '<b>Gate closed.</b> Voicing is locked until every segment is approved.';
+  }
+
+  segs.forEach(seg => {
+    const b = seg.querySelector('.ok-btn');
+    b.addEventListener('click', () => {
+      const on = seg.classList.toggle('ok');
+      b.classList.toggle('on', on);
+      b.textContent = on ? 'Approved' : 'Approve';
+      refresh();
+    });
+  });
+
+  btn.addEventListener('click', () => {
+    if(!btn.classList.contains('open')) return;
+    btn.textContent = 'Voicing…';
+    setTimeout(() => { btn.textContent = '✓ Voiced & assembled'; }, 1400);
+  });
+
+  refresh();
+})();
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<script>(function(){var m=document.getElementById('menu'),t=document.getElementById('menu-toggle');if(!m||!t)return;t.addEventListener('click',function(e){e.stopPropagation();var o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});document.addEventListener('click',function(){m.classList.remove('open');t.setAttribute('aria-expanded','false')});document.addEventListener('keydown',function(e){if(e.key==='Escape'){m.classList.remove('open');t.setAttribute('aria-expanded','false')}})})();</script>
+<script>
+/* House rule: a serif-italic accent either shares one line with the sans, or
+   starts its own line. It never breaks mid-phrase. Measured, not guessed:
+   set inline, see if the heading still fits one line, otherwise block. */
+(function(){
+  function fit(){
+    document.querySelectorAll('h1 em,h2 em,h3 em').forEach(function(em){
+      var h=em.parentElement; em.style.display='inline';
+      var fs=parseFloat(getComputedStyle(h).fontSize);
+      var one=h.getBoundingClientRect().height<=fs*1.45;
+      em.style.display=one?'inline':'block';
+    });
+  }
+  fit(); addEventListener('resize',fit);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>
