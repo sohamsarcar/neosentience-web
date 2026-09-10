@@ -41,11 +41,11 @@
   --ink-faint:#7f7397;
   --line:rgba(255,255,255,.09);
 
-  --violet:#a855f7;
+  --violet:#ff8a1f;
   --gold:#e0b34a;
   --green:#3ee089;
   --cyan:#22d3ee;
-  --grad:linear-gradient(120deg,#a855f7,#8f6ae0,#e0b34a);
+  --grad:linear-gradient(120deg,#ff8a1f,#e9a13a,#f1e3b3);
   /* ── structural rhythm (shared across every Neosentience page) ── */
   --wrap:1240px;
   --sp-section:64px;   /* symmetric: 128px between sections, no inline collapses */
@@ -58,7 +58,7 @@ html,body{background:var(--bg);color:var(--ink);
   font-family:'Albert Sans',-apple-system,sans-serif;font-weight:300;line-height:1.6;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
 body{background-image:
-  radial-gradient(ellipse 1100px 700px at 50% -220px,rgba(168,85,247,.13),transparent 62%),
+  radial-gradient(ellipse 1100px 700px at 50% -220px,rgba(255,138,31,.13),transparent 62%),
   radial-gradient(ellipse 900px 600px at 100% 800px,rgba(34,211,238,.06),transparent 62%);}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
@@ -78,7 +78,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;
 .hero-logo{width:380px;max-width:80%;height:auto;margin:0 auto 30px}
 .pill{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;
   padding:8px 16px;border-radius:999px;
-  background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.32);
+  background:rgba(255,138,31,.1);border:1px solid rgba(255,138,31,.32);
   font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--violet);font-weight:600}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--violet);
@@ -187,7 +187,7 @@ h2 em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
 .ps{padding:18px 12px;border-radius:18px;border:1px solid var(--line);
   background:linear-gradient(180deg,var(--panel),rgba(10,8,16,.7));text-align:center;
   transition:all .3s}
-.ps:hover{border-color:rgba(168,85,247,.35);transform:translateY(-2px)}
+.ps:hover{border-color:rgba(255,138,31,.35);transform:translateY(-2px)}
 .ps.gatestep{border-color:rgba(224,179,74,.45);background:rgba(224,179,74,.07)}
 .ps-n{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.16em;
   color:var(--ink-faint);margin-bottom:9px;font-weight:600}
@@ -199,7 +199,7 @@ h2 em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
 .diffs{margin-top:46px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .diff{padding:26px 24px;border-radius:22px;border:1px solid var(--line);
   background:rgba(255,255,255,.018);transition:all .3s}
-.diff:hover{border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.04)}
+.diff:hover{border-color:rgba(255,138,31,.3);background:rgba(255,138,31,.04)}
 .diff-t{font-family:'Albert Sans',system-ui,sans-serif;font-size:13px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--violet);font-weight:600;margin-bottom:14px}
 .diff h4{font-size:17px;font-weight:600;letter-spacing:-.012em;margin-bottom:8px}
@@ -224,15 +224,15 @@ h2 em{font-family:'Instrument Serif',serif;font-weight:400;font-style:italic;
 
 /* close */
 .cta{padding:var(--sp-section) 0;text-align:center;border-top:1px solid var(--line);
-  background:radial-gradient(ellipse 700px 340px at 50% 40%,rgba(168,85,247,.09),transparent 70%)}
+  background:radial-gradient(ellipse 700px 340px at 50% 40%,rgba(255,138,31,.09),transparent 70%)}
 .cta h2{margin:0 auto 20px}
 .cta p{font-size:15px;color:var(--ink-dim);max-width:540px;margin:0 auto 30px}
 .btn{display:inline-flex;align-items:center;gap:11px;padding:15px 30px;border-radius:999px;
   background:var(--violet);color:#12031f;
   font-family:'Albert Sans',system-ui,sans-serif;font-size:11.5px;letter-spacing:.16em;
   text-transform:uppercase;font-weight:600;
-  transition:transform .3s,box-shadow .3s;box-shadow:0 8px 30px rgba(168,85,247,.3)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 42px rgba(168,85,247,.45)}
+  transition:transform .3s,box-shadow .3s;box-shadow:0 8px 30px rgba(255,138,31,.3)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 42px rgba(255,138,31,.45)}
 
 footer{padding:44px 0 56px;border-top:1px solid var(--line)}
 .frow{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
@@ -290,7 +290,7 @@ footer{padding:44px 0 56px;border-top:1px solid var(--line)}
 }
 
 /* ═════════ HOUSE LAYER — shared with the homepage: type, nav, buttons, labels ═════════ */
-:root{--acc:var(--violet);--acc-ink:#12031f;--c-digisapien:#3ee089;--c-nyaya:#4a6cff;--c-chatdj:#ff3d81;--c-dubanant:#a855f7;--c-qrator:#ffb84a;--c-magiq:#00d4ff;--h-ease:cubic-bezier(.16,1,.3,1)}
+:root{--acc:var(--violet);--acc-ink:#1f0d00;--c-digisapien:#3ee089;--c-nyaya:#4a6cff;--c-chatdj:#ff3d81;--c-dubanant:#ff8a1f;--c-qrator:#ffb84a;--c-magiq:#00d4ff;--h-ease:cubic-bezier(.16,1,.3,1)}
 html,body{font-family:'Albert Sans',system-ui,sans-serif;font-weight:300}
 h1,h2,h3,h4{font-family:'Albert Sans',system-ui,sans-serif}
 h1 em,h2 em,.hero h1 em,.hero-title em,h2.section-title em,.tech-name em,.section h2 em,.cta h2 em,.stat-num,.deg-n,.a-n,.market-headline strong,.market-quote-body strong{
