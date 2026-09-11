@@ -327,6 +327,12 @@ h2.stack em{display:block!important}
 .trust-ico{width:56px;height:56px;margin:0 auto 22px;border-radius:17px;display:grid;place-items:center;color:var(--acc);
   background:color-mix(in srgb,var(--acc) 12%,transparent);border:1px solid color-mix(in srgb,var(--acc) 30%,transparent)}
 .trust-ico svg{width:27px;height:27px}
+.band.still{width:min(1060px,calc(100% - 64px));margin:0 auto;border-radius:26px;overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--acc) 20%,transparent);
+  box-shadow:0 40px 100px -45px rgba(0,0,0,.9)}
+.band.still::after{content:none}
+@media(max-width:900px){.band.still{width:calc(100% - 40px);border-radius:20px}
+  .band.still img{height:240px;object-fit:cover;object-position:50% 42%}}
 /* top bar */
 .topbar{position:absolute;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;gap:32px;padding:28px 34px;background:none;border:0}
 .topbar .brand{display:flex;align-items:center;gap:22px}
@@ -432,6 +438,13 @@ h2.stack em{display:block!important}
     </p>
   </div>
 </section>
+
+<!-- TUTOR STILL -->
+<figure class="band still">
+  <img src="dubguru-assets/tutor.jpg"
+       alt="An Indian tutor mid-lesson at his desk, speaking to camera"
+       width="2400" height="1018" loading="lazy" decoding="async">
+</figure>
 
 <!-- WHAT DUBGURU DOES -->
 <section class="blk">
